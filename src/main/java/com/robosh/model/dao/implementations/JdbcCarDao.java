@@ -3,7 +3,11 @@ package com.robosh.model.dao.implementations;
 import com.robosh.model.dao.CarDao;
 import com.robosh.model.dao.implementations.queries.CarSQL;
 import com.robosh.model.dao.implementations.queries.ClientSQL;
+import com.robosh.model.dao.mappers.CarMapper;
+import com.robosh.model.dao.mappers.ClientMapper;
+import com.robosh.model.dao.mappers.Mapper;
 import com.robosh.model.entity.Car;
+import com.robosh.model.entity.Client;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +19,10 @@ public class JdbcCarDao implements CarDao {
 
     private Connection connection;
 
+    public JdbcCarDao(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     /**
      * don`t use
@@ -24,14 +32,29 @@ public class JdbcCarDao implements CarDao {
 
     @Override
     public Car getById(long id) {
-        return null;
+        Mapper<Car> carMapper = new CarMapper();
+        Car result = new Car();
+        result.setIdCar(-1);
+
+        try (PreparedStatement ps = connection.prepareStatement(CarSQL.READ_BY_ID.getQUERY())) {
+            ps.setLong(1, id);
+            final ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                result = carMapper.getEntity(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @Override
+    /**
+     * don`t use
+     */
     public List<Car> findAll() {
         return null;
     }
-
 
     @Override
     /**

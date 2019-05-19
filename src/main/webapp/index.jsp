@@ -18,7 +18,7 @@
     <option>Spain</option>
     <option>France</option>
     <option>Germany</option>
-</select>
+    </select>
     <br><br>
     Courses:
     <input type="checkbox" name="courses" value="JavaSE" checked />Java SE

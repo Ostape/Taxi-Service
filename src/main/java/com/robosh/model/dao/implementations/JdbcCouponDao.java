@@ -81,4 +81,20 @@ public class JdbcCouponDao implements CouponDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public Coupon readByCouponName(String couponName) {
+        Mapper<Coupon> couponMapper= new CouponMapper();
+        Coupon result = new Coupon();
+        try (PreparedStatement ps = connection.prepareStatement(CouponSQL.READ_BY_COUPON.getQUERY())) {
+            ps.setString(1, couponName);
+            final ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                result = couponMapper.getEntity(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

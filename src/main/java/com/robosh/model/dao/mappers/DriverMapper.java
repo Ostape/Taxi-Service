@@ -1,8 +1,8 @@
 package com.robosh.model.dao.mappers;
 
-import com.robosh.model.entity.Car;
 import com.robosh.model.entity.Driver;
 import com.robosh.model.entity.DriverStatus;
+import com.robosh.service.CarService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,8 +18,9 @@ public class DriverMapper implements Mapper<Driver> {
         driver.setPassword(resultSet.getString("password"));
         driver.setPhoneNumber(resultSet.getString("phone_number"));
         driver.setDriverStatus(toDriverStatus(resultSet.getString("driver_status")));
-        driver.setCar();
-        return null;
+        CarService carService = new CarService();
+        driver.setCar(carService.getCarById(resultSet.getLong("id_car")));
+        return driver;
     }
 
     private DriverStatus toDriverStatus(String status){
@@ -30,9 +31,5 @@ public class DriverMapper implements Mapper<Driver> {
         else {
             return DriverStatus.FREE;
         }
-    }
-
-    private Car takeCar(int id_car){
-        return
     }
 }

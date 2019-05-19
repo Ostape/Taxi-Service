@@ -83,7 +83,7 @@ public class JdbcClientDao implements ClientDao {
             ps.setString(4, client.getPhoneNumber());
             ps.setString(5, client.getEmail());
             ps.setString(6, client.getPassword());
-            ps.execute();
+            ps.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();

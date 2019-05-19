@@ -21,19 +21,18 @@ public class JdbcDaoFactory extends DaoFactory {
 
     @Override
     public DriverDao createDriverDao() {
-        return null;
+        return new JdbcDriverDao(getConnection());
     }
 
     @Override
     public CarDao createCarDao() {
-        return null;
+        return new JdbcCarDao(getConnection());
     }
 
     @Override
     public CouponDao createCouponDao() {
         return new JdbcCouponDao(getConnection());
     }
-
 
     private Connection getConnection() {
         try{

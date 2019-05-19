@@ -3,7 +3,7 @@ package com.robosh.model.dao.implementations.queries;
 public enum DriverSQL {
     CHECK_STATUS("select * from driver where driver_status=(?)"),
 
-    READ_BY_DRIVER_ID("select * from driver where id_driver=(?)"),
+    READ_BY_ID("select * from driver where id_driver=(?)"),
 
     READ_ALL("select * from driver"),
 
