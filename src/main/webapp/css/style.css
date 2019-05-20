@@ -98,7 +98,7 @@ a {
   border: 2px solid  #f0f0f0;
 }
 .labelOrder{
-  width: 15%;
+  width: 20%;
   float: left;
   padding: 5px;
 }
@@ -118,13 +118,35 @@ a {
   background-color: white !important;
 }
 
+.buttonSub{
+    font-size: 20px;
+    line-height: 44px;
+    height: 44px;
+    margin-top: 12px;
+    padding: 0 22px;
+    text-transform: uppercase;
+    color: #472d00;
+    margin: auto;
+    background-color: #fed402;
+    border-radius:10px;
+}
+
+
+.signClient{
+    width: 190px;
+    padding: 10px 0;
+    float: left;
+    height: 56px;
+}
+
+
 .car{
   background-image:url(../img/car1.jpg);
 }
 .truck{
   background-image:url(../img/truck.png);
 }
-.wagon{background-image:url(../img/wagon.png);}
+.wagon{background-image:url(../img/wagon2.jpg);}
 
 .cc-selector input{
     margin:0;padding:0;
@@ -185,7 +207,7 @@ table { width:100%; border-collapse:collapse; border-spacing:0;}
 .header_white { background:#fff; padding:9px 0 11px;}
 #logo { float:left; display:block;}
 #logo img { display:block;}
-.header_city { float:right; width:350px; padding:10px 0; vertical-align:top; text-align:center;}
+.header_city { float:right;margin-right: 38px; width:140px; padding:10px 0; vertical-align:top; text-align:center;}
 .header_city .city_current { display:inline-block; vertical-align:top; background:#fff; margin:3px 0; font-size:16px; line-height:29px; color:#009edf; padding:0 26px; border:1px solid #009edf; border-radius:15px; text-decoration:none;}
 .lang_block { position:absolute; top:17px; right:15px;}
 #lang li { margin:0 1px; float:left;}
