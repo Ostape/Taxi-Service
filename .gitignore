@@ -31,3 +31,5 @@ git.properties
 
 *.xml
 *.iml
+
+target/
