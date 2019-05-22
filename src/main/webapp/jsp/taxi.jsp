@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
 	<meta charset="UTF-8">     
@@ -7,8 +9,9 @@
     <link rel="icon" href="../img/favicon.ico" type="image/x-icon"/>
 	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic&subset=latin,cyrillic' 
 	rel='stylesheet' type='text/css'/>
+<%--	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>--%>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
-	<link type="text/css" rel="stylesheet" href="../css/style.css"/>
+	<link type="text/css" rel="stylesheet" href="css/style.css"/>
 	<link rel="alternate" href="#" hreflang="ua" />
 	<link rel="alternate" href="taxi.jsp" hreflang="en" />
 	<script src='../js/jquery.js?ver=1.11.3'></script>

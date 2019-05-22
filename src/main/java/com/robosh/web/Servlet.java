@@ -11,32 +11,32 @@ import java.io.PrintWriter;
 public class Servlet extends HttpServlet {
     //private static final Logger LOGGER = Logger.getLogger(Servlet.class);
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().print("hello from server");
-      //  LOGGER.info("type rest: " + resp.getContentType());
+    public void doGet(HttpServletRequest request,
+                      HttpServletResponse response)
+            throws IOException, ServletException {
+        processRequest(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter writer = response.getWriter();
+    public void doPost(HttpServletRequest request,
+                       HttpServletResponse response)
+            throws IOException, ServletException {
+        processRequest(request, response);
+    }
 
-        String name = request.getParameter("username");
-        String age = request.getParameter("userage");
-        String gender = request.getParameter("gender");
-        String country = request.getParameter("country");
-        String[] courses = request.getParameterValues("courses");
+    private void processRequest(HttpServletRequest request,
+                                HttpServletResponse response)
+            throws ServletException, IOException {
 
-        try {
-            writer.println("<p>Name: " + name + "</p>");
-            writer.println("<p>Age: " + age + "</p>");
-            writer.println("<p>Gender: " + gender + "</p>");
-            writer.println("<p>Country: " + country + "</p>");
-            writer.println("<h4>Courses</h4>");
-            for(String course: courses)
-                writer.println("<li>" + course + "</li>");
-        } finally {
-            writer.close();
+        String path = request.getRequestURI();
+        path = path.replaceAll(".*/introductory-campaign/" , "");
+
+        Command command = commands.getOrDefault(path , (req, resp)->"/welcome.jsp");
+        String page = command.execute(request, response);
+
+        if (page.contains("redirect")) {
+            response.sendRedirect(page.replace("redirect@", ""));
+        } else {
+            request.getRequestDispatcher(page).forward(request,response);
         }
     }
 }
