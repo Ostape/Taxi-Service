@@ -4,6 +4,7 @@ public enum CouponSQL {
     READ_BY_ID("SELECT * FROM coupon WHERE id=(?)"),
     READ_BY_COUPON("SELECT * FROM coupon WHERE coupon_name=(?)"),
     READ_ALL("SELECT * FROM coupon"),
+
     INSERT(""),
     DELETE(""),
     UPDATE("");

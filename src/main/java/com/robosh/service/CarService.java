@@ -4,6 +4,8 @@ import com.robosh.model.dao.CarDao;
 import com.robosh.model.dao.DaoFactory;
 import com.robosh.model.entity.Car;
 
+import java.util.List;
+
 public class CarService {
 
     DaoFactory daoFactory = DaoFactory.getInstance();
@@ -14,9 +16,21 @@ public class CarService {
         }
     }
 
-    public boolean isSuchType(int id_car, String type){
+    public List<Car> getAllCars(){
+        try(CarDao dao = daoFactory.createCarDao()){
+            return dao.findAll();
+        }
+    }
+
+    public boolean findCarByIdAndCarType(int id_car, String type){
         try (CarDao dao = daoFactory.createCarDao()) {
             return dao.isSameCarType(id_car, type);
+        }
+    }
+
+    public Car getCarByType(String type){
+        try(CarDao dao = daoFactory.createCarDao()){
+            return dao.getCarByType(type);
         }
     }
 }

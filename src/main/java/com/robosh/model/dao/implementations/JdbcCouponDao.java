@@ -21,13 +21,8 @@ public class JdbcCouponDao implements CouponDao {
     }
 
     @Override
-    public void create(Coupon entity) {
-
-    }
-
-    @Override
     public Coupon getById(long id) {
-        Mapper<Coupon> couponMapper= new CouponMapper();
+        Mapper<Coupon> couponMapper = new CouponMapper();
         Coupon result = new Coupon();
         result.setIdCoupon(-1);
 
@@ -59,32 +54,12 @@ public class JdbcCouponDao implements CouponDao {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
-            //todo optional
-        }
-    }
-
-    @Override
-    public void update(Coupon coupon) {
-
-    }
-
-    @Override
-    public void delete(long id) {
-
-    }
-
-    @Override
-    public void close() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
     @Override
     public Coupon readByCouponName(String couponName) {
-        Mapper<Coupon> couponMapper= new CouponMapper();
+        Mapper<Coupon> couponMapper = new CouponMapper();
         Coupon result = new Coupon();
         try (PreparedStatement ps = connection.prepareStatement(CouponSQL.READ_BY_COUPON.getQUERY())) {
             ps.setString(1, couponName);
@@ -97,4 +72,44 @@ public class JdbcCouponDao implements CouponDao {
         }
         return result;
     }
+
+    /**
+     * not using
+     *
+     * @param entity
+     */
+    @Override
+    public void create(Coupon entity) {
+    }
+
+
+    /**
+     * not using
+     *
+     * @param coupon
+     */
+    @Override
+    public boolean update(Coupon coupon) {
+        return false;
+    }
+
+    /**
+     * not using
+     *
+     * @param id
+     */
+    @Override
+    public boolean delete(long id) {
+        return false;
+    }
+
+    @Override
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

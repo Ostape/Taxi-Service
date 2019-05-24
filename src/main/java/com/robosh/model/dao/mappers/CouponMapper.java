@@ -11,6 +11,7 @@ public class CouponMapper implements Mapper<Coupon> {
         Coupon coupon = new Coupon();
         coupon.setIdCoupon(resultSet.getInt("id_coupon"));
         coupon.setCouponName(resultSet.getString("coupon_name"));
+        coupon.setDiscount(resultSet.getInt("discount"));
         return coupon;
     }
 }

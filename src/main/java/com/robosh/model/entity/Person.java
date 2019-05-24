@@ -1,12 +1,19 @@
 package com.robosh.model.entity;
 
 public abstract class Person {
+    protected long personId;
     protected String name;
     protected String surname;
-    protected String middleName;
     protected String password;
     protected String phoneNumber;
-    protected int personId;
+
+    public long getUserId() {
+        return personId;
+    }
+
+    public void setUserId(long personId) {
+        this.personId = personId;
+    }
 
     public String getName() {
         return name;
@@ -22,14 +29,6 @@ public abstract class Person {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
     }
 
     public String getPassword() {
@@ -48,11 +47,4 @@ public abstract class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getUserId() {
-        return personId;
-    }
-
-    public void setUserId(int personId) {
-        this.personId = personId;
-    }
 }

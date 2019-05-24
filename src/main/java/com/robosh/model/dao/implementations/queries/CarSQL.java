@@ -7,7 +7,7 @@ public enum CarSQL {
 
     READ_BY_TYPE("select * from car where and car_type=(?)"),
 
-    //READ_ALL("select * from car "),
+    READ_ALL("select * from car "),
 
     INSERT(""),
 

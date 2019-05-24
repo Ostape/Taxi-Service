@@ -34,6 +34,11 @@ public class JdbcDaoFactory extends DaoFactory {
         return new JdbcCouponDao(getConnection());
     }
 
+    @Override
+    public OrderDao createOrderDao() {
+        return null;
+    }
+
     private Connection getConnection() {
         try{
             return dataSource.getConnection();

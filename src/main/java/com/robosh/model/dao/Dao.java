@@ -3,20 +3,17 @@ package com.robosh.model.dao;
 import java.util.List;
 
 public interface Dao<T> extends AutoCloseable{
-        //Create
-        void create(T entity);
 
-        //Read
+       void create(T entity);
+
         T getById(long id);
 
         List<T> findAll();
 
-        //Update
-        void update(T t);
+        boolean update(T t);
 
-        //Delete
-        void delete(long id);
+        boolean delete(long id);
 
-        //Close
+        @Override
         void close();
 }

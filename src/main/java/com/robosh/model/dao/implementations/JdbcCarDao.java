@@ -9,10 +9,8 @@ import com.robosh.model.dao.mappers.Mapper;
 import com.robosh.model.entity.Car;
 import com.robosh.model.entity.Client;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcCarDao implements CarDao {
@@ -21,13 +19,6 @@ public class JdbcCarDao implements CarDao {
 
     public JdbcCarDao(Connection connection) {
         this.connection = connection;
-    }
-
-    @Override
-    /**
-     * don`t use
-     */
-    public void create(Car entity) {
     }
 
     @Override
@@ -49,27 +40,22 @@ public class JdbcCarDao implements CarDao {
     }
 
     @Override
-    /**
-     * don`t use
-     */
     public List<Car> findAll() {
-        return null;
-    }
+        List<Car> cars = new ArrayList<>();
+        final String query = CarSQL.READ_ALL.getQUERY();
+        try (Statement st = connection.createStatement()) {
+            ResultSet rs = st.executeQuery(query);
+            Mapper<Car> carMapper = new CarMapper();
 
-    @Override
-    /**
-     * don`t use
-     */
-    public void update(Car car) {
-
-    }
-
-    @Override
-    /**
-     * don`t use
-     */
-    public void delete(long id) {
-
+            while (rs.next()) {
+                Car car = carMapper.getEntity(rs);
+                cars.add(car);
+            }
+            return cars;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -84,6 +70,47 @@ public class JdbcCarDao implements CarDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
+    }
+
+    @Override
+    public Car getCarByType(String carType) {
+        Mapper<Car> carMapper = new CarMapper();
+        Car result = new Car();
+
+        try (PreparedStatement ps = connection.prepareStatement(CarSQL.READ_BY_TYPE.getQUERY())) {
+            ps.setString(1, carType);
+            final ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                result = carMapper.getEntity(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    @Override
+    /**
+     * don`t using
+     */
+    public void create(Car entity) {
+    }
+
+    @Override
+    /**
+     * don`t using
+     */
+    public boolean update(Car car) {
+        return false;
+    }
+
+    @Override
+    /**
+     * don`t use
+     */
+    public boolean delete(long id) {
         return false;
     }
 

@@ -17,7 +17,6 @@ public class Client extends Person{
                 "email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", middleName='" + middleName + '\'' +
                 ", password='" + password + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", personId=" + personId +

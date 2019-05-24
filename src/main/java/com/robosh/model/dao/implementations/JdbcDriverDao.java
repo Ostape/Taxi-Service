@@ -5,7 +5,7 @@ import com.robosh.model.dao.implementations.queries.DriverSQL;
 import com.robosh.model.dao.mappers.DriverMapper;
 import com.robosh.model.dao.mappers.Mapper;
 import com.robosh.model.entity.Driver;
-import com.robosh.model.entity.DriverStatus;
+import com.robosh.model.entity.enums.DriverStatus;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -37,10 +37,6 @@ public class JdbcDriverDao implements DriverDao {
     }
 
     @Override
-    public void create(Driver entity) {
-    }
-
-    @Override
     public Driver getById(long id) {
         Mapper<Driver> driverMapper = new DriverMapper();
         Driver result = new Driver();
@@ -66,29 +62,79 @@ public class JdbcDriverDao implements DriverDao {
             Mapper<Driver> driverMapper = new DriverMapper();
 
             while (rs.next()) {
-                Driver adress = driverMapper.getEntity(rs);
-                drivers.add(adress);
+                Driver driver = driverMapper.getEntity(rs);
+                drivers.add(driver);
             }
             return drivers;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
-            //todo optional
         }
     }
 
     @Override
-    public void update(Driver driver) {
-
+    public Driver getDriverByCarTypeAndDriverStatus(DriverStatus driverStatus, String carType) {
+        Mapper<Driver> driverMapper = new DriverMapper();
+        Driver result = new Driver();
+        result.setUserId(-1);
+        try (PreparedStatement ps = connection.prepareStatement(DriverSQL
+                .FIND_DRIVER_BY_CAR_TYPE_AND_STATUS.getQUERY())) {
+            ps.setString(1, driverStatus.toString().toLowerCase());
+            ps.setString(2, carType);
+            final ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                result = driverMapper.getEntity(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
+    /**
+     * rewrite
+     * @param driver
+     * @return
+     */
     @Override
-    public void delete(long id) {
+    public boolean update(Driver driver) {
+        try (PreparedStatement ps = connection.prepareStatement(DriverSQL.UPDATE.getQUERY())) {
+            ps.setString(1,driver.getDriverStatus().toString().toLowerCase());
+            ps.setLong(2, driver.getUserId());
+            final ResultSet rs = ps.executeQuery();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
+
+    /**
+     * not using
+     *
+     * @param entity
+     */
+    @Override
+    public void create(Driver entity) {
+    }
+
+    /**
+     * not using
+     *
+     * @param id
+     */
+    @Override
+    public boolean delete(long id) {
+        return false;
     }
 
     @Override
     public void close() {
-
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

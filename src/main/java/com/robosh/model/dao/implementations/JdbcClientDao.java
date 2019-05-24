@@ -79,12 +79,10 @@ public class JdbcClientDao implements ClientDao {
         try (PreparedStatement ps = connection.prepareStatement(ClientSQL.INSERT.getQUERY())) {
             ps.setString(1, client.getSurname());
             ps.setString(2, client.getName());
-            ps.setString(3, client.getMiddleName());
-            ps.setString(4, client.getPhoneNumber());
-            ps.setString(5, client.getEmail());
-            ps.setString(6, client.getPassword());
+            ps.setString(3, client.getPhoneNumber());
+            ps.setString(4, client.getEmail());
+            ps.setString(5, client.getPassword());
             ps.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -125,16 +123,24 @@ public class JdbcClientDao implements ClientDao {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
-            //todo optional
         }
     }
 
+
+    /**
+    *not using yet
+     */
     @Override
-    public void update(Client client) {
+    public boolean update(Client client) {
+        return false;
     }
 
+    /**
+     * not using
+     */
     @Override
-    public void delete(long id) {
+    public boolean delete(long id) {
+        return false;
     }
 
     @Override

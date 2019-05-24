@@ -1,61 +1,72 @@
 package com.robosh.model.entity;
 
+import com.robosh.model.entity.enums.OrderStatus;
+
 public class Order {
     private int idOrder;
-    private String orderStatus;
-    private int idClient;
-    private int idAdressArrive;
-    private int idAdressDeparture;
-    private int idCoupon;
+    private OrderStatus orderStatus;
+    private Client client;
+    private Driver driver;
+    private Adress adressArrive;
+    private Adress adressDeparture;
+    private Coupon coupon;
     private double cost;
     private double costWithDiscount;
 
-    public int getIdOreder() {
+    public int getIdOrder() {
         return idOrder;
     }
 
-    public void setIdOreder(int idOrder) {
+    public void setIdOrder(int idOrder) {
         this.idOrder = idOrder;
     }
 
-    public String getOrderStatus() {
+    public OrderStatus getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(String orderStatus) {
+    public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
 
-    public int getIdClient() {
-        return idClient;
+    public Client getClient() {
+        return client;
     }
 
-    public void setIdClient(int idClient) {
-        this.idClient = idClient;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public int getIdAdressArrive() {
-        return idAdressArrive;
+    public Driver getDriver() {
+        return driver;
     }
 
-    public void setIdAdressArrive(int idAdressArrive) {
-        this.idAdressArrive = idAdressArrive;
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
-    public int getIdAdressDeparture() {
-        return idAdressDeparture;
+    public Adress getAdressArrive() {
+        return adressArrive;
     }
 
-    public void setIdAdressDeparture(int idAdressDeparture) {
-        this.idAdressDeparture = idAdressDeparture;
+    public void setAdressArrive(Adress adressArrive) {
+        this.adressArrive = adressArrive;
     }
 
-    public int getIdCoupon() {
-        return idCoupon;
+    public Adress getAdressDeparture() {
+        return adressDeparture;
     }
 
-    public void setIdCoupon(int idCoupon) {
-        this.idCoupon = idCoupon;
+    public void setAdressDeparture(Adress adressDeparture) {
+        this.adressDeparture = adressDeparture;
+    }
+
+    public Coupon getCoupon() {
+        return coupon;
+    }
+
+    public void setCoupon(Coupon coupon) {
+        this.coupon = coupon;
     }
 
     public double getCost() {
@@ -77,12 +88,12 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "idOreder=" + idOrder +
+                "idOrder=" + idOrder +
                 ", orderStatus='" + orderStatus + '\'' +
-                ", idClient=" + idClient +
-                ", idAdressArrive=" + idAdressArrive +
-                ", idAdressDeparture=" + idAdressDeparture +
-                ", idCoupon=" + idCoupon +
+                ", client=" + client +
+                ", AdressArrive=" + adressArrive +
+                ", AdressDeparture=" + adressDeparture +
+                ", coupon=" + coupon +
                 ", cost=" + cost +
                 ", costWithDiscount=" + costWithDiscount +
                 '}';

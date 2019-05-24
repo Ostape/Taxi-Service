@@ -3,13 +3,11 @@ package com.robosh.model.dao.implementations.queries;
 public enum ClientSQL {
     READ_BY_ID("select * from client where id_client=(?)"),
 
-    READ_ALL("select * from client"),
+    READ_ALL("select * from `client`"),
 
-
-    //ask for insert
     INSERT("INSERT INTO `client` " +
-            "(`surname`, `name`, `middle_name`, `phone_number`, `e_mail`, `password`) " +
-            "VALUES ((?),(?),(?),(?), (?), (?))"),
+            "(`surname`, `name`, `phone_number`, `e_mail`, `password`) " +
+            "VALUES ((?),(?),(?), (?), (?))"),
 
     READ_BY_EMAIL("SELECT * FROM client where e_mail=(?)"),
 

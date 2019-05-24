@@ -1,15 +1,18 @@
 package com.robosh.model.entity;
 
+import com.robosh.model.entity.enums.DriverStatus;
+
 public class Driver extends Person{
     private DriverStatus driverStatus;
-    private Car Car;
+    private Car car;
+    private String middleName;
 
     public com.robosh.model.entity.Car getCar() {
-        return Car;
+        return car;
     }
 
     public void setCar(com.robosh.model.entity.Car car) {
-        Car = car;
+        this.car = car;
     }
 
     public DriverStatus getDriverStatus() {
@@ -20,16 +23,25 @@ public class Driver extends Person{
         this.driverStatus = driverStatus;
     }
 
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
     @Override
     public String toString() {
         return "Driver{" +
-                "driverStatus='" + driverStatus + '\'' +
+                "driverStatus=" + driverStatus +
+                ", car=" + car +
+                ", middleName='" + middleName + '\'' +
+                ", personId=" + personId +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", middleName='" + middleName + '\'' +
                 ", password='" + password + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", personId=" + personId +
                 '}';
     }
 }

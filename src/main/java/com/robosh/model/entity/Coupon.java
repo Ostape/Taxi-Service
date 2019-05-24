@@ -3,6 +3,7 @@ package com.robosh.model.entity;
 public class Coupon {
     private int idCoupon;
     private String couponName;
+    private int discount;
 
     public int getIdCoupon() {
         return idCoupon;
@@ -20,11 +21,20 @@ public class Coupon {
         this.couponName = couponName;
     }
 
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
     @Override
     public String toString() {
-        return "CouponDao{" +
+        return "Coupon{" +
                 "idCoupon=" + idCoupon +
                 ", couponName='" + couponName + '\'' +
+                ", discount=" + discount +
                 '}';
     }
 }

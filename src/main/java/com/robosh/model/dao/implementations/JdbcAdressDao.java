@@ -34,14 +34,6 @@ public class JdbcAdressDao implements AdressDao {
     }
 
     @Override
-    /**
-     * not
-     */
-    public void create(Adress entity) {
-
-    }
-
-    @Override
     public Adress getById(long id) {
         Mapper<Adress> adressMapper = new AdressMapper();
         Adress result = new Adress();
@@ -75,24 +67,32 @@ public class JdbcAdressDao implements AdressDao {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
-            //todo optional
         }
     }
 
     @Override
     /**
-     * not
+     * not using
      */
-    public void update(Adress adress) {
+    public void create(Adress entity) {
 
+    }
+
+
+    @Override
+    /**
+     * not using
+     */
+    public boolean update(Adress adress) {
+        return false;
     }
 
     @Override
     /**
-     * not
+     * not using
      */
-    public void delete(long id) {
-
+    public boolean delete(long id) {
+        return false;
     }
 
     @Override

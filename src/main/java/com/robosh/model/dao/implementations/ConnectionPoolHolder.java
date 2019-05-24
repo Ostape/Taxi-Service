@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ConnectionPoolHolder {
-
     private static volatile DataSource dataSource;
 
     public static DataSource getDataSource() {

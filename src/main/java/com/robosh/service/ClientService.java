@@ -11,29 +11,30 @@ import java.util.List;
 public class ClientService {
     DaoFactory daoFactory = DaoFactory.getInstance();
 
+
+    public boolean isClientAlreadyExist(String email, String password){
+        try (ClientDao dao = daoFactory.createClientDao()) {
+            return dao.isClientExists(email, password);
+        }
+    }
+
     public Client getClientById(long id){
         try (ClientDao dao = daoFactory.createClientDao()) {
             return dao.getById(id);
         }
     }
 
-//    public boolean isClientAlreadyExist(String email, String password){
-//        try (ClientDao dao = daoFactory.createClientDao()) {
-//            return dao.isClientExists(email, password);
-//        }
-//    }
+    public boolean isPhoneNumberAlreadyExists(String phoneNumber){
+        try (ClientDao dao = daoFactory.createClientDao()) {
+            return dao.isPhoneNumberExists(phoneNumber);
+        }
+    }
 
-//    public boolean isPhoneNumberAlreadyExists(String phoneNumber){
-//        try (ClientDao dao = daoFactory.createClientDao()) {
-//            return dao.isPhoneNumberExists(phoneNumber);
-//        }
-//    }
-
-//    public boolean isEmailAlreadyExists(String email){
-//        try (ClientDao dao = daoFactory.createClientDao()) {
-//            return dao.isEmailExists(email);
-//        }
-//    }
+    public boolean isEmailAlreadyExists(String email){
+        try (ClientDao dao = daoFactory.createClientDao()) {
+            return dao.isEmailExists(email);
+        }
+    }
 
     public void createClientInDatabase(Client client) throws EmailIsAlreadyTaken, PhoneNumberIsAlreadyTaken {
         try (ClientDao dao = daoFactory.createClientDao()) {
