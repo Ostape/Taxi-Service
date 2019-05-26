@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" isErrorPage="true" %>
+
+<% response.setStatus(404); %>
 <html lang="en">
 
 <head>
@@ -6,9 +9,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>404 HTML Template by Colorlib</title>
+	<title>Error 404</title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-	<link type="text/css" rel="stylesheet" href="../css/error404.css" />
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/error404.css" />
 
 </head>
 

@@ -14,6 +14,18 @@ public class DriverService {
 //
 //    }
 
+    public boolean isDriverExists(String phoneNumber, String password){
+        try (DriverDao dao = daoFactory.createDriverDao()){
+            return dao.isDriverExist(phoneNumber, password);
+        }
+    }
+
+    public Driver getDriverByPasswordAndPhone(String phoneNumber, String password){
+        try(DriverDao dao = daoFactory.createDriverDao()){
+            return dao.getDriverByPassAndPhone(phoneNumber, password);
+        }
+    }
+
     public Driver getDriverById(long id) {
         try (DriverDao dao = daoFactory.createDriverDao()) {
             return dao.getById(id);

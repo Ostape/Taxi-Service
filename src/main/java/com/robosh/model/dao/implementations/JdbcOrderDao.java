@@ -22,7 +22,7 @@ public class JdbcOrderDao implements OrderDao {
     public void create(Order order) {
         try (PreparedStatement ps = connection.prepareStatement(OrderSQL.INSERT.getQUERY())) {
             ps.setString(1, order.getOrderStatus().toString().toLowerCase());
-            ps.setLong(2, order.getClient().getUserId());
+            ps.setLong(2, order.getClient().getPersonId());
 //            ps.setString(3, order.getPhoneNumber());
 //            ps.setString(4, order.getEmail());
 //            ps.setString(5, order.getPassword());

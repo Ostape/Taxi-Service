@@ -21,14 +21,11 @@ public class JdbcClientDao implements ClientDao {
     /**
      * checks is client registered
      *
-     * @param email
-     * @param password
-     * @return
      */
     @Override
-    public boolean isClientExists(String email, String password) {
-        try (PreparedStatement ps = connection.prepareStatement(ClientSQL.READ_BY_EMAIL_PASSWORD.getQUERY())) {
-            ps.setString(1, email);
+    public boolean isClientExists(String phoneNumber, String password) {
+        try (PreparedStatement ps = connection.prepareStatement(ClientSQL.READ_BY_PHONE_PASSWORD.getQUERY())) {
+            ps.setString(1, phoneNumber);
             ps.setString(2, password);
             final ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -75,6 +72,25 @@ public class JdbcClientDao implements ClientDao {
     }
 
     @Override
+    public Client getClientByPassPhone(String phoneNumber, String password) {
+        Mapper<Client> clientMapper = new ClientMapper();
+        Client result = new Client();
+        result.setPersonId(-1);
+        try (PreparedStatement ps = connection.prepareStatement(ClientSQL.READ_BY_PHONE_PASSWORD.getQUERY())) {
+            ps.setString(1, phoneNumber);
+            ps.setString(2, password);
+
+            final ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                result = clientMapper.getEntity(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
     public void create(Client client) {
         try (PreparedStatement ps = connection.prepareStatement(ClientSQL.INSERT.getQUERY())) {
             ps.setString(1, client.getSurname());
@@ -92,7 +108,7 @@ public class JdbcClientDao implements ClientDao {
     public Client getById(long id) {
         Mapper<Client> clientMapper = new ClientMapper();
         Client result = new Client();
-        result.setUserId(-1);
+        result.setPersonId(-1);
 
         try (PreparedStatement ps = connection.prepareStatement(ClientSQL.READ_BY_ID.getQUERY())) {
             ps.setLong(1, id);

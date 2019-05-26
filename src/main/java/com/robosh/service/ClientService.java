@@ -9,12 +9,12 @@ import com.robosh.model.entity.Client;
 import java.util.List;
 
 public class ClientService {
-    DaoFactory daoFactory = DaoFactory.getInstance();
+    private DaoFactory daoFactory = DaoFactory.getInstance();
 
 
-    public boolean isClientAlreadyExist(String email, String password){
+    public boolean isClientAlreadyExist(String phoneNumber, String password){
         try (ClientDao dao = daoFactory.createClientDao()) {
-            return dao.isClientExists(email, password);
+            return dao.isClientExists(phoneNumber, password);
         }
     }
 
@@ -50,6 +50,12 @@ public class ClientService {
         }
     }
 
+    public Client getClientByPasswordAndPhone(String phoneNumber, String password){
+        try(ClientDao dao = daoFactory.createClientDao()){
+            return dao.getClientByPassPhone(phoneNumber, password);
+        }
+    }
+    
     public List<Client> getAllClients(){
         try (ClientDao dao = daoFactory.createClientDao()) {
             return dao.findAll();

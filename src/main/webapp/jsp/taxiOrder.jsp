@@ -1,18 +1,33 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 
-<html>
+<%--<fmt:setLocale value="${param.lang}" />--%>
+<%--<fmt:setBundle basename="messages" />--%>
+
+<%--<fmt:setLocale value="${locale}"/>--%>
+<%--<fmt:setBundle basename="${bundle}"/>--%>
+
+<%--<html lang="${locale}}">--%>
+
+<fmt:setLocale value="${param.lang}" />
+<fmt:setBundle basename="messages" />
+
+<html lang="${param.lang}">
 <head>
-	<meta charset="UTF-8">     
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Таксі Київ</title>
-	<!-- no-image!!! -->
-    <link rel="icon" href="../img/favicon.ico" type="image/x-icon"/>
-	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic&subset=latin,cyrillic' 
-	rel='stylesheet' type='text/css'/>
+	<title>Таксі Київ</title>
+	<%--	--%>
+	<link rel="icon" href="${pageContext.request.contextPath}/img/favicon.ico" type="image/x-icon"/>
+	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic&subset=latin,cyrillic'
+		  rel='stylesheet' type='text/css'/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
-	<link type="text/css" rel="stylesheet" href="../css/style.css"/>
-	<link rel="alternate" href="#" hreflang="ua" />
-	<link rel="alternate" href="taxi.jsp" hreflang="en" />
-	<script src='../js/jquery.js?ver=1.11.3'></script>
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
+	<%--	<link rel="alternate" href="#" hreflang="ua" />--%>
+	<%--	<link rel="alternate" href="taxiHome.jsp" hreflang="en" />--%>
+	<script src="${pageContext.request.contextPath}/js/jquery.js?ver=1.11.3"></script>
 </head>
 
 <body class="home blog">
@@ -21,19 +36,37 @@
 	<div class="header_white clearfix">
 		<div class="center">
 			<!-- change -->
-			<a href="" id="logo" title="Taxi838 kyiv">
-				<img src="../img/logo.png" width="163" height="57">
+			<a href="${pageContext.request.contextPath}/taxi-Kyiv/homePage" id="logo" title="Taxi838 kyiv">
+				<img src="${pageContext.request.contextPath}/img/logo.png" width="163" height="57">
 			</a>
-			
-			<div class="header_city">
-                <div class="city_current">Київ</div>			
-			</div>
+			<div style="float: right; width: 370px">
 
-			<div class="lang_block">
-				<ul id="lang">
-					<li class="lang-item lang-item-2 lang-item-ua current-lang"><a hreflang="ua" href="#">ua</a></li>
-					<li class="lang-item lang-item-5 lang-item-ru "><a hreflang="en" href="#">en</a></li>
-                </ul>
+				<div class="signClient">
+					<a href="${pageContext.request.contextPath}/taxi-Kyiv/loginMe">
+						<div style="margin: auto; float: right; height: 36px;">
+							<img src="${pageContext.request.contextPath}/img/iconenter.png" style="height: 36px" >
+						</div>
+					</a>
+				</div>
+
+				<div class="header_city">
+					<div class="city_current">Київ</div>
+				</div>
+
+				<div class="lang_block">
+					<ul id="lang">
+						<li class="lang-item lang-item-2 lang-item-ua current-lang">
+							<a href="#">ua</a>
+							<%--						<a href="?=ua"><fmt:message key="label.lang.de" /></a>--%>
+							<%--							<a href="?taxi=ua"><fmt:message key="${locale}"/>ua</a>--%>
+						</li>
+						<li class="lang-item lang-item-5 lang-item-ru ">
+							<a href="#">en</a>
+							<%--							<a href="?lang=en"><fmt:message key="label.lang.en" /></a>--%>
+							<%--							<a href="?taxi=en"><fmt:message key="${locale}"/>en</a>--%>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -46,8 +79,8 @@
 	<li id="menu-item-45" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45"><a href="#">Тарифи</a></li>
 	<li id="menu-item-44" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44"><a href="#">Про нас</a></li>
 	<li id="menu-item-47" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-47"><a href="#">Новини</a></li>
-	<li id="menu-item-43" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-43"><a href="#">Водіям</a></li>
-	<li id="menu-item-431" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-431"><a href="#">Зробити замовлення</a></li>
+	<li id="menu-item-43" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-43"><a href="${pageContext.request.contextPath}/taxi-Kyiv/loginDriver">Водіям</a></li>
+	<li id="menu-item-431" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-431"><a href="${pageContext.request.contextPath}/taxi-Kyiv/makeOrder">Зробити замовлення</a></li>
 
 
 	<li id="menu-item-42" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-42"><a href="#">Контакти</a></li>

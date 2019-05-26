@@ -13,7 +13,7 @@ public enum ClientSQL {
 
     READ_BY_PHONE_NUMBER("SELECT * FROM client where phone_number=(?)"),
 
-    READ_BY_EMAIL_PASSWORD("SELECT * FROM client where e_mail=(?) and password=(?)"),
+    READ_BY_PHONE_PASSWORD("SELECT * FROM client where phone_number=(?) and password=(?)"),
 
     DELETE(""),
     UPDATE("");

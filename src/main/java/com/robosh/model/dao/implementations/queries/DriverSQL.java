@@ -9,6 +9,8 @@ public enum DriverSQL {
 
     CHECK_STATUS("select * from driver where driver_status=(?)"),
 
+    READ_BY_PHONE_AND_PASSWORD("select * from driver where phone_number = (?) and `password` = (?)"),
+
     READ_BY_ID("select * from driver where id_driver=(?)"),
 
     READ_ALL("select * from driver"),
