@@ -6,6 +6,7 @@ import com.robosh.model.dao.mappers.DriverMapper;
 import com.robosh.model.dao.mappers.Mapper;
 import com.robosh.model.entity.Driver;
 import com.robosh.model.entity.enums.DriverStatus;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.List;
 public class JdbcDriverDao implements DriverDao {
 
     private Connection connection;
-
+    private static final Logger LOG = Logger.getLogger(JdbcDriverDao.class);
     public JdbcDriverDao(Connection connection) {
         this.connection = connection;
     }
@@ -27,10 +28,13 @@ public class JdbcDriverDao implements DriverDao {
         try (PreparedStatement ps = connection.prepareStatement(DriverSQL.CHECK_STATUS.getQUERY())) {
             ps.setString(1, DriverStatus.FREE.toString().toLowerCase());
             final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + DriverSQL.CHECK_STATUS);
             if (rs.next()) {
+                LOG.debug("check is rs has next");
                 return true;
             }
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
         return false;
@@ -44,10 +48,13 @@ public class JdbcDriverDao implements DriverDao {
         try (PreparedStatement ps = connection.prepareStatement(DriverSQL.READ_BY_ID.getQUERY())) {
             ps.setLong(1, id);
             final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + DriverSQL.READ_BY_ID);
             if (rs.next()) {
+                LOG.debug("check is rs has next");
                 result = driverMapper.getEntity(rs);
             }
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
         return result;
@@ -59,14 +66,17 @@ public class JdbcDriverDao implements DriverDao {
         final String query = DriverSQL.READ_ALL.getQUERY();
         try (Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery(query);
+            LOG.debug("Executed query" + DriverSQL.READ_ALL);
             Mapper<Driver> driverMapper = new DriverMapper();
 
             while (rs.next()) {
+                LOG.debug("Read objects");
                 Driver driver = driverMapper.getEntity(rs);
                 drivers.add(driver);
             }
             return drivers;
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
             return null;
         }
@@ -82,10 +92,13 @@ public class JdbcDriverDao implements DriverDao {
             ps.setString(1, driverStatus.toString().toLowerCase());
             ps.setString(2, carType);
             final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + DriverSQL.FIND_DRIVER_BY_CAR_TYPE_AND_STATUS);
             if (rs.next()) {
+                LOG.debug("check is rs has next");
                 result = driverMapper.getEntity(rs);
             }
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
         return result;
@@ -97,10 +110,13 @@ public class JdbcDriverDao implements DriverDao {
             ps.setString(1, phoneNumber);
             ps.setString(2, password);
             final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + DriverSQL.READ_BY_PHONE_AND_PASSWORD);
             if (rs.next()) {
+                LOG.debug("check is rs has next");
                 return true;
             }
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
         return false;
@@ -116,10 +132,13 @@ public class JdbcDriverDao implements DriverDao {
             ps.setString(1, phone_number);
             ps.setString(2, password);
             final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + DriverSQL.READ_BY_PHONE_AND_PASSWORD);
             if (rs.next()) {
+                LOG.debug("check is rs has next");
                 result = driverMapper.getEntity(rs);
             }
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
         return result;
@@ -136,8 +155,10 @@ public class JdbcDriverDao implements DriverDao {
             ps.setString(1,driver.getDriverStatus().toString().toLowerCase());
             ps.setLong(2, driver.getPersonId());
             final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + DriverSQL.UPDATE);
             return true;
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
             return false;
         }
@@ -167,7 +188,9 @@ public class JdbcDriverDao implements DriverDao {
     public void close() {
         try {
             connection.close();
+            LOG.debug("Connection closed");
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             throw new RuntimeException(e);
         }
     }

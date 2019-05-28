@@ -1,4 +1,4 @@
-package com.robosh.model.command.directions;
+package com.robosh.model.command.account;
 
 import com.robosh.model.command.Command;
 import com.robosh.model.command.CommandService;
@@ -11,8 +11,7 @@ import java.io.IOException;
 public class LogOutCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        CommandService.unlogUser(request);
-        Command command = new TaxiHomeCommand();
-        return "redirect#" + command.execute(request, response);
+        request.getSession().invalidate();
+        return "redirect#" + request.getContextPath() + "/taxi-Kyiv/homePage";
     }
 }

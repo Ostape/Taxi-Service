@@ -1,10 +1,12 @@
 package com.robosh.web;
 
-
 import com.robosh.model.command.Command;
 import com.robosh.model.command.account.EnterLoginCommand;
+import com.robosh.model.command.account.LogOutCommand;
+import com.robosh.model.command.account.ShowAllDriverOrdersCommand;
 import com.robosh.model.command.directions.*;
 import com.robosh.service.ClientService;
+import com.robosh.service.OrderService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +33,7 @@ public class Servlet extends HttpServlet {
             commands.put("logOut", new LogOutCommand());
             commands.put("clientAccount", new ClientAccountCommand());
             commands.put("driverAccount", new DriverAccountCommand());
-            commands.put("showAllOrders", new ShowAllDriverOrdersCommand());
+            commands.put("showAllOrders", new ShowAllDriverOrdersCommand(new OrderService()));
     }
 
     @Override
@@ -51,7 +53,6 @@ public class Servlet extends HttpServlet {
         String commandKey = getRequestPath(request);//get next command key
         Command command = commands.get(commandKey);
         if (command == null) { //if there is no command with such key, request dispatcher home page
-            System.out.println("fff");
             request.getRequestDispatcher("/taxi-Kyiv/homePage").forward(request, response);
         }else {
             String nextPage = command.execute(request, response); //which one we will use: regirect or forward
@@ -73,7 +74,6 @@ public class Servlet extends HttpServlet {
 //                .substring(request.getRequestURI().lastIndexOf("/") + 1);
         String pathURI = request.getRequestURI();
         return pathURI.replaceAll(".*/taxi-Kyiv/", "");
-        //return pathURI.replaceAll(".*/taxi-Kyiv/", "");
     }
 
     private boolean isRedirect(String string){

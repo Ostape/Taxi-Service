@@ -105,7 +105,7 @@
     		</div>
     		</div>
     		<div style="text-align: center;">
-	    		<form>
+	    		<form action="${pageContext.request.contextPath}/taxi-Kyiv/logOut">
 	    			<button type="submit" class="logout">Logout</button>
 	    		</form>
     		</div>

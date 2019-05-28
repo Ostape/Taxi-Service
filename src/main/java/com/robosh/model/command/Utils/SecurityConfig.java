@@ -12,21 +12,22 @@ public class SecurityConfig {
     }
 
     private static void init() {
-
         // Configure For "Client" Role.
         List<String> urlPatterns1 = new ArrayList<>();
 
         //todo make url patterns
-        urlPatterns1.add("/makeOrder");
-        urlPatterns1.add("/clientAccount");
+        urlPatterns1.add("makeOrder");
+        urlPatterns1.add("clientAccount");
+        urlPatterns1.add("logOut");
 
         mapConfig.put(Role.CLIENT, urlPatterns1);
 
         // Configure For "Driver" Role.
         List<String> urlPatterns2 = new ArrayList<>();
 
-        ///urlPatterns2.add("/userInfo");
-        urlPatterns2.add("/driverAccount");
+        urlPatterns2.add("showOrders");
+        urlPatterns2.add("driverAccount");
+        urlPatterns2.add("logOut");
 
         mapConfig.put(Role.DRIVER, urlPatterns2);
     }

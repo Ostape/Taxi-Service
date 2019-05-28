@@ -114,7 +114,7 @@
                     <button type="submit" class="logoutDriver">Logout</button>
                 </form>
 
-                <form class="dr">
+                <form class="dr" action="${pageContext.request.contextPath}/taxi-Kyiv/showAllOrders">
                     <button type="submit" class="logoutDriver">Show all orders</button>
                 </form>
 

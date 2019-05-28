@@ -1,9 +1,11 @@
 package com.robosh.model.dao;
 
 import com.robosh.model.dao.implementations.JdbcDaoFactory;
+import org.apache.log4j.Logger;
 
 public abstract class DaoFactory {
     private static DaoFactory daoFactory;
+    private static final Logger LOG = Logger.getLogger(DaoFactory.class);
 
     public abstract ClientDao createClientDao();
 
@@ -21,6 +23,7 @@ public abstract class DaoFactory {
         if (daoFactory == null) {
             synchronized (DaoFactory.class) {
                 if (daoFactory == null) {
+                    LOG.debug("creating dao factory");
                     daoFactory = new JdbcDaoFactory();
                 }
             }

@@ -33,6 +33,50 @@ footer{
 padding: 10px;
 }
 
+.viewData{
+  height:60px;
+  width: 100%;
+  border-radius: 5px;
+  text-align: center;
+  border: 1px solid #ddd !important;
+}
+.viewData p{
+  padding-top: 17px;
+}
+
+.data{
+  margin-top: 4px;
+}
+
+.ordersHeader {
+  text-align: center;
+  font-size: 40px;
+  padding-bottom: 31px;
+  height: inherit;
+}
+.street{
+  width: 25%;
+  float: left;
+  height: inherit;
+}
+.costVoage{
+  width: 10%;
+  float: left;
+  height: inherit;
+}
+
+.idOrder{
+  width: 10%;
+  float: left;
+  height: inherit;
+}
+.nameClient{
+  width: 30%;
+  float: left;
+  height: inherit;
+
+}
+
 /* Full-width input fields */
 input[type=text], input[type=password] {
   width: 100%;

@@ -6,6 +6,8 @@
 <fmt:setLocale value="${param.lang}" />
 <fmt:setBundle basename="messages" />
 
+
+
 <html lang="">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +19,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-grid.css">
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
- 
+
     <script src="${pageContext.request.contextPath}/js/jquery.js?ver=1.11.3"></script>
 </head>
 
@@ -79,45 +81,48 @@
 
     <div class="center">
         <div class="nazar" >
-            <div class="row">
-            <div class="col-lg-6">
-                <img src="${pageContext.request.contextPath}/img/clientPhoto.png" style="width: 65% ">
-            </div>
+            
+            		<div class="ordersHeader" >
+            		<p>All orders</p>
+            		</div>
+           		<div class="viewData" >
+           			<div class="idOrder">
+           				<p>id_order</p>
+           			</div>
+           			<div class="nameClient">
+           				<p>Client Name</p>
+           			</div>
+           			<div class="street">
+           				<p>Street deparure</p>
+           			</div>
+           			<div class="street">
+           				<p>Street arrive</p>
+           			</div>
+           			<div class="costVoage">
+           				<p>Costs</p>
+           			</div>
+           		</div>
 
-            <div class="col-lg-6">
-                <ul>
-                    <li>
-                       <strong> Щур Назар Богданович</strong>
-                    </li>
+            <c:forEach items="${requestScope.orderList}" var="order">
+           		<div class="viewData data" >
+           			<div class="idOrder">
+           				<p><c:out value="${order.idOrder}"/></p>
+           			</div>
+           			<div class="nameClient">
+           				<p><c:out value="${order.client.name}"/> <c:out value="${order.client.surname}"/></p>
+           			</div>
+           			<div class="street">
+           				<p><c:out value="${order.adressArrive.street}"/> <c:out value="${order.adressArrive.houseNumber}"/></p>
+           			</div>
+           			<div class="street">
+           				<p><c:out value="${order.adressDeparture.street}"/> <c:out value="${order.adressDeparture.houseNumber}"/></p>
+           			</div>
+           			<div class="costVoage">
+           				<p><c:out value="${order.costWithDiscount}"/></p>
+           			</div>
 
-                    <li class="liFont">
-                        Телефон +380943267341
-                    </li>
-
-                    <li class="liFont">
-                        Тип авто Міні-вен
-                    </li>
-
-                    <li class="liFont">
-                        Status виконується
-                    </li> 
-                </ul>
-            </div>
-            </div>
-            <div>
-                
-                <form class="dr">
-                    <button type="submit" class="logoutDriver">Logout</button>
-                </form>
-
-                <form class="dr">
-                    <button type="submit" class="logoutDriver">Show all orders</button>
-                </form>
-
-                <form class="dr">
-                    <button type="submit" class="logoutDriver">make order</button>
-                </form>
-            </div>
+           		</div>
+            </c:forEach>
         </div>
     </div>
     </section>

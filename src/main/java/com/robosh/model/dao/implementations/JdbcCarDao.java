@@ -8,6 +8,7 @@ import com.robosh.model.dao.mappers.ClientMapper;
 import com.robosh.model.dao.mappers.Mapper;
 import com.robosh.model.entity.Car;
 import com.robosh.model.entity.Client;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class JdbcCarDao implements CarDao {
 
+    private static final Logger LOG = Logger.getLogger(JdbcAdressDao.class);
     private Connection connection;
 
     public JdbcCarDao(Connection connection) {
@@ -28,12 +30,16 @@ public class JdbcCarDao implements CarDao {
         result.setIdCar(-1);
 
         try (PreparedStatement ps = connection.prepareStatement(CarSQL.READ_BY_ID.getQUERY())) {
+
             ps.setLong(1, id);
             final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + CarSQL.READ_BY_ID);
             if (rs.next()) {
+                LOG.debug("check is rs has next");
                 result = carMapper.getEntity(rs);
             }
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
         return result;
@@ -46,13 +52,15 @@ public class JdbcCarDao implements CarDao {
         try (Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery(query);
             Mapper<Car> carMapper = new CarMapper();
-
+            LOG.debug("Executed query" + CarSQL.READ_ALL);
             while (rs.next()) {
+                LOG.debug("check is rs has next");
                 Car car = carMapper.getEntity(rs);
                 cars.add(car);
             }
             return cars;
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
             return null;
         }
@@ -64,10 +72,13 @@ public class JdbcCarDao implements CarDao {
             ps.setInt(1, id_car);
             ps.setString(2, carType);
             final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + CarSQL.READ_BY_ID_AND_CAR_TYPE);
             if (rs.next()) {
+                LOG.debug("check is rs has next");
                 return true;
             }
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
         return false;
@@ -81,10 +92,13 @@ public class JdbcCarDao implements CarDao {
         try (PreparedStatement ps = connection.prepareStatement(CarSQL.READ_BY_TYPE.getQUERY())) {
             ps.setString(1, carType);
             final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + CarSQL.READ_BY_TYPE);
             if (rs.next()) {
+                LOG.debug("check is rs has next");
                 result = carMapper.getEntity(rs);
             }
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
         return result;
@@ -118,7 +132,9 @@ public class JdbcCarDao implements CarDao {
     public void close() {
         try {
             connection.close();
+            LOG.debug("Connection closed");
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             throw new RuntimeException(e);
         }
     }

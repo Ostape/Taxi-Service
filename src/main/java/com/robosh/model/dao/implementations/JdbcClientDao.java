@@ -5,6 +5,7 @@ import com.robosh.model.dao.implementations.queries.ClientSQL;
 import com.robosh.model.dao.mappers.ClientMapper;
 import com.robosh.model.dao.mappers.Mapper;
 import com.robosh.model.entity.Client;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class JdbcClientDao implements ClientDao {
 
+    private static final Logger LOG = Logger.getLogger(JdbcClientDao.class);
     private Connection connection;
 
     public JdbcClientDao(Connection connection) {
@@ -28,10 +30,14 @@ public class JdbcClientDao implements ClientDao {
             ps.setString(1, phoneNumber);
             ps.setString(2, password);
             final ResultSet rs = ps.executeQuery();
+
+            LOG.debug("Executed query" + ClientSQL.READ_BY_PHONE_PASSWORD);
             if (rs.next()) {
+                LOG.debug("check is rs has next");
                 return true;
             }
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
         return false;
@@ -39,19 +45,19 @@ public class JdbcClientDao implements ClientDao {
 
     /**
      * checks if phone number is free
-     *
-     * @param phoneNumber
-     * @return
      */
     @Override
     public boolean isPhoneNumberExists(String phoneNumber) {
         try (PreparedStatement ps = connection.prepareStatement(ClientSQL.READ_BY_PHONE_NUMBER.getQUERY())) {
             ps.setString(1, phoneNumber);
             final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + ClientSQL.READ_BY_PHONE_NUMBER);
             if (rs.next()) {
+                LOG.debug("check is rs has next");
                 return true;
             }
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
         return false;
@@ -62,10 +68,12 @@ public class JdbcClientDao implements ClientDao {
         try (PreparedStatement ps = connection.prepareStatement(ClientSQL.READ_BY_EMAIL.getQUERY())) {
             ps.setString(1, email);
             final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + ClientSQL.READ_BY_EMAIL);
             if (rs.next()) {
                 return true;
             }
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
         return false;
@@ -81,10 +89,13 @@ public class JdbcClientDao implements ClientDao {
             ps.setString(2, password);
 
             final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + ClientSQL.READ_BY_PHONE_PASSWORD);
             if (rs.next()) {
+                LOG.debug("check is rs has next");
                 result = clientMapper.getEntity(rs);
             }
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
         return result;
@@ -93,6 +104,7 @@ public class JdbcClientDao implements ClientDao {
     @Override
     public void create(Client client) {
         try (PreparedStatement ps = connection.prepareStatement(ClientSQL.INSERT.getQUERY())) {
+            LOG.debug("Executed query" + ClientSQL.INSERT);
             ps.setString(1, client.getSurname());
             ps.setString(2, client.getName());
             ps.setString(3, client.getPhoneNumber());
@@ -100,6 +112,7 @@ public class JdbcClientDao implements ClientDao {
             ps.setString(5, client.getPassword());
             ps.executeUpdate();
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
     }
@@ -113,10 +126,13 @@ public class JdbcClientDao implements ClientDao {
         try (PreparedStatement ps = connection.prepareStatement(ClientSQL.READ_BY_ID.getQUERY())) {
             ps.setLong(1, id);
             final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + ClientSQL.READ_BY_ID);
             if (rs.next()) {
+                LOG.debug("check is rs has next");
                 result = clientMapper.getEntity(rs);
             }
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
         return result;
@@ -129,14 +145,17 @@ public class JdbcClientDao implements ClientDao {
 
         try (Statement st = connection.createStatement()) {
             ResultSet rs = st.executeQuery(query);
+            LOG.debug("Executed query" + ClientSQL.READ_ALL);
             Mapper<Client> clientMapper = new ClientMapper();
 
             while (rs.next()) {
+                LOG.debug("Read objects");
                 Client student = clientMapper.getEntity(rs);
                 clients.add(student);
             }
             return clients;
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             e.printStackTrace();
             return null;
         }
@@ -163,7 +182,9 @@ public class JdbcClientDao implements ClientDao {
     public void close() {
         try {
             connection.close();
+            LOG.debug("Connection closed");
         } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
             throw new RuntimeException(e);
         }
     }

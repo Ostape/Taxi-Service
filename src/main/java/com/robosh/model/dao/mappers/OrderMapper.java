@@ -1,5 +1,7 @@
 package com.robosh.model.dao.mappers;
 
+import com.robosh.model.entity.Coupon;
+import com.robosh.model.entity.Driver;
 import com.robosh.model.entity.Order;
 import com.robosh.model.entity.enums.OrderStatus;
 import com.robosh.service.AdressService;
@@ -21,10 +23,20 @@ public class OrderMapper implements Mapper<Order>{
         order.setIdOrder(resultSet.getInt("id_order"));
         order.setOrderStatus(OrderStatus.valueOf(resultSet.getString("order_status")));
         order.setClient(clientService.getClientById(resultSet.getLong("id_client")));
-        order.setDriver(driverService.getDriverById(resultSet.getLong("id_driver")));
-        order.setAdressDeparture(adressService.getAdressById(resultSet.getLong("id_adress")));
-        order.setAdressArrive(adressService.getAdressById(resultSet.getLong("id_adress")));
-        order.setCoupon(couponService.getCouponById(resultSet.getLong("id_coupon")));
+
+        Driver driver = driverService.getDriverById(resultSet.getLong("id_driver"));
+        if (driver.getPersonId() != -1){
+            order.setDriver(driver);
+        }
+        order.setAdressDeparture(adressService.getAdressById(resultSet.getLong("id_adress_departure")));
+        order.setAdressArrive(adressService.getAdressById(resultSet.getLong("id_adress_arrive")));
+
+       // if (resultSet.getLong("id_coupon"))
+        Coupon coupon = couponService.getCouponById(resultSet.getLong("id_coupon"));
+        if (coupon.getIdCoupon() != -1) {
+            order.setCoupon(coupon);
+        }
+
         order.setCost(resultSet.getInt("cost"));
         order.setCostWithDiscount(resultSet.getInt("cost_with_discount"));
         return order;
