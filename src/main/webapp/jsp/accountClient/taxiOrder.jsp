@@ -42,7 +42,7 @@
 			<div style="float: right; width: 370px">
 
 				<div class="signClient">
-					<a href="${pageContext.request.contextPath}/taxi-Kyiv/loginMe">
+					<a href="${pageContext.request.contextPath}/taxi-Kyiv/loginClient">
 						<div style="margin: auto; float: right; height: 36px;">
 							<img src="${pageContext.request.contextPath}/img/iconenter.png" style="height: 36px" >
 						</div>
@@ -197,19 +197,19 @@
 
 <div style="height: 100px"></div>
 </div>
+</form>
 
 </div>
 
-</form>
 
 
 </section>
-	<script src='../js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
-	<script src='../js/script.js?ver=4.3.19'></script>
+	<script src='../../js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
+	<script src='../../js/script.js?ver=4.3.19'></script>
 </div>
  <footer id="footer">
 	<div class="center">
-			<div class="foot"><img src="../img/logo.png"></div>
+			<div class="foot"><img src="../../img/logo.png"></div>
 		<div class="copyright">	<div class="textwidget">© Інформаційно-диспетчерська служба «Всеукраїнське Таксі 838» , 2014—2018</div>
 	</div>
 	</div>

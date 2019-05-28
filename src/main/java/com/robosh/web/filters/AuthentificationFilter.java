@@ -1,86 +1,86 @@
 //package com.robosh.web.filters;
 //
+//import com.robosh.model.command.Utils.SecurityUtils;
+//import com.robosh.model.entity.Person;
+//import com.robosh.model.entity.enums.Role;
+//
 //import javax.servlet.*;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
 //import javax.servlet.http.HttpSession;
 //import java.io.IOException;
+//import java.util.List;
+//import java.util.Map;
+//import java.util.stream.Collectors;
+//import java.util.stream.Stream;
 //
 //import static java.util.Objects.nonNull;
 //
 //public class AuthentificationFilter implements Filter {
 //    @Override
-//    public void init(FilterConfig filterConfig) throws ServletException {
-//    }
-//
-//    @Override
-//    public void doFilter(final ServletRequest request,
-//                         final ServletResponse response,
-//                         final FilterChain filterChain)
-//
-//            throws IOException, ServletException {
-//
-//        final HttpServletRequest req = (HttpServletRequest) request;
-//        final HttpServletResponse res = (HttpServletResponse) response;
-//
-//        final String login = req.getParameter("login");
-//        final String password = req.getParameter("password");
-//
-//        final HttpSession session = req.getSession();
-//
-//        //Logged user.
-//        if (nonNull(session) &&
-//                nonNull(session.getAttribute("login")) &&
-//                nonNull(session.getAttribute("password"))) {
-//
-//            final User.ROLE role = (User.ROLE) session.getAttribute("role");
-//
-//            moveToMenu(req, res, role);
-//
-//
-//        } else if (dao.get().userIsExist(login, password)) {
-//
-//            final User.ROLE role = dao.get().getRoleByLoginPassword(login, password);
-//
-//            req.getSession().setAttribute("password", password);
-//            req.getSession().setAttribute("login", login);
-//            req.getSession().setAttribute("role", role);
-//
-//            moveToMenu(req, res, role);
-//
-//        } else {
-//            moveToMenu(req, res, User.ROLE.UNKNOWN);
-//        }
-//    }
-//
-//    /**
-//     * Move user to menu.
-//     * If access 'admin' move to admin menu.
-//     * If access 'user' move to user menu.
-//     */
-//    private void moveToMenu(final HttpServletRequest req,
-//                            final HttpServletResponse res,
-//                            final User.ROLE role)
-//            throws ServletException, IOException {
-//
-//
-//        if (role.equals(User.ROLE.ADMIN)) {
-//
-//            req.getRequestDispatcher("/WEB-INF/view/admin_menu.jsp").forward(req, res);
-//
-//        } else if (role.equals(User.ROLE.USER)) {
-//
-//            req.getRequestDispatcher("/WEB-INF/view/user_menu.jsp").forward(req, res);
-//
-//        } else {
-//
-//            req.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(req, res);
-//        }
-//    }
-//
-//
-//    @Override
 //    public void destroy() {
 //    }
 //
+//    @Override
+//    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
+//            throws IOException, ServletException {
+//        HttpServletRequest request = (HttpServletRequest) req;
+//        HttpServletResponse response = (HttpServletResponse) resp;
+//        String servletPath = request.getServletPath();
+//        // User information stored in the Session.
+//        // (After successful login).
+//        Person loginedUser = AppUtils.getLoginedUser(request.getSession());
+//
+//        if (servletPath.equals("/login")) {
+//            chain.doFilter(request, response);
+//            return;
+//        }
+//        HttpServletRequest wrapRequest = request;
+//
+//        if (loginedUser != null) {
+//            // User Name
+//            String userName = loginedUser.getUserName();
+//
+//            // Roles
+//            List<String> roles = loginedUser.getRoles();
+//
+//            // Wrap old request by a new Request with userName and Roles information.
+//            wrapRequest = new UserRoleRequestWrapper(userName, roles, request);
+//        }
+//
+//        // Pages must be signed in.
+//        if (SecurityUtils.isSecurityPage(request)) {
+//
+//            // If the user is not logged in,
+//            // Redirect to the login page.
+//            if (loginedUser == null) {
+//
+//                String requestUri = request.getRequestURI();
+//
+//                // Store the current page to redirect to after successful login.
+//                int redirectId = AppUtils.storeRedirectAfterLoginUrl(request.getSession(), requestUri);
+//
+//                response.sendRedirect(wrapRequest.getContextPath() + "/login?redirectId=" + redirectId);
+//                return;
+//            }
+//
+//            // Check if the user has a valid role?
+//            boolean hasPermission = SecurityUtils.hasPermission(wrapRequest);
+//            if (!hasPermission) {
+//
+//                RequestDispatcher dispatcher //
+//                        = request.getServletContext().getRequestDispatcher("/WEB-INF/views/accessDeniedView.jsp");
+//
+//                dispatcher.forward(request, response);
+//                return;
+//            }
+//        }
+//
+//        chain.doFilter(wrapRequest, response);
+//    }
+//
+//    @Override
+//    public void init(FilterConfig fConfig) throws ServletException {
+//
+//    }
 //}

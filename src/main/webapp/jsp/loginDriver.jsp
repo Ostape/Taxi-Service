@@ -3,23 +3,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
+
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${bundle}"/>
+
+<html lang="${locale}}">
+
 <%--<fmt:setLocale value="${param.lang}" />--%>
 <%--<fmt:setBundle basename="messages" />--%>
 
-<%--<fmt:setLocale value="${locale}"/>--%>
-<%--<fmt:setBundle basename="${bundle}"/>--%>
-
-<%--<html lang="${locale}}">--%>
-
-<fmt:setLocale value="${param.lang}" />
-<fmt:setBundle basename="messages" />
-
-<html lang="${param.lang}">
+<%--<html lang="${param.lang}">--%>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Таксі Київ</title>
-	<%--	--%>
 	<link rel="icon" href="${pageContext.request.contextPath}/img/favicon.ico" type="image/x-icon"/>
 	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic&subset=latin,cyrillic'
 		  rel='stylesheet' type='text/css'/>
@@ -35,14 +32,13 @@
 	<header id="header">
 	<div class="header_white clearfix">
 		<div class="center">
-			<!-- change -->
 			<a href="" id="logo" title="Taxi838 kyiv">
 				<img src="${pageContext.request.contextPath}/img/logo.png" width="163" height="57">
 			</a>
 			<div style="float: right; width: 370px">
 
 				<div class="signClient">
-					<a href="${pageContext.request.contextPath}/taxi-Kyiv/loginMe">
+					<a href="${pageContext.request.contextPath}/taxi-Kyiv/loginClient">
 						<div style="margin: auto; float: right; height: 36px;">
 							<img src="${pageContext.request.contextPath}/img/iconenter.png" style="height: 36px" >
 						</div>
@@ -99,10 +95,10 @@
 		    <h1>Sign up for Driver</h1>
 		    <p>Please fill this form to enter in your driver account.</p>
 		    <hr>
-		    <label for="email"><b>Phone number</b></label>
+		    <label><b>Phone number</b></label>
 		    <input type="text" placeholder="Phone number" name="Phone" required>
 
-		    <label for="psw"><b>Password</b></label>
+		    <label><b>Password</b></label>
 		    <input type="password" placeholder="Enter password" name="psw" required>
 		    <hr>
 		    <button type="submit" class="registerbtn">Submit</button>

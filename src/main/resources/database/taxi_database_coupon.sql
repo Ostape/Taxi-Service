@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `taxi_database` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `taxi_database`;
 -- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: taxi_database
@@ -26,9 +24,10 @@ DROP TABLE IF EXISTS `coupon`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `coupon` (
   `id_coupon` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `coupon` varchar(45) NOT NULL,
+  `coupon_name` varchar(45) NOT NULL,
+  `discount` int(10) NOT NULL,
   PRIMARY KEY (`id_coupon`),
-  UNIQUE KEY `coupon_UNIQUE` (`coupon`)
+  UNIQUE KEY `coupon_UNIQUE` (`coupon_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -38,7 +37,7 @@ CREATE TABLE `coupon` (
 
 LOCK TABLES `coupon` WRITE;
 /*!40000 ALTER TABLE `coupon` DISABLE KEYS */;
-INSERT INTO `coupon` VALUES (1,'AZAZIN'),(4,'KUPON'),(3,'TAKITAKI'),(2,'TAXIKYIV');
+INSERT INTO `coupon` VALUES (1,'AZAZ',20),(2,'TAXIKYIV',10),(3,'TAKITAKI',40),(4,'KUPON',20);
 /*!40000 ALTER TABLE `coupon` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-17  1:36:27
+-- Dump completed on 2019-05-27 18:36:13

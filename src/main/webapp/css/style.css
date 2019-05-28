@@ -81,9 +81,38 @@ hr {
   opacity:1;
 }
 
+
+.logout{
+  background-color: #009edf;;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  margin-top: 105px;
+  width: 30%;
+  opacity:1;
+}
+.logoutDriver{
+  background-color: #009edf;;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  margin-top: 60px;
+  width: 30%;
+  opacity:1;
+}
 /* Add a blue text color to links */
 a {
   color: dodgerblue;
+}
+.liFont{
+  font-size: 26px !important;
+}
+.dr{
+  display: unset;
 }
 
 /* Set a grey background color and center the text of the "sign in" section */
@@ -206,8 +235,19 @@ a{color:#444;text-decoration:none;}
 p{margin-bottom:.3em;}
 
 
-
-
+.nazar{
+  min-height: 400px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+.row{
+  margin: 0px;
+}
+.nazar li{
+  padding: 16px 0px 33px 48px;
+    font-size: 33px;
+    font-family: "centyry gotic";
+}
 
 .a-center { text-align:center;}
 .cell { vertical-align:middle; display:table-cell;}

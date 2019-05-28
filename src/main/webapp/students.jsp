@@ -11,10 +11,8 @@ students
 <table>
     <c:forEach items="${students}" var="student">
         <tr>
-<%--            <td>${student.id}</td>--%>
             <td><c:out value="${student.getName()}"/></td>
             <td><c:out value="${student.getSurname()}"/></td>
-<%--            <td><c:out value="${student.phone}"/></td>--%>
         </tr>
     </c:forEach>
 </table>

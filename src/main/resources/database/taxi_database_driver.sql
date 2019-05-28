@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `taxi_database` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `taxi_database`;
 -- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: taxi_database
@@ -29,6 +27,7 @@ CREATE TABLE `driver` (
   `surname` varchar(128) NOT NULL,
   `name` varchar(128) NOT NULL,
   `middle_name` varchar(128) NOT NULL,
+  `password` varchar(128) NOT NULL,
   `phone_number` varchar(14) NOT NULL,
   `driver_status` varchar(45) NOT NULL,
   `id_car` int(10) unsigned NOT NULL,
@@ -36,7 +35,7 @@ CREATE TABLE `driver` (
   UNIQUE KEY `phone_number_UNIQUE` (`phone_number`),
   KEY `fk_driver_car_idx` (`id_car`),
   CONSTRAINT `fk_driver_car` FOREIGN KEY (`id_car`) REFERENCES `car` (`id_car`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +44,7 @@ CREATE TABLE `driver` (
 
 LOCK TABLES `driver` WRITE;
 /*!40000 ALTER TABLE `driver` DISABLE KEYS */;
-INSERT INTO `driver` VALUES (1,'Карпенко','Андрій','Олександрович','+380983445123','free',1),(2,'Пацевко','Олена','Ігорівна','+380923454352','free',2),(3,'Арутунян','Ерік','Андрійович','+380983453432','free',4),(4,'Іванюк','Андрій','Олегович','+380923454623','booked',3),(5,'Кириченко','Євгеній','Назарович','+380923423112','booked',5),(6,'Сусоєв','Максим','Васильович','+380932345633','free',7),(7,'Голуб','Віталій','Сергійович','+380965423232','free',6);
+INSERT INTO `driver` VALUES (1,'Карпенко','Андрій','Олександрович','qwerty','+380983445123','free',1),(2,'Пацевко','Олена','Ігорівна','asdfgh','+380923454352','free',2),(3,'Арутунян','Ерік','Андрійович','applepen','+380983453432','free',4),(4,'Іванюк','Андрій','Олегович','aplea1','+380923454623','booked',3),(5,'Кириченко','Євгеній','Назарович','123456789','+380923423112','booked',5),(6,'Сусоєв','Максим','Васильович','888888888','+380932345633','booked',7),(7,'Голуб','Віталій','Сергійович','qazwsxedcrfv','+380965423232','free',6);
 /*!40000 ALTER TABLE `driver` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-17  1:36:28
+-- Dump completed on 2019-05-27 18:36:14

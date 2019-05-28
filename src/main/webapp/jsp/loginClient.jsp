@@ -3,23 +3,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
-<%--<fmt:setLocale value="${param.lang}" />--%>
-<%--<fmt:setBundle basename="messages" />--%>
-
-<%--<fmt:setLocale value="${locale}"/>--%>
-<%--<fmt:setBundle basename="${bundle}"/>--%>
-
-<%--<html lang="${locale}}">--%>
-
-<fmt:setLocale value="${param.lang}" />
-<fmt:setBundle basename="messages" />
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${bundle}"/>
 
 <html lang="${param.lang}">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Таксі Київ</title>
-	<%--	--%>
 	<link rel="icon" href="${pageContext.request.contextPath}/img/favicon.ico" type="image/x-icon"/>
 	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic&subset=latin,cyrillic'
 		  rel='stylesheet' type='text/css'/>
@@ -42,7 +33,7 @@
 			<div style="float: right; width: 370px">
 
 				<div class="signClient">
-					<a href="${pageContext.request.contextPath}/taxi-Kyiv/loginMe">
+					<a href="${pageContext.request.contextPath}/taxi-Kyiv/loginClient">
 						<div style="margin: auto; float: right; height: 36px;">
 							<img src="${pageContext.request.contextPath}/img/iconenter.png" style="height: 36px" >
 						</div>
@@ -76,7 +67,7 @@
 					<div id="navmobile-btn">Меню</div>
                     <ul id="menu-main-menu" class="main_menu clearfix">
 
-<li id="menu-item-45" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45"><a href="#">Тарифи</a></li>
+<li id="menu-item-45" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45"><a href="#"><fmt:message key="label.header.menu.tariff"/></a></li>
 <li id="menu-item-44" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44"><a href="#">Про нас</a></li>
 <li id="menu-item-47" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-47"><a href="#">Новини</a></li>
 <li id="menu-item-43" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-43"><a href="${pageContext.request.contextPath}/taxi-Kyiv/loginDriver">Водіям</a></li>
@@ -90,16 +81,18 @@
 </div>
 
 </header>
-
+<h1>
+	<c:out value = "${requestScope.errorMessage}" default="login"/>
+</h1>
 <div class="center">
 	<div class="register">
-		<form action="registerClient.jsp">
+		<form method="POST" action="${pageContext.request.contextPath}/taxi-Kyiv/enterLogin">
 		  <div class="container">
 		    <h1>Sign up</h1>
 		    <p>Please fill this form to enter in your account.</p>
 		    <hr>
-		    <label><b>Email</b></label>
-		    <input type="text" placeholder="Enter Phone" name="phone_number" required>
+		    <label><b>Phone</b></label>
+		    <input type="text" placeholder="Enter Phone" name="phoneNumber" required>
 		    <label><b>Password</b></label>
 		    <input type="password" placeholder="Enter Password" name="password" required>
 		    <hr>
@@ -120,7 +113,7 @@
 </div>
  <footer id="footer">
 	<div class="center">
-			<div class="foot"><img src="../img/logo.png"></div>
+			<div class="foot"><img src="${pageContext.request.contextPath}/img/logo.png"></div>
 		<div class="copyright">	<div class="textwidget">© Інформаційно-диспетчерська служба «Всеукраїнське Таксі 838» , 2014—2018</div>
 	</div>
 	</div>

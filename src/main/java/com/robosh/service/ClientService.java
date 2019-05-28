@@ -55,7 +55,7 @@ public class ClientService {
             return dao.getClientByPassPhone(phoneNumber, password);
         }
     }
-    
+
     public List<Client> getAllClients(){
         try (ClientDao dao = daoFactory.createClientDao()) {
             return dao.findAll();

@@ -42,7 +42,7 @@
 			<div style="float: right; width: 370px">
 
 				<div class="signClient">
-					<a href="${pageContext.request.contextPath}/taxi-Kyiv/loginMe">
+					<a href="${pageContext.request.contextPath}/taxi-Kyiv/loginClient">
 						<div style="margin: auto; float: right; height: 36px;">
 							<img src="${pageContext.request.contextPath}/img/iconenter.png" style="height: 36px" >
 						</div>
@@ -129,7 +129,7 @@
 		  </div>
 
 		  <div class="container signin">
-		    <p>Already have an account? <a href="${pageContext.request.contextPath}/taxi-Kyiv/loginMe">Sign in</a>.</p>
+		    <p>Already have an account? <a href="${pageContext.request.contextPath}/taxi-Kyiv/loginClient">Sign in</a>.</p>
 		  </div>
 		  <div style="height: 60px"></div>
 		</form>
