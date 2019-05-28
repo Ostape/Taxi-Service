@@ -10,6 +10,6 @@ import java.io.IOException;
 public class MakeClientOrderCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        return "/jsp/taxiOrder.jsp";
+        return "/jsp/accountClient/taxiOrder.jsp";
     }
 }

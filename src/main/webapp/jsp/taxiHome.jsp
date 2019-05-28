@@ -33,7 +33,7 @@
 			<div style="float: right; width: 370px">
 
 				<div class="signClient">
-					<c:out value="${sessionScope.clientName.name}"/>
+					<c:out value="${sessionScope.loginedPerson.name}"/>
 					<a href="${pageContext.request.contextPath}/taxi-Kyiv/loginClient">
 	                <div style="margin: auto; float: right; height: 36px;">
 	                	<img src="${pageContext.request.contextPath}/img/iconenter.png" style="height: 36px" >

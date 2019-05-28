@@ -34,6 +34,8 @@ public class Servlet extends HttpServlet {
             commands.put("clientAccount", new ClientAccountCommand());
             commands.put("driverAccount", new DriverAccountCommand());
             commands.put("showAllOrders", new ShowAllDriverOrdersCommand(new OrderService()));
+
+            commands.put("403", new Error403Command());
     }
 
     @Override
@@ -58,20 +60,18 @@ public class Servlet extends HttpServlet {
             String nextPage = command.execute(request, response); //which one we will use: regirect or forward
             //if command.execute will have "redirect#", we will use redirect, otherwise forward
             if (isRedirect(nextPage)){
+                System.out.println("redirect servlet: " + nextPage + "\n");
                 response.sendRedirect(nextPage.replaceAll("redirect#", ""));
             }
             else{
+                System.out.println("forward servlet: " + nextPage +"\n");
                 request.getRequestDispatcher(nextPage).forward(request, response);
-                System.out.println(nextPage);
             }
         }
     }
 
 
     private String getRequestPath(HttpServletRequest request) {
-//        String pathURI = request.getRequestURI();
-//        String action = request.getRequestURI()
-//                .substring(request.getRequestURI().lastIndexOf("/") + 1);
         String pathURI = request.getRequestURI();
         return pathURI.replaceAll(".*/taxi-Kyiv/", "");
     }

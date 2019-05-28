@@ -31,22 +31,14 @@ public class EnterLoginCommand implements Command {
             request.setAttribute("errorMessage", errorMessage);
             return "/jsp/loginClient.jsp";
         }else {
-            String pathContext = request.getContextPath();
-            if (CommandService.isClientLogged(request, phoneNumber)){
-//            if (AppUtils.getLoginedU  ser(request.getSession()) != null){
-             //todo account client
-                return "redirect#" +pathContext + "/taxi/clientAccount";
+            if (AppUtils.getLoginedUser(request.getSession()) != null){
+                System.out.println("in EnterLoginCommand");
+                return "redirect#" + request.getContextPath() + "/taxi-Kyiv/clientAccount";
             }
-
-            final Role role = Role.CLIENT;
-            request.getSession().setAttribute("phoneNumber", phoneNumber);
-            request.getSession().setAttribute("password", password);
-            request.getSession().setAttribute("role", role);
-
-            Client client = clientService.getClientByPasswordAndPhone(phoneNumber, password);
-            request.getSession().setAttribute("clientName",client);
-            request.getSession().setAttribute("clientSurname", client);
-            return "redirect#"+ pathContext + "/taxi-Kyiv/clientAccount";
+            Client client = clientService.getClientByPasswordAndPhone(phoneNumber,password);
+            System.out.println(client);
+            AppUtils.storeLoginedUser(request.getSession(), client);
+            return "redirect#" + request.getContextPath() + "/taxi-Kyiv/clientAccount";
         }
     }
 

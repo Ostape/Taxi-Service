@@ -1,11 +1,16 @@
 package com.robosh.model.entity;
 
 import com.robosh.model.entity.enums.DriverStatus;
+import com.robosh.model.entity.enums.Role;
 
 public class Driver extends Person{
     private DriverStatus driverStatus;
     private Car car;
     private String middleName;
+
+    public Driver() {
+        this.role = Role.DRIVER;
+    }
 
     public com.robosh.model.entity.Car getCar() {
         return car;

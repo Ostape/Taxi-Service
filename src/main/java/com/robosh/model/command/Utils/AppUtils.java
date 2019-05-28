@@ -1,19 +1,20 @@
 package com.robosh.model.command.Utils;
-
-import com.robosh.model.entity.Client;
 import com.robosh.model.entity.Person;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 public class AppUtils {
 
+    // Store user info in Session.
     public static void storeLoginedUser(HttpSession session, Person loginedPerson) {
-        // On the JSP can access via ${loginedUser}
         session.setAttribute("loginedPerson", loginedPerson);
     }
 
+    // Get the user information stored in the session.
     public static Person getLoginedUser(HttpSession session) {
-        return(Person) session.getAttribute("loginedPerson");
+        return (Person) session.getAttribute("loginedPerson");
     }
-
 }
