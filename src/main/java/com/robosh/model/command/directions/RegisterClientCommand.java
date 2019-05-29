@@ -10,6 +10,6 @@ import java.io.IOException;
 public class RegisterClientCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        return "/jsp/registerClient.jsp";
+        return "/jsp/commonPages/registerClient.jsp";
     }
 }

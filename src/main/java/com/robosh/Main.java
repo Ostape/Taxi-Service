@@ -1,5 +1,7 @@
 package com.robosh;
 
+import com.robosh.model.customExceptions.EmailIsAlreadyTaken;
+import com.robosh.model.customExceptions.PhoneNumberIsAlreadyTaken;
 import com.robosh.model.entity.Client;
 import com.robosh.model.entity.Driver;
 import com.robosh.model.entity.Order;
@@ -18,11 +20,19 @@ import java.util.stream.Stream;
 
 class Main{
 
-    public static void main(String[] args) {
-        OrderService orderService = new OrderService();
-        List<Order> orderList = orderService.getAllOrderByIdDriver(1);
-        System.out.println(orderList);
+    public static void main(String[] args) throws PhoneNumberIsAlreadyTaken, EmailIsAlreadyTaken {
+        ClientService clientService = new ClientService();
 
+        Client client = new Client();
+        client.setName("Галушка");
+        client.setSurname("Галушкон");
+        client.setPhoneNumber("+380956323431");
+
+        client.setEmail("petrtfsdf@gmail.com");
+        client.setPassword("passweoasd12");
+
+
+        clientService.createClientInDatabase(client);
 
     }
 

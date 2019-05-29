@@ -10,6 +10,6 @@ import java.io.IOException;
 public class TaxiHomeCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        return "/jsp/taxiHome.jsp";
+        return "/jsp/commonPages/taxiHome.jsp";
     }
 }

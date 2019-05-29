@@ -18,6 +18,11 @@ import com.robosh.model.entity.enums.Role;
 public class AuthentificationFilter implements Filter {
 
     @Override
+    public void init(FilterConfig fConfig) {
+
+    }
+
+    @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
@@ -25,7 +30,6 @@ public class AuthentificationFilter implements Filter {
         String pathInfo = request.getPathInfo();
         Person loginedPerson = AppUtils.getLoginedUser(request.getSession());
 
-        //if ("/loginClient".equals(pathInfo) && loginedPerson != null){
         if ("/login".equals(pathInfo) && loginedPerson != null){
             if (loginedPerson.getRole().equals(Role.CLIENT)){
                 response.sendRedirect(request.getContextPath() + "/taxi-Kyiv/clientAccount");
@@ -46,7 +50,6 @@ public class AuthentificationFilter implements Filter {
                     response.sendRedirect(request.getContextPath() + "/taxi-Kyiv/login");
                 }
                 else {
-                    System.out.println("helo");
                     response.sendRedirect(request.getContextPath() + "/taxi-Kyiv/403");
                 }
             }
@@ -56,10 +59,6 @@ public class AuthentificationFilter implements Filter {
         }
     }
 
-    @Override
-    public void init(FilterConfig fConfig) {
-
-    }
     @Override
     public void destroy() {
     }

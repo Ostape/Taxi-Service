@@ -3,6 +3,7 @@ package com.robosh.web;
 import com.robosh.model.command.Command;
 import com.robosh.model.command.account.EnterLoginCommand;
 import com.robosh.model.command.account.LogOutCommand;
+import com.robosh.model.command.account.RegistrationCommand;
 import com.robosh.model.command.account.ShowAllDriverOrdersCommand;
 import com.robosh.model.command.directions.*;
 import com.robosh.service.ClientService;
@@ -24,17 +25,19 @@ public class Servlet extends HttpServlet {
     @Override
     public void init() {
             commands = new HashMap<>();
-         //   commands.put("loginClient", new LoginClientCommand());
-         //   commands.put("loginDriver", new LoginDriverCommand());
             commands.put("makeOrder", new MakeClientOrderCommand());
             commands.put("registerClient", new RegisterClientCommand());
+            commands.put("register", new RegistrationCommand(new ClientService()));
             commands.put("homePage", new TaxiHomeCommand());
+
             commands.put("enterLogin", new EnterLoginCommand(new ClientService(), new DriverService()));
+            commands.put("login", new LoginCommand());
             commands.put("logOut", new LogOutCommand());
+
             commands.put("clientAccount", new ClientAccountCommand());
             commands.put("driverAccount", new DriverAccountCommand());
+
             commands.put("showAllOrders", new ShowAllDriverOrdersCommand(new OrderService()));
-            commands.put("login", new LoginCommand());
 
             commands.put("403", new Error403Command());
     }

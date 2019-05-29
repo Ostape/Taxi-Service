@@ -22,7 +22,6 @@ public class SecurityConfig {
 
         // Configure For "Driver" Role.
         List<String> urlPatterns2 = new ArrayList<>();
-
         urlPatterns2.add("/showOrders");
         urlPatterns2.add("/driverAccount");
         urlPatterns2.add("/logOut");

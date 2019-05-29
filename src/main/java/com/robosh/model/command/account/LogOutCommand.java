@@ -1,7 +1,6 @@
 package com.robosh.model.command.account;
 
 import com.robosh.model.command.Command;
-import com.robosh.model.command.CommandService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

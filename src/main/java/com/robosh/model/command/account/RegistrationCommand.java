@@ -21,7 +21,7 @@ public class RegistrationCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public String execute(HttpServletRequest request, HttpServletResponse response)  {
 
         final String name = request.getParameter("name");
         final String surname = request.getParameter("surname");
@@ -29,7 +29,7 @@ public class RegistrationCommand implements Command {
         final String email = request.getParameter("email");
         final String password = request.getParameter("password");
         final String repeadPassword = request.getParameter("password_repeat");
-        final Role role = Role.CLIENT;
+
 
         //check is corect data
 //        if ()
@@ -40,7 +40,6 @@ public class RegistrationCommand implements Command {
 
 
         Client client = new Client();
-        client.setRole(role);
         client.setName(name);
         client.setPhoneNumber(phoneNumber);
         client.setSurname(surname);
@@ -51,14 +50,12 @@ public class RegistrationCommand implements Command {
             clientService.createClientInDatabase(client);
         } catch (EmailIsAlreadyTaken emailIsAlreadyTaken) {
             emailIsAlreadyTaken.printStackTrace();
-            return "/jsp/registerClient.jsp";
+            return "/jsp/commonPages/registerClient.jsp";
         } catch (PhoneNumberIsAlreadyTaken phoneNumberIsAlreadyTaken) {
             phoneNumberIsAlreadyTaken.printStackTrace();
-            return "/jsp/registerClient.jsp";
+            return "/jsp/commonPages/registerClient.jsp";
         }
 
-
-//        return "/jsp/registerClient.jsp";
-        return "/jsp/taxiOrder.jsp";
+        return "/jsp/commonPages/taxiOrder.jsp";
     }
 }

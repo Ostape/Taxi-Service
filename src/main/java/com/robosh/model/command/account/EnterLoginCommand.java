@@ -29,8 +29,7 @@ public class EnterLoginCommand implements Command {
         if (inputWrongData(phoneNumber,password)){
             String errorMessage = "Invalid Phone Number or Password";
             request.setAttribute("errorMessage", errorMessage);
-            //return "/jsp/loginClient.jsp";
-            return "/jsp/login.jsp";
+            return "/jsp/commonPages/login.jsp";
         }else {
             if (AppUtils.getLoginedUser(request.getSession()) != null){
                 System.out.println("in EnterLoginCommand");

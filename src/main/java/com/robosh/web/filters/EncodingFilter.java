@@ -2,9 +2,7 @@ package com.robosh.web.filters;
 
 
 import javax.servlet.*;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.logging.Logger;
 
 public class EncodingFilter implements Filter {
 
