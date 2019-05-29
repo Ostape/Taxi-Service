@@ -6,6 +6,7 @@ import com.robosh.model.command.account.LogOutCommand;
 import com.robosh.model.command.account.ShowAllDriverOrdersCommand;
 import com.robosh.model.command.directions.*;
 import com.robosh.service.ClientService;
+import com.robosh.service.DriverService;
 import com.robosh.service.OrderService;
 
 import javax.servlet.ServletException;
@@ -19,21 +20,21 @@ import java.util.Map;
 public class Servlet extends HttpServlet {
 
     private Map<String, Command> commands;
-    //private static final String JSP_PATH = "/jsp/%s.jsp";
 
     @Override
     public void init() {
             commands = new HashMap<>();
-            commands.put("loginClient", new LoginClientCommand());
-            commands.put("loginDriver", new LoginDriverCommand());
+         //   commands.put("loginClient", new LoginClientCommand());
+         //   commands.put("loginDriver", new LoginDriverCommand());
             commands.put("makeOrder", new MakeClientOrderCommand());
             commands.put("registerClient", new RegisterClientCommand());
             commands.put("homePage", new TaxiHomeCommand());
-            commands.put("enterLogin", new EnterLoginCommand(new ClientService()));
+            commands.put("enterLogin", new EnterLoginCommand(new ClientService(), new DriverService()));
             commands.put("logOut", new LogOutCommand());
             commands.put("clientAccount", new ClientAccountCommand());
             commands.put("driverAccount", new DriverAccountCommand());
             commands.put("showAllOrders", new ShowAllDriverOrdersCommand(new OrderService()));
+            commands.put("login", new LoginCommand());
 
             commands.put("403", new Error403Command());
     }
@@ -55,7 +56,8 @@ public class Servlet extends HttpServlet {
         String commandKey = getRequestPath(request);//get next command key
         Command command = commands.get(commandKey);
         if (command == null) { //if there is no command with such key, request dispatcher home page
-            request.getRequestDispatcher("/taxi-Kyiv/homePage").forward(request, response);
+           // request.getRequestDispatcher("/taxi-Kyiv/homePage").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/taxi-Kyiv/homePage");
         }else {
             String nextPage = command.execute(request, response); //which one we will use: regirect or forward
             //if command.execute will have "redirect#", we will use redirect, otherwise forward
