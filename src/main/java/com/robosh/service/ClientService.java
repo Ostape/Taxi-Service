@@ -2,7 +2,7 @@ package com.robosh.service;
 
 import com.robosh.model.customExceptions.EmailIsAlreadyTaken;
 import com.robosh.model.customExceptions.PhoneNumberIsAlreadyTaken;
-import com.robosh.model.dao.ClientDao;
+import com.robosh.model.dao.interfaces.ClientDao;
 import com.robosh.model.dao.DaoFactory;
 import com.robosh.model.entity.Client;
 import org.apache.log4j.Logger;

@@ -1,6 +1,6 @@
 package com.robosh.service;
 
-import com.robosh.model.dao.CarDao;
+import com.robosh.model.dao.interfaces.CarDao;
 import com.robosh.model.dao.DaoFactory;
 import com.robosh.model.entity.Car;
 import org.apache.log4j.Logger;

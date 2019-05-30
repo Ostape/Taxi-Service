@@ -1,4 +1,4 @@
-package com.robosh.model.dao;
+package com.robosh.model.dao.interfaces;
 
 import com.robosh.model.entity.Order;
 

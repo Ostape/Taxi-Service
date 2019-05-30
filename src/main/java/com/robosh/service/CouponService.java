@@ -1,6 +1,6 @@
 package com.robosh.service;
 
-import com.robosh.model.dao.CouponDao;
+import com.robosh.model.dao.interfaces.CouponDao;
 import com.robosh.model.dao.DaoFactory;
 import com.robosh.model.entity.Coupon;
 import org.apache.log4j.Logger;

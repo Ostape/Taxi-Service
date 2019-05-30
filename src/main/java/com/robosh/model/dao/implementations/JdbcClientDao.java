@@ -1,6 +1,6 @@
 package com.robosh.model.dao.implementations;
 
-import com.robosh.model.dao.ClientDao;
+import com.robosh.model.dao.interfaces.ClientDao;
 import com.robosh.model.dao.implementations.queries.ClientSQL;
 import com.robosh.model.dao.mappers.ClientMapper;
 import com.robosh.model.dao.mappers.Mapper;

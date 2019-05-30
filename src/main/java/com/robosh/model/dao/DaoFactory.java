@@ -1,6 +1,7 @@
 package com.robosh.model.dao;
 
 import com.robosh.model.dao.implementations.JdbcDaoFactory;
+import com.robosh.model.dao.interfaces.*;
 import org.apache.log4j.Logger;
 
 public abstract class DaoFactory {

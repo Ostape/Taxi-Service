@@ -1,7 +1,7 @@
 package com.robosh.service;
 
 import com.robosh.model.dao.DaoFactory;
-import com.robosh.model.dao.DriverDao;
+import com.robosh.model.dao.interfaces.DriverDao;
 import com.robosh.model.entity.Driver;
 import com.robosh.model.entity.enums.DriverStatus;
 import org.apache.log4j.Logger;

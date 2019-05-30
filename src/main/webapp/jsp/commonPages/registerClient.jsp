@@ -17,7 +17,11 @@
 </header>
 <div class="center">
 	<div class="register">
-		<form>
+		<c:if test="${param.dataInvalid == true}">
+			<p style="color: orange">Oy pacanchik no no </p>
+		</c:if>
+		<form method="POST" action="${pageContext.request.contextPath}/taxi-Kyiv/register">
+<%--			${pageContext.request.contextPath}--%>
 		  <div class="container">
 		    <h1>Register</h1>
 		    <p>Please fill this form to create an account.</p>

@@ -10,8 +10,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.robosh.model.command.Utils.AppUtils;
-import com.robosh.model.command.Utils.SecurityUtils;
+import com.robosh.Utils.AppUtils;
+import com.robosh.Utils.SecurityUtils;
 import com.robosh.model.entity.Person;
 import com.robosh.model.entity.enums.Role;
 

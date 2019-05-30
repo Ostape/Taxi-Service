@@ -1,6 +1,6 @@
 package com.robosh.model.dao.implementations;
 
-import com.robosh.model.dao.AdressDao;
+import com.robosh.model.dao.interfaces.AdressDao;
 import com.robosh.model.dao.implementations.queries.AdressSQL;
 import com.robosh.model.dao.mappers.AdressMapper;
 import com.robosh.model.dao.mappers.Mapper;

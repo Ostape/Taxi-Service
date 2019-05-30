@@ -1,13 +1,10 @@
 package com.robosh.model.dao.implementations;
 
-import com.robosh.model.dao.CarDao;
+import com.robosh.model.dao.interfaces.CarDao;
 import com.robosh.model.dao.implementations.queries.CarSQL;
-import com.robosh.model.dao.implementations.queries.ClientSQL;
 import com.robosh.model.dao.mappers.CarMapper;
-import com.robosh.model.dao.mappers.ClientMapper;
 import com.robosh.model.dao.mappers.Mapper;
 import com.robosh.model.entity.Car;
-import com.robosh.model.entity.Client;
 import org.apache.log4j.Logger;
 
 import java.sql.*;

@@ -1,6 +1,6 @@
 package com.robosh.model.dao.implementations;
 
-import com.robosh.model.dao.CouponDao;
+import com.robosh.model.dao.interfaces.CouponDao;
 import com.robosh.model.dao.implementations.queries.CouponSQL;
 import com.robosh.model.dao.mappers.CouponMapper;
 import com.robosh.model.dao.mappers.Mapper;

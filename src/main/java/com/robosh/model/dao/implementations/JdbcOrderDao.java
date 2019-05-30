@@ -1,6 +1,6 @@
 package com.robosh.model.dao.implementations;
 
-import com.robosh.model.dao.OrderDao;
+import com.robosh.model.dao.interfaces.OrderDao;
 import com.robosh.model.dao.implementations.queries.OrderSQL;
 import com.robosh.model.dao.mappers.Mapper;
 import com.robosh.model.dao.mappers.OrderMapper;

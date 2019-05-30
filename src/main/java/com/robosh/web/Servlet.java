@@ -24,22 +24,19 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init() {
-            commands = new HashMap<>();
-            commands.put("makeOrder", new MakeClientOrderCommand());
-            commands.put("registerClient", new RegisterClientCommand());
-            commands.put("register", new RegistrationCommand(new ClientService()));
-            commands.put("homePage", new TaxiHomeCommand());
+        commands = new HashMap<>();
 
-            commands.put("enterLogin", new EnterLoginCommand(new ClientService(), new DriverService()));
-            commands.put("login", new LoginCommand());
-            commands.put("logOut", new LogOutCommand());
-
-            commands.put("clientAccount", new ClientAccountCommand());
-            commands.put("driverAccount", new DriverAccountCommand());
-
-            commands.put("showAllOrders", new ShowAllDriverOrdersCommand(new OrderService()));
-
-            commands.put("403", new Error403Command());
+        commands.put("registerClient", new RegisterClientCommand());
+        commands.put("register", new RegistrationCommand(new ClientService()));
+        commands.put("homePage", new TaxiHomeCommand());
+        commands.put("makeOrder", new MakeClientOrderCommand());
+        commands.put("enterLogin", new EnterLoginCommand(new ClientService(), new DriverService()));
+        commands.put("login", new LoginCommand());
+        commands.put("logOut", new LogOutCommand());
+        commands.put("clientAccount", new ClientAccountCommand());
+        commands.put("driverAccount", new DriverAccountCommand());
+        commands.put("showAllOrders", new ShowAllDriverOrdersCommand(new OrderService()));
+        commands.put("403", new Error403Command());
     }
 
     @Override

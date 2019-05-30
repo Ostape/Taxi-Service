@@ -1,9 +1,7 @@
 package com.robosh.model.command.account;
 
 import com.robosh.model.command.Command;
-import com.robosh.model.command.Utils.AppUtils;
-import com.robosh.model.entity.Client;
-import com.robosh.model.entity.Driver;
+import com.robosh.Utils.AppUtils;
 import com.robosh.model.entity.Person;
 import com.robosh.service.ClientService;
 import com.robosh.service.DriverService;

@@ -1,4 +1,4 @@
-package com.robosh.model.command.Utils;
+package com.robosh.Utils;
 
 import com.robosh.model.entity.Person;
 

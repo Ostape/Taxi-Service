@@ -1,7 +1,7 @@
 package com.robosh.service;
 
 import com.robosh.model.dao.DaoFactory;
-import com.robosh.model.dao.OrderDao;
+import com.robosh.model.dao.interfaces.OrderDao;
 import com.robosh.model.entity.Order;
 import org.apache.log4j.Logger;
 

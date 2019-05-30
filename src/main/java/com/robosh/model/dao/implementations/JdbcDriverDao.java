@@ -1,6 +1,6 @@
 package com.robosh.model.dao.implementations;
 
-import com.robosh.model.dao.DriverDao;
+import com.robosh.model.dao.interfaces.DriverDao;
 import com.robosh.model.dao.implementations.queries.DriverSQL;
 import com.robosh.model.dao.mappers.DriverMapper;
 import com.robosh.model.dao.mappers.Mapper;

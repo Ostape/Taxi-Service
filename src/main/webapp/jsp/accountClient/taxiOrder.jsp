@@ -17,7 +17,8 @@
     </header>
 
     <div class="center">
-        <form>
+<%--        asddddddddddddddddddddddddddddddddddddddddddddd--%>
+        <form method="POST" action="action=${pageContext.request.contextPath}/taxi-Kyiv/">
             <div class="order">
                 <div style="height: 60px"></div>
 
