@@ -16,36 +16,36 @@
     </header>
 
     <div class="center">
-        <div class="nazar">
-            <div class="row">
-                <div class="col-lg-6">
-                    <img src="${pageContext.request.contextPath}/img/clientPhoto.png" style="width: 65% ">
-                </div>
+    	<div class="nazar" >
+    		<div class="row">
+    		<div class="col-lg-6">
+    			<img src="${pageContext.request.contextPath}/img/clientPhoto.png" style="width: 65% ">
+    		</div>
 
-                <div class="col-lg-6">
-                    <ul>
-                        <li>
-                            <strong><p><c:out value="${sessionScope.loginedPerson.name}"/>
-                                <c:out value="${sessionScope.loginedPerson.surname}"/></p></strong>
-                        </li>
+    		<div class="col-lg-6">
+    			<ul>
+    				<li>
+    					<strong><p><c:out value="${sessionScope.loginedPerson.name}"/>
+							<c:out value="${sessionScope.loginedPerson.surname}"/></p></strong>
+    				</li>
 
-                        <li class="liFont">
-                            <p>E-mail: <c:out value="${sessionScope.loginedPerson.email}"/></p>
-                        </li>
+    				<li class="liFont">
+						<p>E-mail: <c:out value="${sessionScope.loginedPerson.email}"/></p>
+    				</li>
 
-                        <li class="liFont">
-                            <p>Phone number: <c:out value="${sessionScope.loginedPerson.phoneNumber}"/></p>
-                        </li>
+    				<li class="liFont">
+						<p>Phone number: <c:out value="${sessionScope.loginedPerson.phoneNumber}"/></p>
+    				</li>
 
-                    </ul>
-                </div>
-            </div>
-            <div style="text-align: center;">
-                <form action="${pageContext.request.contextPath}/taxi-Kyiv/logOut">
-                    <button type="submit" class="logout">Logout</button>
-                </form>
-            </div>
-        </div>
+    			</ul>
+    		</div>
+    		</div>
+    		<div style="text-align: center;">
+	    		<form action="${pageContext.request.contextPath}/taxi-Kyiv/logOut">
+	    			<button type="submit" class="logout">Logout</button>
+	    		</form>
+    		</div>
+    	</div>
     </div>
     </section>
 
