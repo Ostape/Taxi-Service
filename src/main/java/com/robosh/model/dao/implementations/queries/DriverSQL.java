@@ -1,11 +1,14 @@
 package com.robosh.model.dao.implementations.queries;
 
 public enum DriverSQL {
-    FIND_DRIVER_BY_CAR_TYPE_AND_STATUS("select id_driver, surname, `driver`.`name`, " +
-            "middle_name, `password`, " +
-            "phone_number, driver_status, driver.id_car \n" +
-            "from driver, car where driver_status=(?) and driver.id_car = " +
-            "car.id_car and car_type=(?)"),
+//    FIND_DRIVER_BY_CAR_TYPE_AND_STATUS("select driver.id_driver, surname, `name`, middle_name, `password`," +
+//            " phone_number, driver_status, driver.id_car" +
+//            "from driver, car where driver_status=(?) and" +
+//            " driver.id_car = car.id_car and car_type=(?) limit 1;"),
+
+    FIND_DRIVER_BY_CAR_TYPE_AND_STATUS("select *" +
+            "from driver, car where driver_status=(?) and" +
+            " driver.id_car = car.id_car and car_type=(?) limit 1;"),
 
     CHECK_STATUS("select * from driver where driver_status=(?)"),
 
@@ -14,6 +17,8 @@ public enum DriverSQL {
     READ_BY_ID("select * from driver where id_driver=(?)"),
 
     READ_ALL("select * from driver"),
+
+    READ_ONLY_NAME_AND_PHONE(""),
 
     UPDATE("UPDATE driver SET driver_status=(?) WHERE id_driver = (?))"),
 

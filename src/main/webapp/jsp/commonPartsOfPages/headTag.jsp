@@ -14,7 +14,5 @@
           rel='stylesheet' type='text/css'/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
-    <%--	<link rel="alternate" href="#" hreflang="ua" />--%>
-    <%--	<link rel="alternate" href="taxiHome.jsp" hreflang="en" />--%>
     <script src="${pageContext.request.contextPath}/js/jquery.js?ver=1.11.3"></script>
 </head>

@@ -17,6 +17,7 @@ public class SecurityConfig {
         urlPatterns1.add("/makeOrder");
         urlPatterns1.add("/clientAccount");
         urlPatterns1.add("/logOut");
+        urlPatterns1.add("/enterOrder");
 
         mapConfig.put(Role.CLIENT, urlPatterns1);
 

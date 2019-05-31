@@ -4,7 +4,7 @@
 <%@ page isELIgnored="false" %>
 
 
-<html lang="${locale}">
+<html lang="${param.lang}">
 <jsp:include page="../commonPartsOfPages/headTag.jsp"/>
 
 <body class="home blog">

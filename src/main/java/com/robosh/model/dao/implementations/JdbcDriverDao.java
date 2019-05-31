@@ -85,8 +85,7 @@ public class JdbcDriverDao implements DriverDao {
     @Override
     public Driver getDriverByCarTypeAndDriverStatus(DriverStatus driverStatus, String carType) {
         Mapper<Driver> driverMapper = new DriverMapper();
-        Driver result = new Driver();
-        result.setPersonId(-1);
+        Driver result = null;
         try (PreparedStatement ps = connection.prepareStatement(DriverSQL
                 .FIND_DRIVER_BY_CAR_TYPE_AND_STATUS.getQUERY())) {
             ps.setString(1, driverStatus.toString().toLowerCase());
@@ -95,6 +94,7 @@ public class JdbcDriverDao implements DriverDao {
             LOG.debug("Executed query" + DriverSQL.FIND_DRIVER_BY_CAR_TYPE_AND_STATUS);
             if (rs.next()) {
                 LOG.debug("check is rs has next");
+                result = new Driver();
                 result = driverMapper.getEntity(rs);
             }
         } catch (SQLException e) {

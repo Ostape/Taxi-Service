@@ -30,7 +30,7 @@ public class AuthentificationFilter implements Filter {
         String pathInfo = request.getPathInfo();
         Person loginedPerson = AppUtils.getLoginedUser(request.getSession());
 
-        if ("/login".equals(pathInfo) && loginedPerson != null){
+        if (("/login".equals(pathInfo) || "/registerClient".equals(pathInfo)) && loginedPerson != null){
             if (loginedPerson.getRole().equals(Role.CLIENT)){
                 response.sendRedirect(request.getContextPath() + "/taxi-Kyiv/clientAccount");
             }

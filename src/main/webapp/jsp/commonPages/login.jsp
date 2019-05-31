@@ -14,9 +14,6 @@
         </div>
 
     </header>
-    <h1>
-        <c:out value="${requestScope.errorMessage}" default="login"/>
-    </h1>
     <div class="center">
         <div class="register">
             <form method="POST" action="${pageContext.request.contextPath}/taxi-Kyiv/enterLogin">
@@ -24,6 +21,9 @@
                     <h1>Sign up</h1>
                     <p>Please fill this form to enter in your account.</p>
                     <hr>
+                    <c:if test="${param.wrongData == true}">
+                        <p class="errorsM">Incorrect input</p>
+                    </c:if>
                     <label><b>Phone</b></label>
                     <input type="text" placeholder="Enter Phone" name="phoneNumber" required>
                     <label><b>Password</b></label>

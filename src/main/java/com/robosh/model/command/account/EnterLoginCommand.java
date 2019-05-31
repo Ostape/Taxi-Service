@@ -27,13 +27,18 @@ public class EnterLoginCommand implements Command {
         if (inputWrongData(phoneNumber,password)){
             String errorMessage = "Invalid Phone Number or Password";
             request.setAttribute("errorMessage", errorMessage);
-            return "/jsp/commonPages/login.jsp";
+            return "/jsp/commonPages/login.jsp" + "?wrongData=true";
         }else {
-            if (AppUtils.getLoginedUser(request.getSession()) != null){
+            Person person = AppUtils.getLoginedUser(request.getSession());
+            if (person != null){
                 System.out.println("in EnterLoginCommand");
-                return "redirect#" + request.getContextPath() + "/taxi-Kyiv/clientAccount";
+                if ("CLIENT".equals(person.getRole().toString())) {
+                    return "redirect#" + request.getContextPath() + "/taxi-Kyiv/clientAccount";
+                }
+                else {
+                    return "redirect#" + request.getContextPath() + "/taxi-Kyiv/driverAccount";
+                }
             }
-            Person person;
             if (checkIfDriver(phoneNumber, password)){
                 person = driverService.getDriverByPasswordAndPhone(phoneNumber, password);
                 AppUtils.storeLoginedUser(request.getSession(), person);
@@ -44,18 +49,12 @@ public class EnterLoginCommand implements Command {
                 AppUtils.storeLoginedUser(request.getSession(), person);
                 return "redirect#" + request.getContextPath() + "/taxi-Kyiv/clientAccount";
             }
-           // return "redirect#" + request.getContextPath() + "/taxi-Kyiv/clientAccount";
         }
     }
 
     private boolean inputWrongData(String phoneNumber, String password){
         //return !clientService.isClientAlreadyExist(phoneNumber, password);
-        if (checkIfClient(phoneNumber, password) || checkIfDriver(phoneNumber, password)){
-            return false;
-        }
-        else {
-            return  true;
-        }
+        return !checkIfClient(phoneNumber, password) && !checkIfDriver(phoneNumber, password);
     }
 
     private boolean checkIfClient(String phoneNumber, String password) {
