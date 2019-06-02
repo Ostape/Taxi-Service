@@ -3,9 +3,7 @@ package com.robosh.web;
 import com.robosh.model.command.Command;
 import com.robosh.model.command.account.*;
 import com.robosh.model.command.directions.*;
-import com.robosh.service.ClientService;
-import com.robosh.service.DriverService;
-import com.robosh.service.OrderService;
+import com.robosh.service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +31,8 @@ public class Servlet extends HttpServlet {
         commands.put("driverAccount", new DriverAccountCommand());
         commands.put("showAllOrders", new ShowAllDriverOrdersCommand(new OrderService()));
         commands.put("403", new Error403Command());
-        commands.put("enterOrder", new EnterOrderCommand(new OrderService(), new DriverService()));
+        commands.put("enterOrder", new EnterOrderCommand(new OrderService(), new DriverService(),
+                new AdressService(), new CouponService()));
     }
 
     @Override

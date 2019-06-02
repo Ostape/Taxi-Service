@@ -4,11 +4,14 @@ public enum OrderSQL {
     READ_BY_ID("SELECT * FROM `order` WHERE id_order=(?)"),
     READ_BY_ID_DRIVER("select * from `order` where id_driver=(?)"),
     READ_ALL("SELECT * FROM `order`"),
-    INSERT("INSERT INTO `taxi_database`.`order` " +
+    INSERT("INSERT INTO `order` " +
             "(`order_status`, `id_client`, `id_driver`, `id_adress_departure`," +
             " `id_adress_arrive`, `id_coupon`, `cost`, `cost_with_discount`)" +
             " VALUES ((?), (?), (?), (?), (?), (?), (?), (?))"),
 
+    INSERT_WITHOUT_COUPON("INSERT INTO `order` (`order_status`, `id_client`, " +
+            "`id_driver`, `id_adress_departure`, `id_adress_arrive`, `cost`, `cost_with_discount`) " +
+            "VALUES ((?), (?), (?), (?), (?), (?), (?))"),
 
     UPDATE("UPDATE `taxi_database`.`order` SET `order_status` = " +
     "(?) WHERE (`id_order` = (?))"),

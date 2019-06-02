@@ -24,12 +24,34 @@ public class JdbcOrderDao implements OrderDao {
     public void create(Order order) {
         try (PreparedStatement ps = connection.prepareStatement(OrderSQL.INSERT.getQUERY())) {
             LOG.debug("Executed query" + OrderSQL.INSERT);
-            ps.setString(1, order.getOrderStatus().toString().toLowerCase());
+            ps.setString(1, order.getOrderStatus().toString());
             ps.setLong(2, order.getClient().getPersonId());
-//            ps.setString(3, order.getPhoneNumber());
-////            ps.setString(4, order.getEmail());
-////            ps.setString(5, order.getPassword());
+            ps.setLong(3, order.getDriver().getPersonId());
+            ps.setLong(4, order.getAdressDeparture().getIdAdress());
+            ps.setLong(5, order.getAdressArrive().getIdAdress());
+            ps.setLong(6, order.getCoupon().getIdCoupon());
+            ps.setDouble(7, order.getCost());
+            ps.setDouble(8, order.getCostWithDiscount());
             ps.executeUpdate();
+        } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public void createWithoutCoupon(Order order) {
+        try (PreparedStatement ps = connection.prepareStatement(OrderSQL.INSERT_WITHOUT_COUPON.getQUERY())) {
+            LOG.debug("Executed query" + OrderSQL.INSERT_WITHOUT_COUPON);
+            ps.setString(1, order.getOrderStatus().toString());
+            ps.setLong(2, order.getClient().getPersonId());
+            ps.setLong(3, order.getDriver().getPersonId());
+            ps.setLong(4, order.getAdressDeparture().getIdAdress());
+            ps.setLong(5, order.getAdressArrive().getIdAdress());
+            ps.setDouble(6, order.getCost());
+            ps.setDouble(7, order.getCostWithDiscount());
+            ps.execute();
         } catch (SQLException e) {
             LOG.debug("SQLException occurred");
             e.printStackTrace();
@@ -78,6 +100,7 @@ public class JdbcOrderDao implements OrderDao {
             return null;
         }
     }
+
 
     @Override
     public List<Order> findAll() {

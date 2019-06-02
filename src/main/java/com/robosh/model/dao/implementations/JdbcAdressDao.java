@@ -21,10 +21,10 @@ public class JdbcAdressDao implements AdressDao {
     }
 
     @Override
-    public boolean checkAdressExist(String street, String number_house) {
+    public boolean checkAdressExist(String street, String numberHouse) {
         try (PreparedStatement ps = connection.prepareStatement(AdressSQL.READ_BY_ADRESS.getQUERY())) {
             ps.setString(1, street);
-            ps.setString(2, number_house);
+            ps.setString(2, numberHouse);
             final ResultSet rs = ps.executeQuery();
             LOG.debug("Executed query" + AdressSQL.READ_BY_ADRESS);
             if (rs.next()) {
@@ -39,12 +39,50 @@ public class JdbcAdressDao implements AdressDao {
     }
 
     @Override
+    public long getAddressId(String street, String numberHouse) {
+        try (PreparedStatement ps = connection.prepareStatement(AdressSQL.READ_ADDRESS_ID.getQUERY())) {
+            ps.setString(1, street);
+            ps.setString(2, numberHouse);
+            final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + AdressSQL.READ_ADDRESS_ID);
+            if (rs.next()) {
+                LOG.debug("check is rs has next");
+                return rs.getLong("id_adress");
+            }
+        } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
+    public Adress getAdressByStreetNumberHouse(String street, String numberHouse) {
+        Mapper<Adress> addressMapper = new AdressMapper();
+        Adress result = new Adress();
+        result.setIdAdress(-1);
+        try (PreparedStatement ps = connection.prepareStatement(AdressSQL.READ_BY_ADRESS.getQUERY())) {
+            ps.setString(1, street);
+            ps.setString(2, numberHouse);
+            final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + AdressSQL.READ_BY_ADRESS);
+            if (rs.next()) {
+                LOG.debug("check is rs has next");
+                result = addressMapper.getEntity(rs);
+            }
+        } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
     public Adress getById(long id) {
         Mapper<Adress> adressMapper = new AdressMapper();
         Adress result = new Adress();
         result.setIdAdress(-1);
         try (PreparedStatement ps = connection.prepareStatement(AdressSQL.READ_BY_ID.getQUERY())) {
-
             ps.setLong(1, id);
             final ResultSet rs = ps.executeQuery();
             LOG.debug("Executed query" + AdressSQL.READ_BY_ADRESS);

@@ -10,8 +10,23 @@ public class Order {
     private Adress adressArrive;
     private Adress adressDeparture;
     private Coupon coupon;
-    private double cost;
-    private double costWithDiscount;
+    private int cost;
+    private int costWithDiscount;
+
+    public Order() {
+    }
+
+    public Order(OrderStatus orderStatus, Client client, Driver driver, Adress adressArrive,
+                 Adress adressDeparture, Coupon coupon, int cost, int costWithDiscount) {
+        this.orderStatus = orderStatus;
+        this.client = client;
+        this.driver = driver;
+        this.adressArrive = adressArrive;
+        this.adressDeparture = adressDeparture;
+        this.coupon = coupon;
+        this.cost = cost;
+        this.costWithDiscount = costWithDiscount;
+    }
 
     public int getIdOrder() {
         return idOrder;
@@ -69,19 +84,19 @@ public class Order {
         this.coupon = coupon;
     }
 
-    public double getCost() {
+    public int getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(int cost) {
         this.cost = cost;
     }
 
-    public double getCostWithDiscount() {
+    public int getCostWithDiscount() {
         return costWithDiscount;
     }
 
-    public void setCostWithDiscount(double costWithDiscount) {
+    public void setCostWithDiscount(int costWithDiscount) {
         this.costWithDiscount = costWithDiscount;
     }
 

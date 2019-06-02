@@ -154,7 +154,7 @@ public class JdbcDriverDao implements DriverDao {
         try (PreparedStatement ps = connection.prepareStatement(DriverSQL.UPDATE.getQUERY())) {
             ps.setString(1,driver.getDriverStatus().toString().toLowerCase());
             ps.setLong(2, driver.getPersonId());
-            final ResultSet rs = ps.executeQuery();
+            ps.execute();
             LOG.debug("Executed query" + DriverSQL.UPDATE);
             return true;
         } catch (SQLException e) {
