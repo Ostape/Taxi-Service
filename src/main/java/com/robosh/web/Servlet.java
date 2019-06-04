@@ -33,6 +33,7 @@ public class Servlet extends HttpServlet {
         commands.put("403", new Error403Command());
         commands.put("enterOrder", new EnterOrderCommand(new OrderService(), new DriverService(),
                 new AdressService(), new CouponService()));
+        commands.put("showClientOrder", new ShowOrderClientCommand());
     }
 
     @Override

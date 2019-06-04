@@ -1,7 +1,9 @@
 package com.robosh.model.command.account;
 
 import com.robosh.Utils.AppUtils;
+import com.robosh.Utils.CookiesUtils;
 import com.robosh.Utils.PriceVoyageUtils;
+import com.robosh.Utils.TimeWaitTaxiUtil;
 import com.robosh.model.command.Command;
 import com.robosh.model.command.directions.ClientOrderCommand;
 import com.robosh.model.entity.*;
@@ -43,8 +45,7 @@ public class EnterOrderCommand implements Command {
         if (isNotSameAddress(addressDepartureStr, addressArriveStr)) {
             Driver driver = driverService.getDriverByCarTypeAndDriverStatus(DriverStatus.FREE, carType);
             if (driver != null){
-                driver.setDriverStatus(DriverStatus.BOOKED);
-                driverService.updateDriverStatus(driver);
+                bookedDriver(driver);
                 Client loginedClient = (Client) AppUtils.getLoginedUser(request.getSession());
                 Adress addressDeparture = adressService.getAdressByAdressString(addressDepartureStr);
                 Adress addressArrive = adressService.getAdressByAdressString(addressArriveStr);
@@ -53,7 +54,9 @@ public class EnterOrderCommand implements Command {
                 int costWithDiscount = PriceVoyageUtils.getPriceWithCoupon(costs, coupon);
                 orderService.createOrderInDB(loginedClient, driver, addressDeparture, addressArrive,
                         coupon, costs, costWithDiscount);
-                return "redirect#" + request.getContextPath() + "/taxi-Kyiv/clientAccount";
+                int timeWait = TimeWaitTaxiUtil.getTimeWait();
+                CookiesUtils.addCookies(response, driver, costWithDiscount,timeWait);
+                return "redirect#" + request.getContextPath() + "/taxi-Kyiv/showClientOrder";
             }else {
                 return wrongDataRequest + "?noSuitableCarType=true";
             }
@@ -63,8 +66,14 @@ public class EnterOrderCommand implements Command {
         }
     }
 
+    private void bookedDriver(Driver driver) {
+        driver.setDriverStatus(DriverStatus.BOOKED);
+        driverService.updateDriverStatus(driver);
+    }
+
     //check if address is not same
     private boolean isNotSameAddress(String addressDeparture, String addressArrive) {
         return !addressArrive.equals(addressDeparture);
     }
+
 }

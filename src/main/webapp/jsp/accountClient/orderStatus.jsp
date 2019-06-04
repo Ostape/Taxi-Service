@@ -28,10 +28,13 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <p>Дорогий Галушка Галшкін, ваше замовлення відправлено.</p>
-                    <p>Ваш водій Андрій. Номер телефону +38234231231.</p>
+                    <p>Дорогий <c:out value="${sessionScope.loginedPerson.name}"/>
+                        <c:out value="${sessionScope.loginedPerson.surname}"/>, ваше замовлення відправлено.</p>
+                    <p>Ваш водій <c:out value="${requestScope.driverName}"/>.
+                        Номер телефону +<c:out value="${requestScope.phoneNumber}"/>.</p>
                     <p>Дякуємо за користування нашою службою таксі.</p>
-                    <b>Орієнтована вартісь поїздки: 432 грн</b>
+                    <p>Вартісь поїздки: <c:out value="${requestScope.priceVoyage}"/> грн</p>
+                    <p>Орієнтований очікування: <c:out value="${requestScope.timeWait}"/> хв</p>
                 </div>
             </div>
             <div>
