@@ -53,8 +53,8 @@ public class OrderService {
         }
     }
 
-    public void createOrderInDB(Client client, Driver driver, Adress addressDeparture,
-                                            Adress addressArrive, Coupon coupon, int costs, int costsWithDiscount){
+    public void createOrderInDB(Client client, Driver driver, Address addressDeparture,
+                                Address addressArrive, Coupon coupon, int costs, int costsWithDiscount){
         Order order = new Order(OrderStatus.EXECUTING, client, driver, addressDeparture,
                 addressArrive, coupon, costs, costsWithDiscount);
 

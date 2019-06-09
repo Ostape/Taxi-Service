@@ -1,13 +1,13 @@
 package com.robosh.model.dao.implementations.queries;
 
 public enum CarSQL {
-    READ_BY_ID("select * from car where id_car=(?)"),
+    READ_BY_ID("SELECT * FROM `car` WHERE `id_car`=(?)"),
 
-    READ_BY_ID_AND_CAR_TYPE("select * from car where id_car=(?) and car_type=(?)"),
+    READ_BY_ID_AND_CAR_TYPE("SELECT * FROM `car` WHERE `id_car`=(?) AND `car_type`=(?)"),
 
-    READ_BY_TYPE("select * from car where and car_type=(?)"),
+    READ_BY_TYPE("SELECT * FROM `car` WHERE `car_type`=(?)"),
 
-    READ_ALL("select * from car "),
+    READ_ALL("SELECT * FROM `car`"),
 
     INSERT(""),
 

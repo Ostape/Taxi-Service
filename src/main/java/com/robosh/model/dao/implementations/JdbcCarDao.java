@@ -13,7 +13,7 @@ import java.util.List;
 
 public class JdbcCarDao implements CarDao {
 
-    private static final Logger LOG = Logger.getLogger(JdbcAdressDao.class);
+    private static final Logger LOG = Logger.getLogger(JdbcCarDao.class);
     private Connection connection;
 
     public JdbcCarDao(Connection connection) {

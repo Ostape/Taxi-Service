@@ -47,8 +47,8 @@ public class EnterOrderCommand implements Command {
             if (driver != null){
                 bookedDriver(driver);
                 Client loginedClient = (Client) AppUtils.getLoginedUser(request.getSession());
-                Adress addressDeparture = adressService.getAdressByAdressString(addressDepartureStr);
-                Adress addressArrive = adressService.getAdressByAdressString(addressArriveStr);
+                Address addressDeparture = adressService.getAdressByAdressString(addressDepartureStr);
+                Address addressArrive = adressService.getAdressByAdressString(addressArriveStr);
                 Coupon coupon = couponService.getCouponByName(couponStr);
                 int costs = PriceVoyageUtils.getPriceDependDistance(addressArrive, addressDeparture);
                 int costWithDiscount = PriceVoyageUtils.getPriceWithCoupon(costs, coupon);

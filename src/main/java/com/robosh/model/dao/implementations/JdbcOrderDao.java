@@ -28,8 +28,8 @@ public class JdbcOrderDao implements OrderDao {
             ps.setString(1, order.getOrderStatus().toString());
             ps.setLong(2, order.getClient().getPersonId());
             ps.setLong(3, order.getDriver().getPersonId());
-            ps.setLong(4, order.getAdressDeparture().getIdAdress());
-            ps.setLong(5, order.getAdressArrive().getIdAdress());
+            ps.setLong(4, order.getAddressDeparture().getIdAddress());
+            ps.setLong(5, order.getAddressArrive().getIdAddress());
             ps.setLong(6, order.getCoupon().getIdCoupon());
             ps.setDouble(7, order.getCost());
             ps.setDouble(8, order.getCostWithDiscount());
@@ -47,8 +47,8 @@ public class JdbcOrderDao implements OrderDao {
             ps.setString(1, order.getOrderStatus().toString());
             ps.setLong(2, order.getClient().getPersonId());
             ps.setLong(3, order.getDriver().getPersonId());
-            ps.setLong(4, order.getAdressDeparture().getIdAdress());
-            ps.setLong(5, order.getAdressArrive().getIdAdress());
+            ps.setLong(4, order.getAddressDeparture().getIdAddress());
+            ps.setLong(5, order.getAddressArrive().getIdAddress());
             ps.setDouble(6, order.getCost());
             ps.setDouble(7, order.getCostWithDiscount());
             ps.execute();

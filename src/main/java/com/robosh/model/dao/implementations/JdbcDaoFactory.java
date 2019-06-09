@@ -18,8 +18,8 @@ public class JdbcDaoFactory extends DaoFactory {
     }
 
     @Override
-    public AdressDao createAdressDao() {
-        return new JdbcAdressDao(getConnection());
+    public AddressDao createAdressDao() {
+        return new JdbcAddressDao(getConnection());
     }
 
     @Override

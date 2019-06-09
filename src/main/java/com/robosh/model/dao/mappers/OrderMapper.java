@@ -28,10 +28,9 @@ public class OrderMapper implements Mapper<Order>{
         if (driver.getPersonId() != -1){
             order.setDriver(driver);
         }
-        order.setAdressDeparture(adressService.getAdressById(resultSet.getLong("id_adress_departure")));
-        order.setAdressArrive(adressService.getAdressById(resultSet.getLong("id_adress_arrive")));
+        order.setAddressDeparture(adressService.getAddressById(resultSet.getLong("id_adress_departure")));
+        order.setAddressArrive(adressService.getAddressById(resultSet.getLong("id_adress_arrive")));
 
-       // if (resultSet.getLong("id_coupon"))
         Coupon coupon = couponService.getCouponById(resultSet.getLong("id_coupon"));
         if (coupon.getIdCoupon() != -1) {
             order.setCoupon(coupon);

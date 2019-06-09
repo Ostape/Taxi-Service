@@ -33,8 +33,8 @@
                         <div class="labelOrder"><h1 class="order-text label-text">Адреса: </h1></div>
                         <div class="inputOrder">
                             <select name="addressDeparture" class="selectAdress">
-                                <c:forEach items="${requestScope.allAddress}" var="adress">
-                                <option><c:out value="${adress.street}"/> <c:out value="${adress.houseNumber}"/></option>
+                                <c:forEach items="${requestScope.allAddress}" var="address">
+                                <option><c:out value="${address.street}"/> <c:out value="${address.houseNumber}"/></option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -56,8 +56,8 @@
                         <div class="labelOrder"><h1 class="order-text label-text">Адреса: </h1></div>
                         <div class="inputOrder">
                             <select name="addressArrive" class="selectAdress">
-                                <c:forEach items="${requestScope.allAddress}" var="adress">
-                                    <option><c:out value="${adress.street}"/> <c:out value="${adress.houseNumber}"/></option>
+                                <c:forEach items="${requestScope.allAddress}" var="address">
+                                    <option><c:out value="${address.street}"/> <c:out value="${address.houseNumber}"/></option>
                                 </c:forEach>
                             </select>
                         </div>

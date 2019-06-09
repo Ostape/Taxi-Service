@@ -38,8 +38,8 @@ CREATE TABLE `order` (
   KEY `fk_order_adress2_idx` (`id_adress_departure`),
   KEY `fk_order_driver1_idx1` (`id_driver`),
   KEY `fk_order_adress3_idx` (`id_adress_arrive`),
-  CONSTRAINT `fk_order_adress2` FOREIGN KEY (`id_adress_departure`) REFERENCES `adress` (`id_adress`),
-  CONSTRAINT `fk_order_adress3` FOREIGN KEY (`id_adress_arrive`) REFERENCES `adress` (`id_adress`),
+  CONSTRAINT `fk_order_adress2` FOREIGN KEY (`id_adress_departure`) REFERENCES `address` (`id_adress`),
+  CONSTRAINT `fk_order_adress3` FOREIGN KEY (`id_adress_arrive`) REFERENCES `address` (`id_adress`),
   CONSTRAINT `fk_order_client1` FOREIGN KEY (`id_client`) REFERENCES `client` (`id_client`),
   CONSTRAINT `fk_order_coupon1` FOREIGN KEY (`id_coupon`) REFERENCES `coupon` (`id_coupon`),
   CONSTRAINT `fk_order_driver1` FOREIGN KEY (`id_driver`) REFERENCES `driver` (`id_driver`)

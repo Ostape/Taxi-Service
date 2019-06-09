@@ -1,6 +1,6 @@
 package com.robosh.Utils;
 
-import com.robosh.model.entity.Adress;
+import com.robosh.model.entity.Address;
 import com.robosh.model.entity.Coupon;
 
 public class PriceVoyageUtils {
@@ -9,11 +9,11 @@ public class PriceVoyageUtils {
     private PriceVoyageUtils() {
     }
 
-    public static int getPriceDependDistance(Adress adressArrive, Adress adressDeparture) {
-        double arriveStreetPrice = getStreetPrice(adressArrive.getStreet());
-        double departureStreetPrice = getStreetPrice(adressDeparture.getStreet());
-        double arriveHouseNumberPrice = getHouseNumberPrice(adressArrive.getHouseNumber());
-        double departureHouseNumberPrice = getHouseNumberPrice(adressDeparture.getHouseNumber());
+    public static int getPriceDependDistance(Address addressArrive, Address addressDeparture) {
+        double arriveStreetPrice = getStreetPrice(addressArrive.getStreet());
+        double departureStreetPrice = getStreetPrice(addressDeparture.getStreet());
+        double arriveHouseNumberPrice = getHouseNumberPrice(addressArrive.getHouseNumber());
+        double departureHouseNumberPrice = getHouseNumberPrice(addressDeparture.getHouseNumber());
         return (int) (arriveStreetPrice + departureStreetPrice +
                 arriveHouseNumberPrice + departureHouseNumberPrice + getPriceWeather());
     }

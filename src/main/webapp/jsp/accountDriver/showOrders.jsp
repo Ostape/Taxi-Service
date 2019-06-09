@@ -55,12 +55,12 @@
                         <p><c:out value="${order.client.name}"/> <c:out value="${order.client.surname}"/></p>
                     </div>
                     <div class="street">
-                        <p><c:out value="${order.adressArrive.street}"/> <c:out
-                                value="${order.adressArrive.houseNumber}"/></p>
+                        <p><c:out value="${order.addressArrive.street}"/> <c:out
+                                value="${order.addressArrive.houseNumber}"/></p>
                     </div>
                     <div class="street">
-                        <p><c:out value="${order.adressDeparture.street}"/> <c:out
-                                value="${order.adressDeparture.houseNumber}"/></p>
+                        <p><c:out value="${order.addressDeparture.street}"/> <c:out
+                                value="${order.addressDeparture.houseNumber}"/></p>
                     </div>
                     <div class="costVoage">
                         <p><c:out value="${order.costWithDiscount}"/></p>

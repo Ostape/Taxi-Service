@@ -7,8 +7,8 @@ public class Order {
     private OrderStatus orderStatus;
     private Client client;
     private Driver driver;
-    private Adress adressArrive;
-    private Adress adressDeparture;
+    private Address addressArrive;
+    private Address addressDeparture;
     private Coupon coupon;
     private int cost;
     private int costWithDiscount;
@@ -16,13 +16,13 @@ public class Order {
     public Order() {
     }
 
-    public Order(OrderStatus orderStatus, Client client, Driver driver, Adress adressArrive,
-                 Adress adressDeparture, Coupon coupon, int cost, int costWithDiscount) {
+    public Order(OrderStatus orderStatus, Client client, Driver driver, Address addressArrive,
+                 Address addressDeparture, Coupon coupon, int cost, int costWithDiscount) {
         this.orderStatus = orderStatus;
         this.client = client;
         this.driver = driver;
-        this.adressArrive = adressArrive;
-        this.adressDeparture = adressDeparture;
+        this.addressArrive = addressArrive;
+        this.addressDeparture = addressDeparture;
         this.coupon = coupon;
         this.cost = cost;
         this.costWithDiscount = costWithDiscount;
@@ -60,20 +60,20 @@ public class Order {
         this.driver = driver;
     }
 
-    public Adress getAdressArrive() {
-        return adressArrive;
+    public Address getAddressArrive() {
+        return addressArrive;
     }
 
-    public void setAdressArrive(Adress adressArrive) {
-        this.adressArrive = adressArrive;
+    public void setAddressArrive(Address addressArrive) {
+        this.addressArrive = addressArrive;
     }
 
-    public Adress getAdressDeparture() {
-        return adressDeparture;
+    public Address getAddressDeparture() {
+        return addressDeparture;
     }
 
-    public void setAdressDeparture(Adress adressDeparture) {
-        this.adressDeparture = adressDeparture;
+    public void setAddressDeparture(Address addressDeparture) {
+        this.addressDeparture = addressDeparture;
     }
 
     public Coupon getCoupon() {
@@ -106,8 +106,8 @@ public class Order {
                 "idOrder=" + idOrder +
                 ", orderStatus='" + orderStatus + '\'' +
                 ", client=" + client +
-                ", AdressArrive=" + adressArrive +
-                ", AdressDeparture=" + adressDeparture +
+                ", AdressArrive=" + addressArrive +
+                ", AdressDeparture=" + addressDeparture +
                 ", coupon=" + coupon +
                 ", cost=" + cost +
                 ", costWithDiscount=" + costWithDiscount +

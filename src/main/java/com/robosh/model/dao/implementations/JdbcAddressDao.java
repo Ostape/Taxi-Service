@@ -1,32 +1,32 @@
 package com.robosh.model.dao.implementations;
 
-import com.robosh.model.dao.interfaces.AdressDao;
-import com.robosh.model.dao.implementations.queries.AdressSQL;
-import com.robosh.model.dao.mappers.AdressMapper;
+import com.robosh.model.dao.interfaces.AddressDao;
+import com.robosh.model.dao.implementations.queries.AddressSQL;
+import com.robosh.model.dao.mappers.AddressMapper;
 import com.robosh.model.dao.mappers.Mapper;
-import com.robosh.model.entity.Adress;
+import com.robosh.model.entity.Address;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JdbcAdressDao implements AdressDao {
+public class JdbcAddressDao implements AddressDao {
 
-    private static final Logger LOG = Logger.getLogger(JdbcAdressDao.class);
+    private static final Logger LOG = Logger.getLogger(JdbcAddressDao.class);
     private Connection connection;
 
-    public JdbcAdressDao(Connection connection) {
+    public JdbcAddressDao(Connection connection) {
         this.connection = connection;
     }
 
     @Override
-    public boolean checkAdressExist(String street, String numberHouse) {
-        try (PreparedStatement ps = connection.prepareStatement(AdressSQL.READ_BY_ADRESS.getQUERY())) {
+    public boolean checkAddressExist(String street, String numberHouse) {
+        try (PreparedStatement ps = connection.prepareStatement(AddressSQL.READ_BY_ADRESS.getQUERY())) {
             ps.setString(1, street);
             ps.setString(2, numberHouse);
             final ResultSet rs = ps.executeQuery();
-            LOG.debug("Executed query" + AdressSQL.READ_BY_ADRESS);
+            LOG.debug("Executed query" + AddressSQL.READ_BY_ADRESS);
             if (rs.next()) {
                 LOG.debug("check is rs has next");
                 return true;
@@ -40,11 +40,11 @@ public class JdbcAdressDao implements AdressDao {
 
     @Override
     public long getAddressId(String street, String numberHouse) {
-        try (PreparedStatement ps = connection.prepareStatement(AdressSQL.READ_ADDRESS_ID.getQUERY())) {
+        try (PreparedStatement ps = connection.prepareStatement(AddressSQL.READ_ADDRESS_ID.getQUERY())) {
             ps.setString(1, street);
             ps.setString(2, numberHouse);
             final ResultSet rs = ps.executeQuery();
-            LOG.debug("Executed query" + AdressSQL.READ_ADDRESS_ID);
+            LOG.debug("Executed query" + AddressSQL.READ_ADDRESS_ID);
             if (rs.next()) {
                 LOG.debug("check is rs has next");
                 return rs.getLong("id_adress");
@@ -57,15 +57,15 @@ public class JdbcAdressDao implements AdressDao {
     }
 
     @Override
-    public Adress getAdressByStreetNumberHouse(String street, String numberHouse) {
-        Mapper<Adress> addressMapper = new AdressMapper();
-        Adress result = new Adress();
-        result.setIdAdress(-1);
-        try (PreparedStatement ps = connection.prepareStatement(AdressSQL.READ_BY_ADRESS.getQUERY())) {
+    public Address getAddressByStreetNumberHouse(String street, String numberHouse) {
+        Mapper<Address> addressMapper = new AddressMapper();
+        Address result = new Address();
+        result.setIdAddress(-1);
+        try (PreparedStatement ps = connection.prepareStatement(AddressSQL.READ_BY_ADRESS.getQUERY())) {
             ps.setString(1, street);
             ps.setString(2, numberHouse);
             final ResultSet rs = ps.executeQuery();
-            LOG.debug("Executed query" + AdressSQL.READ_BY_ADRESS);
+            LOG.debug("Executed query" + AddressSQL.READ_BY_ADRESS);
             if (rs.next()) {
                 LOG.debug("check is rs has next");
                 result = addressMapper.getEntity(rs);
@@ -78,17 +78,17 @@ public class JdbcAdressDao implements AdressDao {
     }
 
     @Override
-    public Adress getById(long id) {
-        Mapper<Adress> adressMapper = new AdressMapper();
-        Adress result = new Adress();
-        result.setIdAdress(-1);
-        try (PreparedStatement ps = connection.prepareStatement(AdressSQL.READ_BY_ID.getQUERY())) {
+    public Address getById(long id) {
+        Mapper<Address> addressMapper = new AddressMapper();
+        Address result = new Address();
+        result.setIdAddress(-1);
+        try (PreparedStatement ps = connection.prepareStatement(AddressSQL.READ_BY_ID.getQUERY())) {
             ps.setLong(1, id);
             final ResultSet rs = ps.executeQuery();
-            LOG.debug("Executed query" + AdressSQL.READ_BY_ADRESS);
+            LOG.debug("Executed query" + AddressSQL.READ_BY_ADRESS);
             if (rs.next()) {
                 LOG.debug("check is rs has next");
-                result = adressMapper.getEntity(rs);
+                result = addressMapper.getEntity(rs);
             }
         } catch (SQLException e) {
             LOG.debug("SQLException occurred");
@@ -98,22 +98,22 @@ public class JdbcAdressDao implements AdressDao {
     }
 
     @Override
-    public List<Adress> findAll() {
-        List<Adress> adresses = new ArrayList<>();
-        final String query = AdressSQL.READ_ALL.getQUERY();
+    public List<Address> findAll() {
+        List<Address> addresses = new ArrayList<>();
+        final String query = AddressSQL.READ_ALL.getQUERY();
 
         try (Statement st = connection.createStatement()) {
             LOG.debug("connection createStatement");
             ResultSet rs = st.executeQuery(query);
-            LOG.debug("Executed query" + AdressSQL.READ_ALL);
-            Mapper<Adress> adressMapper = new AdressMapper();
+            LOG.debug("Executed query" + AddressSQL.READ_ALL);
+            Mapper<Address> adressMapper = new AddressMapper();
 
             while (rs.next()) {
                 LOG.debug("Read objects");
-                Adress adress = adressMapper.getEntity(rs);
-                adresses.add(adress);
+                Address address = adressMapper.getEntity(rs);
+                addresses.add(address);
             }
-            return adresses;
+            return addresses;
         } catch (SQLException e) {
             LOG.debug("SQLException occurred");
             e.printStackTrace();
@@ -125,7 +125,7 @@ public class JdbcAdressDao implements AdressDao {
     /**
      * not using
      */
-    public void create(Adress entity) {
+    public void create(Address entity) {
 
     }
 
@@ -134,7 +134,7 @@ public class JdbcAdressDao implements AdressDao {
     /**
      * not using
      */
-    public boolean update(Adress adress) {
+    public boolean update(Address address) {
         return false;
     }
 

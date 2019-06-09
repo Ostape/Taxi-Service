@@ -2,17 +2,17 @@ package com.robosh.model.entity;
 
 import java.util.Objects;
 
-public class Adress {
-    private int idAdress;
+public class Address {
+    private int idAddress;
     private String street;
     private String houseNumber;
 
-    public int getIdAdress() {
-        return idAdress;
+    public int getIdAddress() {
+        return idAddress;
     }
 
-    public void setIdAdress(int idAdress) {
-        this.idAdress = idAdress;
+    public void setIdAddress(int idAddress) {
+        this.idAddress = idAddress;
     }
 
     public String getStreet() {
@@ -33,8 +33,8 @@ public class Adress {
 
     @Override
     public String toString() {
-        return "Adress{" +
-                "idAdress='" + idAdress + '\'' +
+        return "Address{" +
+                "idAddress='" + idAddress + '\'' +
                 ", street='" + street + '\'' +
                 ", houseNumber='" + houseNumber + '\'' +
                 '}';
@@ -43,15 +43,15 @@ public class Adress {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Adress)) return false;
-        Adress adress = (Adress) o;
-        return idAdress == adress.idAdress &&
-                Objects.equals(street, adress.street) &&
-                Objects.equals(houseNumber, adress.houseNumber);
+        if (!(o instanceof Address)) return false;
+        Address address = (Address) o;
+        return idAddress == address.idAddress &&
+                Objects.equals(street, address.street) &&
+                Objects.equals(houseNumber, address.houseNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idAdress, street, houseNumber);
+        return Objects.hash(idAddress, street, houseNumber);
     }
 }

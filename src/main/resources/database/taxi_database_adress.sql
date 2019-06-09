@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `adress`
+-- Table structure for table `address`
 --
 
-DROP TABLE IF EXISTS `adress`;
+DROP TABLE IF EXISTS `address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `adress` (
+CREATE TABLE `address` (
   `id_adress` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `street` varchar(128) NOT NULL,
   `house_number` varchar(12) NOT NULL,
@@ -31,13 +31,13 @@ CREATE TABLE `adress` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `adress`
+-- Dumping data for table `address`
 --
 
-LOCK TABLES `adress` WRITE;
-/*!40000 ALTER TABLE `adress` DISABLE KEYS */;
-INSERT INTO `adress` VALUES (1,'Янгеля','12'),(2,'Янгеля','16/2'),(3,'Янгеля','7'),(4,'Янгеля','8'),(5,'Проскурівська','3'),(6,'Проскурівська','4'),(7,'Проскурівська','7'),(8,'Петровська','8'),(9,'Петровська','12'),(10,'Петровська','55');
-/*!40000 ALTER TABLE `adress` ENABLE KEYS */;
+LOCK TABLES `address` WRITE;
+/*!40000 ALTER TABLE `address` DISABLE KEYS */;
+INSERT INTO `address` VALUES (1,'Янгеля','12'),(2,'Янгеля','16/2'),(3,'Янгеля','7'),(4,'Янгеля','8'),(5,'Проскурівська','3'),(6,'Проскурівська','4'),(7,'Проскурівська','7'),(8,'Петровська','8'),(9,'Петровська','12'),(10,'Петровська','55');
+/*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
