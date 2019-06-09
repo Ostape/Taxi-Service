@@ -1,11 +1,11 @@
-package com.robosh.model.command.account;
+package com.robosh.web.command.account;
 
 import com.robosh.Utils.AppUtils;
 import com.robosh.Utils.CookiesUtils;
 import com.robosh.Utils.PriceVoyageUtils;
 import com.robosh.Utils.TimeWaitTaxiUtil;
-import com.robosh.model.command.Command;
-import com.robosh.model.command.directions.ClientOrderCommand;
+import com.robosh.web.command.Command;
+import com.robosh.web.command.directions.ClientOrderCommand;
 import com.robosh.model.entity.*;
 import com.robosh.model.entity.enums.DriverStatus;
 import com.robosh.service.AdressService;

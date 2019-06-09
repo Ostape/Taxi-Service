@@ -1,13 +1,14 @@
-package com.robosh.model.command.directions;
+package com.robosh.web.command.directions;
 
-import com.robosh.model.command.Command;
+import com.robosh.web.command.Command;
+import com.robosh.web.command.RoutesJSP;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class DriverAccountCommand implements Command {
+public class LoginCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        return "/jsp/accountDriver/driverAccount.jsp";
+        return RoutesJSP.LOGIN;
     }
 }

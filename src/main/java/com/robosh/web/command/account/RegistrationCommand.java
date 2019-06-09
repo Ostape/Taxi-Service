@@ -1,7 +1,8 @@
-package com.robosh.model.command.account;
+package com.robosh.web.command.account;
 
 import com.robosh.Utils.InputDataRegistrationUtils;
-import com.robosh.model.command.Command;
+import com.robosh.web.command.Command;
+import com.robosh.web.command.RoutesJSP;
 import com.robosh.model.customExceptions.EmailIsAlreadyTaken;
 import com.robosh.model.customExceptions.PhoneNumberIsAlreadyTaken;
 import com.robosh.model.entity.Client;
@@ -12,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class RegistrationCommand implements Command {
 
-    private static final String REGISTER_CLIENT_PAGE = "/jsp/commonPages/registerClient.jsp";
     private ClientService clientService;
 
     public RegistrationCommand(ClientService clientService) {
@@ -30,11 +30,11 @@ public class RegistrationCommand implements Command {
         final String repeatPassword = request.getParameter("password_repeat");
 
         if (name == null) {
-            return REGISTER_CLIENT_PAGE;
+            return RoutesJSP.REGISTER_CLIENT;
         }
         if (InputDataRegistrationUtils.isNotCorrectData(name, surname, phoneNumber,
                 email, password, repeatPassword)) {
-            return REGISTER_CLIENT_PAGE + "?badInput=true";
+            return RoutesJSP.REGISTER_CLIENT + "?badInput=true";
         }
 
 
@@ -49,14 +49,12 @@ public class RegistrationCommand implements Command {
             clientService.createClientInDatabase(client);
         } catch (EmailIsAlreadyTaken emailIsAlreadyTaken) {
             emailIsAlreadyTaken.printStackTrace();
-            return REGISTER_CLIENT_PAGE + "?badEmail=true";
+            return RoutesJSP.REGISTER_CLIENT + "?badEmail=true";
         } catch (PhoneNumberIsAlreadyTaken phoneNumberIsAlreadyTaken) {
             phoneNumberIsAlreadyTaken.printStackTrace();
-            return REGISTER_CLIENT_PAGE + "?badPhoneNumber=true";
+            return RoutesJSP.REGISTER_CLIENT + "?badPhoneNumber=true";
         }
-        System.out.println("choga ya tut");
         return "redirect#" + request.getContextPath() + "/taxi-Kyiv/login";
-        //return "/jsp/commonPages/taxiOrder.jsp";
     }
 
 }

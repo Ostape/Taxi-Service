@@ -1,9 +1,9 @@
 package com.robosh.web;
 
-import com.robosh.model.command.Command;
-import com.robosh.model.command.account.*;
-import com.robosh.model.command.directions.*;
+import com.robosh.web.command.Command;
 import com.robosh.service.*;
+import com.robosh.web.command.account.*;
+import com.robosh.web.command.directions.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +30,7 @@ public class Servlet extends HttpServlet {
         commands.put("clientAccount", new ClientAccountCommand());
         commands.put("driverAccount", new DriverAccountCommand());
         commands.put("showAllOrders", new ShowAllDriverOrdersCommand(new OrderService()));
-        commands.put("403", new Error403Command());
+        commands.put("forbidden403", new ErrorForbiddenCommand());
         commands.put("enterOrder", new EnterOrderCommand(new OrderService(), new DriverService(),
                 new AdressService(), new CouponService()));
         commands.put("showClientOrder", new ShowOrderClientCommand());
@@ -54,7 +54,6 @@ public class Servlet extends HttpServlet {
         String commandKey = getRequestPath(request);//get next command key
         Command command = commands.get(commandKey);
         if (command == null) { //if there is no command with such key, request dispatcher home page
-           // request.getRequestDispatcher("/taxi-Kyiv/homePage").forward(request, response);
             response.sendRedirect(request.getContextPath() + "/taxi-Kyiv/homePage");
         }else {
             String nextPage = command.execute(request, response); //which one we will use: regirect or forward

@@ -1,7 +1,8 @@
-package com.robosh.model.command.directions;
+package com.robosh.web.command.directions;
 
 import com.robosh.Utils.CookiesUtils;
-import com.robosh.model.command.Command;
+import com.robosh.web.command.Command;
+import com.robosh.web.command.RoutesJSP;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,6 @@ public class ShowOrderClientCommand implements Command {
         request.setAttribute(CookiesUtils.DRIVER_PHONE, phoneNumber);
         request.setAttribute(CookiesUtils.PRICE_VOYAGE, priceVoyage);
         request.setAttribute(CookiesUtils.TIME_WAIT, timeWait);
-        return "/jsp/accountClient/orderStatus.jsp";
+        return RoutesJSP.ORDER_STATUS;
     }
 }

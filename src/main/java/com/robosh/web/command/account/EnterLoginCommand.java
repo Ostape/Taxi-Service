@@ -1,7 +1,8 @@
-package com.robosh.model.command.account;
+package com.robosh.web.command.account;
 
-import com.robosh.model.command.Command;
+import com.robosh.web.command.Command;
 import com.robosh.Utils.AppUtils;
+import com.robosh.web.command.RoutesJSP;
 import com.robosh.model.entity.Person;
 import com.robosh.service.ClientService;
 import com.robosh.service.DriverService;
@@ -27,7 +28,7 @@ public class EnterLoginCommand implements Command {
         if (inputWrongData(phoneNumber,password)){
             String errorMessage = "Invalid Phone Number or Password";
             request.setAttribute("errorMessage", errorMessage);
-            return "/jsp/commonPages/login.jsp" + "?wrongData=true";
+            return RoutesJSP.LOGIN + "?wrongData=true";
         }else {
             Person person = AppUtils.getLoginedUser(request.getSession());
             if (person != null){
@@ -53,7 +54,6 @@ public class EnterLoginCommand implements Command {
     }
 
     private boolean inputWrongData(String phoneNumber, String password){
-        //return !clientService.isClientAlreadyExist(phoneNumber, password);
         return !checkIfClient(phoneNumber, password) && !checkIfDriver(phoneNumber, password);
     }
 

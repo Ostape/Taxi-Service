@@ -1,7 +1,8 @@
-package com.robosh.model.command.account;
+package com.robosh.web.command.account;
 
 import com.robosh.Utils.AppUtils;
-import com.robosh.model.command.Command;
+import com.robosh.web.command.Command;
+import com.robosh.web.command.RoutesJSP;
 import com.robosh.model.entity.Order;
 import com.robosh.service.OrderService;
 
@@ -38,7 +39,7 @@ public class ShowAllDriverOrdersCommand implements Command {
             numberOfPages = numberOfPages + 1;
         }
         request.setAttribute("pageNumbers", numberOfPages);
-        return "/jsp/accountDriver/showOrders.jsp";
+        return RoutesJSP.SHOW_DRIVER_ORDERS;
     }
 
     private int getPageNumber(String strNumber){
