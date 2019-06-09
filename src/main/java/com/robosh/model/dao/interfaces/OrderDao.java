@@ -7,9 +7,14 @@ import java.util.List;
 
 public interface OrderDao extends Dao<Order> {
     List<Order> getAllOrdersByDriverId(long idDriver);
+
     List<Order> getAllOrdersByDriverId(long idDriver, int row, int limit);
+
     void createWithoutCoupon(Order order);
+
     long getCountOrders(long idDriver);
+
     boolean updateOrderStatus(int idOrder, OrderStatus orderStatus);
+
     boolean isCorrespondOrderAndDriver(int idOrder, int idDriver);
 }
