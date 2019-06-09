@@ -7,9 +7,9 @@ import org.apache.log4j.Logger;
 
 import java.util.List;
 
-public class AdressService {
+public class AddressService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
-    private static final Logger LOG = Logger.getLogger(AdressService.class);
+    private static final Logger LOG = Logger.getLogger(AddressService.class);
 
     public boolean checkAddressExist(String street, String number_house){
         try (AddressDao dao = daoFactory.createAdressDao()) {
@@ -18,7 +18,7 @@ public class AdressService {
         }
     }
 
-    public Address getAddressById(long id){
+    public Address getAddressById(int id){
         try (AddressDao dao = daoFactory.createAdressDao()) {
             LOG.debug("created Address DAO");
             return dao.getById(id);

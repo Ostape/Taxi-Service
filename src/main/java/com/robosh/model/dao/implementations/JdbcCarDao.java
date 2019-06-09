@@ -21,14 +21,13 @@ public class JdbcCarDao implements CarDao {
     }
 
     @Override
-    public Car getById(long id) {
+    public Car getById(int id) {
         Mapper<Car> carMapper = new CarMapper();
         Car result = new Car();
         result.setIdCar(-1);
 
         try (PreparedStatement ps = connection.prepareStatement(CarSQL.READ_BY_ID.getQUERY())) {
-
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             final ResultSet rs = ps.executeQuery();
             LOG.debug("Executed query" + CarSQL.READ_BY_ID);
             if (rs.next()) {
@@ -121,7 +120,7 @@ public class JdbcCarDao implements CarDao {
     /**
      * don`t use
      */
-    public boolean delete(long id) {
+    public boolean delete(int id) {
         return false;
     }
 

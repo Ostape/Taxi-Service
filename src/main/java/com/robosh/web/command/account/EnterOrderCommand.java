@@ -1,14 +1,14 @@
 package com.robosh.web.command.account;
 
-import com.robosh.Utils.AppUtils;
-import com.robosh.Utils.CookiesUtils;
-import com.robosh.Utils.PriceVoyageUtils;
-import com.robosh.Utils.TimeWaitTaxiUtil;
+import com.robosh.utils.LoginedUserUtils;
+import com.robosh.utils.CookiesUtils;
+import com.robosh.utils.PriceVoyageUtils;
+import com.robosh.utils.TimeWaitTaxiUtil;
 import com.robosh.web.command.Command;
 import com.robosh.web.command.directions.ClientOrderCommand;
 import com.robosh.model.entity.*;
 import com.robosh.model.entity.enums.DriverStatus;
-import com.robosh.service.AdressService;
+import com.robosh.service.AddressService;
 import com.robosh.service.CouponService;
 import com.robosh.service.DriverService;
 import com.robosh.service.OrderService;
@@ -22,15 +22,15 @@ public class EnterOrderCommand implements Command {
 
     private OrderService orderService;
     private DriverService driverService;
-    private AdressService adressService;
+    private AddressService addressService;
     private CouponService couponService;
     private Command clientOrderCommand = new ClientOrderCommand();
 
     public EnterOrderCommand(OrderService orderService, DriverService driverService,
-                             AdressService adressService, CouponService couponService) {
+                             AddressService addressService, CouponService couponService) {
         this.orderService = orderService;
         this.driverService = driverService;
-        this.adressService = adressService;
+        this.addressService = addressService;
         this.couponService = couponService;
     }
 
@@ -46,9 +46,9 @@ public class EnterOrderCommand implements Command {
             Driver driver = driverService.getDriverByCarTypeAndDriverStatus(DriverStatus.FREE, carType);
             if (driver != null){
                 bookedDriver(driver);
-                Client loginedClient = (Client) AppUtils.getLoginedUser(request.getSession());
-                Address addressDeparture = adressService.getAdressByAdressString(addressDepartureStr);
-                Address addressArrive = adressService.getAdressByAdressString(addressArriveStr);
+                Client loginedClient = (Client) LoginedUserUtils.getLoginedUser(request.getSession());
+                Address addressDeparture = addressService.getAdressByAdressString(addressDepartureStr);
+                Address addressArrive = addressService.getAdressByAdressString(addressArriveStr);
                 Coupon coupon = couponService.getCouponByName(couponStr);
                 int costs = PriceVoyageUtils.getPriceDependDistance(addressArrive, addressDeparture);
                 int costWithDiscount = PriceVoyageUtils.getPriceWithCoupon(costs, coupon);

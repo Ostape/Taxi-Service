@@ -1,6 +1,6 @@
 package com.robosh.web.command.account;
 
-import com.robosh.Utils.AppUtils;
+import com.robosh.utils.LoginedUserUtils;
 import com.robosh.web.command.Command;
 import com.robosh.web.command.RoutesJSP;
 import com.robosh.model.entity.Order;
@@ -22,7 +22,7 @@ public class ShowAllDriverOrdersCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        int idDriver = (int)AppUtils.getLoginedUser(session).getPersonId();
+        int idDriver = (int) LoginedUserUtils.getLoginedUser(session).getPersonId();
         int pageNumber = 0;
         int totalNumberRecords = (int) orderService.getAllOrdersCount(idDriver);
         int recordPerPage = 5;

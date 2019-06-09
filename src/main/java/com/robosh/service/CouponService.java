@@ -11,7 +11,7 @@ public class CouponService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
     private static final Logger LOG = Logger.getLogger(CarService.class);
 
-    public Coupon getCouponById(long id) {
+    public Coupon getCouponById(int id) {
         try (CouponDao dao = daoFactory.createCouponDao()) {
             LOG.debug("created CouponDao");
             return dao.getById(id);

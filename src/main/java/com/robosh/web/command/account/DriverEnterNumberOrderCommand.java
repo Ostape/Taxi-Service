@@ -1,6 +1,6 @@
 package com.robosh.web.command.account;
 
-import com.robosh.Utils.AppUtils;
+import com.robosh.utils.LoginedUserUtils;
 import com.robosh.web.command.Command;
 import com.robosh.web.command.RoutesJSP;
 import com.robosh.model.entity.Driver;
@@ -30,10 +30,10 @@ public class DriverEnterNumberOrderCommand implements Command {
 
 
 
-            Driver driver = (Driver) AppUtils.getLoginedUser(request.getSession());
+            Driver driver = (Driver) LoginedUserUtils.getLoginedUser(request.getSession());
             if (orderService.isCorrespondOrderAndDriver(numberOfOrder, (int) driver.getPersonId())){
                 driver.setDriverStatus(DriverStatus.FREE);
-                AppUtils.updateLoginedUser(request.getSession(), driver);
+                LoginedUserUtils.updateLoginedUser(request.getSession(), driver);
                 orderService.updateOrderStatus(numberOfOrder, OrderStatus.COMPLETE);
                 return RoutesJSP.DRIVER_ACCOUNT;
             }

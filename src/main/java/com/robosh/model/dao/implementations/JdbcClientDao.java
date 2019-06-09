@@ -118,13 +118,13 @@ public class JdbcClientDao implements ClientDao {
     }
 
     @Override
-    public Client getById(long id) {
+    public Client getById(int id) {
         Mapper<Client> clientMapper = new ClientMapper();
         Client result = new Client();
         result.setPersonId(-1);
 
         try (PreparedStatement ps = connection.prepareStatement(ClientSQL.READ_BY_ID.getQUERY())) {
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             final ResultSet rs = ps.executeQuery();
             LOG.debug("Executed query" + ClientSQL.READ_BY_ID);
             if (rs.next()) {
@@ -174,7 +174,7 @@ public class JdbcClientDao implements ClientDao {
      * not using
      */
     @Override
-    public boolean delete(long id) {
+    public boolean delete(int id) {
         return false;
     }
 

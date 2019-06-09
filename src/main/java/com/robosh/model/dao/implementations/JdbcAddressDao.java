@@ -11,6 +11,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class JdbcAddressDao implements AddressDao {
 
     private static final Logger LOG = Logger.getLogger(JdbcAddressDao.class);
@@ -78,12 +80,12 @@ public class JdbcAddressDao implements AddressDao {
     }
 
     @Override
-    public Address getById(long id) {
+    public Address getById(int id) {
         Mapper<Address> addressMapper = new AddressMapper();
         Address result = new Address();
         result.setIdAddress(-1);
         try (PreparedStatement ps = connection.prepareStatement(AddressSQL.READ_BY_ID.getQUERY())) {
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             final ResultSet rs = ps.executeQuery();
             LOG.debug("Executed query" + AddressSQL.READ_BY_ADRESS);
             if (rs.next()) {
@@ -141,7 +143,7 @@ public class JdbcAddressDao implements AddressDao {
     /**
      * not using
      */
-    public boolean delete(long id) {
+    public boolean delete(int id) {
         return false;
     }
 

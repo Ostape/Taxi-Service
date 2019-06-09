@@ -10,16 +10,15 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.robosh.Utils.AppUtils;
-import com.robosh.Utils.SecurityUtils;
+import com.robosh.utils.LoginedUserUtils;
+import com.robosh.utils.SecurityUtils;
 import com.robosh.model.entity.Person;
 import com.robosh.model.entity.enums.Role;
 
-public class AuthentificationFilter implements Filter {
+public class AuthenticationFilter implements Filter {
 
     @Override
     public void init(FilterConfig fConfig) {
-
     }
 
     @Override
@@ -28,7 +27,7 @@ public class AuthentificationFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
 
         String pathInfo = request.getPathInfo();
-        Person loginedPerson = AppUtils.getLoginedUser(request.getSession());
+        Person loginedPerson = LoginedUserUtils.getLoginedUser(request.getSession());
 
         if (("/login".equals(pathInfo) || "/registerClient".equals(pathInfo)) && loginedPerson != null){
             if (loginedPerson.getRole().equals(Role.CLIENT)){

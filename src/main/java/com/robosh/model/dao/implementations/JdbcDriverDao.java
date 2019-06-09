@@ -41,12 +41,12 @@ public class JdbcDriverDao implements DriverDao {
     }
 
     @Override
-    public Driver getById(long id) {
+    public Driver getById(int id) {
         Mapper<Driver> driverMapper = new DriverMapper();
         Driver result = new Driver();
         result.setPersonId(-1);
         try (PreparedStatement ps = connection.prepareStatement(DriverSQL.READ_BY_ID.getQUERY())) {
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             final ResultSet rs = ps.executeQuery();
             LOG.debug("Executed query" + DriverSQL.READ_BY_ID);
             if (rs.next()) {
@@ -153,7 +153,7 @@ public class JdbcDriverDao implements DriverDao {
     public boolean update(Driver driver) {
         try (PreparedStatement ps = connection.prepareStatement(DriverSQL.UPDATE.getQUERY())) {
             ps.setString(1,driver.getDriverStatus().toString().toLowerCase());
-            ps.setLong(2, driver.getPersonId());
+            ps.setInt(2, driver.getPersonId());
             ps.execute();
             LOG.debug("Executed query" + DriverSQL.UPDATE);
             return true;
@@ -180,7 +180,7 @@ public class JdbcDriverDao implements DriverDao {
      * @param id
      */
     @Override
-    public boolean delete(long id) {
+    public boolean delete(int id) {
         return false;
     }
 

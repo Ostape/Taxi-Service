@@ -26,13 +26,13 @@ public class JdbcOrderDao implements OrderDao {
         try (PreparedStatement ps = connection.prepareStatement(OrderSQL.INSERT.getQUERY())) {
             LOG.debug("Executed query" + OrderSQL.INSERT);
             ps.setString(1, order.getOrderStatus().toString());
-            ps.setLong(2, order.getClient().getPersonId());
-            ps.setLong(3, order.getDriver().getPersonId());
-            ps.setLong(4, order.getAddressDeparture().getIdAddress());
-            ps.setLong(5, order.getAddressArrive().getIdAddress());
-            ps.setLong(6, order.getCoupon().getIdCoupon());
-            ps.setDouble(7, order.getCost());
-            ps.setDouble(8, order.getCostWithDiscount());
+            ps.setInt(2, order.getClient().getPersonId());
+            ps.setInt(3, order.getDriver().getPersonId());
+            ps.setInt(4, order.getAddressDeparture().getIdAddress());
+            ps.setInt(5, order.getAddressArrive().getIdAddress());
+            ps.setInt(6, order.getCoupon().getIdCoupon());
+            ps.setInt(7, order.getCost());
+            ps.setInt(8, order.getCostWithDiscount());
             ps.executeUpdate();
         } catch (SQLException e) {
             LOG.debug("SQLException occurred");
@@ -45,12 +45,12 @@ public class JdbcOrderDao implements OrderDao {
         try (PreparedStatement ps = connection.prepareStatement(OrderSQL.INSERT_WITHOUT_COUPON.getQUERY())) {
             LOG.debug("Executed query" + OrderSQL.INSERT_WITHOUT_COUPON);
             ps.setString(1, order.getOrderStatus().toString());
-            ps.setLong(2, order.getClient().getPersonId());
-            ps.setLong(3, order.getDriver().getPersonId());
-            ps.setLong(4, order.getAddressDeparture().getIdAddress());
-            ps.setLong(5, order.getAddressArrive().getIdAddress());
-            ps.setDouble(6, order.getCost());
-            ps.setDouble(7, order.getCostWithDiscount());
+            ps.setInt(2, order.getClient().getPersonId());
+            ps.setInt(3, order.getDriver().getPersonId());
+            ps.setInt(4, order.getAddressDeparture().getIdAddress());
+            ps.setInt(5, order.getAddressArrive().getIdAddress());
+            ps.setInt(6, order.getCost());
+            ps.setInt(7, order.getCostWithDiscount());
             ps.execute();
         } catch (SQLException e) {
             LOG.debug("SQLException occurred");
@@ -59,10 +59,10 @@ public class JdbcOrderDao implements OrderDao {
     }
 
     @Override
-    public long getCountOrders(long idDriver) {
+    public long getCountOrders(int idDriver) {
         long countOrders = 0;
         try (PreparedStatement ps = connection.prepareStatement(OrderSQL.GET_COUNT_ORDERS.getQUERY())) {
-            ps.setLong(1, idDriver);
+            ps.setInt(1, idDriver);
 
             final ResultSet rs = ps.executeQuery();
 
@@ -79,12 +79,12 @@ public class JdbcOrderDao implements OrderDao {
     }
 
     @Override
-    public Order getById(long id) {
+    public Order getById(int id) {
         Mapper<Order> orderMapper = new OrderMapper();
         Order result = new Order();
         result.setIdOrder(-1);
         try (PreparedStatement ps = connection.prepareStatement(OrderSQL.READ_BY_ID.getQUERY())) {
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             final ResultSet rs = ps.executeQuery();
             LOG.debug("Executed query" + OrderSQL.READ_BY_ID);
             if (rs.next()) {
@@ -99,12 +99,12 @@ public class JdbcOrderDao implements OrderDao {
     }
 
     @Override
-    public List<Order> getAllOrdersByDriverId(long idDriver) {
+    public List<Order> getAllOrdersByDriverId(int idDriver) {
         List<Order> orders = new ArrayList<>();
         final String query = OrderSQL.READ_BY_ID_DRIVER.getQUERY();
 
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setLong(1, idDriver);
+            ps.setInt(1, idDriver);
            final ResultSet rs = ps.executeQuery();
             return getOrders(orders, rs);
         } catch (SQLException e) {
@@ -115,11 +115,11 @@ public class JdbcOrderDao implements OrderDao {
     }
 
     @Override
-    public List<Order> getAllOrdersByDriverId(long idDriver, int row, int limit) {
+    public List<Order> getAllOrdersByDriverId(int idDriver, int row, int limit) {
         List<Order> orders = new ArrayList<>();
         final String query = OrderSQL.READ_BY_ID_DRIVER_WITH_LIMIT.getQUERY();
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setLong(1, idDriver);
+            ps.setInt(1, idDriver);
             ps.setInt(2, row);
             ps.setInt(3, limit);
             final ResultSet rs = ps.executeQuery();
@@ -207,7 +207,7 @@ public class JdbcOrderDao implements OrderDao {
      * @return
      */
     @Override
-    public boolean delete(long id) {
+    public boolean delete(int id) {
         return false;
     }
 

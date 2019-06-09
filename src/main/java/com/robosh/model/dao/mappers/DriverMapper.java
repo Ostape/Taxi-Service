@@ -13,7 +13,7 @@ public class DriverMapper implements Mapper<Driver> {
     public Driver getEntity(ResultSet resultSet) throws SQLException {
         Driver driver = new Driver();
         CarService carService = new CarService();
-        driver.setPersonId(resultSet.getLong("id_driver"));
+        driver.setPersonId(resultSet.getInt("id_driver"));
         driver.setSurname(resultSet.getString("surname"));
         driver.setName(resultSet.getString("name"));
         driver.setMiddleName(resultSet.getString("middle_name"));
@@ -21,16 +21,15 @@ public class DriverMapper implements Mapper<Driver> {
         driver.setPhoneNumber(resultSet.getString("phone_number"));
         driver.setDriverStatus(toDriverStatus(resultSet.getString("driver_status")));
         driver.setRole(Role.DRIVER);
-        driver.setCar(carService.getCarById(resultSet.getLong("id_car")));
+        driver.setCar(carService.getCarById(resultSet.getInt("id_car")));
         return driver;
     }
 
-    private DriverStatus toDriverStatus(String status){
+    private DriverStatus toDriverStatus(String status) {
         if (DriverStatus.BOOKED.toString()
-                .equalsIgnoreCase(status)){
+                .equalsIgnoreCase(status)) {
             return DriverStatus.BOOKED;
-        }
-        else {
+        } else {
             return DriverStatus.FREE;
         }
     }

@@ -1,4 +1,4 @@
-package com.robosh.Utils;
+package com.robosh.utils;
 
 import com.robosh.model.entity.Address;
 import com.robosh.model.entity.Coupon;

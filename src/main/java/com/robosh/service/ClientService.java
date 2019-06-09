@@ -20,7 +20,7 @@ public class ClientService {
         }
     }
 
-    public Client getClientById(long id){
+    public Client getClientById(int id){
         try (ClientDao dao = daoFactory.createClientDao()) {
             LOG.debug("created ClientDao");
             return dao.getById(id);

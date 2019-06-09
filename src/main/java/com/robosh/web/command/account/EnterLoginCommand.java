@@ -1,7 +1,7 @@
 package com.robosh.web.command.account;
 
 import com.robosh.web.command.Command;
-import com.robosh.Utils.AppUtils;
+import com.robosh.utils.LoginedUserUtils;
 import com.robosh.web.command.RoutesJSP;
 import com.robosh.model.entity.Person;
 import com.robosh.service.ClientService;
@@ -30,7 +30,7 @@ public class EnterLoginCommand implements Command {
             request.setAttribute("errorMessage", errorMessage);
             return RoutesJSP.LOGIN + "?wrongData=true";
         }else {
-            Person person = AppUtils.getLoginedUser(request.getSession());
+            Person person = LoginedUserUtils.getLoginedUser(request.getSession());
             if (person != null){
                 System.out.println("in EnterLoginCommand");
                 if ("CLIENT".equals(person.getRole().toString())) {
@@ -42,12 +42,12 @@ public class EnterLoginCommand implements Command {
             }
             if (checkIfDriver(phoneNumber, password)){
                 person = driverService.getDriverByPasswordAndPhone(phoneNumber, password);
-                AppUtils.storeLoginedUser(request.getSession(), person);
+                LoginedUserUtils.storeLoginedUser(request.getSession(), person);
                 return "redirect#" + request.getContextPath() + "/taxi-Kyiv/driverAccount";
             }
             else {
                 person = clientService.getClientByPasswordAndPhone(phoneNumber, password);
-                AppUtils.storeLoginedUser(request.getSession(), person);
+                LoginedUserUtils.storeLoginedUser(request.getSession(), person);
                 return "redirect#" + request.getContextPath() + "/taxi-Kyiv/clientAccount";
             }
         }

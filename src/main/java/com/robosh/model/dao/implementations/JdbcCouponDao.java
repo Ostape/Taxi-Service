@@ -20,13 +20,13 @@ public class JdbcCouponDao implements CouponDao {
     }
 
     @Override
-    public Coupon getById(long id) {
+    public Coupon getById(int id) {
         Mapper<Coupon> couponMapper = new CouponMapper();
         Coupon result = new Coupon();
         result.setIdCoupon(-1);
 
         try (PreparedStatement ps = connection.prepareStatement(CouponSQL.READ_BY_ID.getQUERY())) {
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             final ResultSet rs = ps.executeQuery();
             LOG.debug("Executed query" + CouponSQL.READ_BY_ID);
             if (rs.next()) {
@@ -108,7 +108,7 @@ public class JdbcCouponDao implements CouponDao {
      * @param id
      */
     @Override
-    public boolean delete(long id) {
+    public boolean delete(int id) {
         return false;
     }
 

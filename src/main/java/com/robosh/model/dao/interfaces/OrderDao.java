@@ -6,13 +6,13 @@ import com.robosh.model.entity.enums.OrderStatus;
 import java.util.List;
 
 public interface OrderDao extends Dao<Order> {
-    List<Order> getAllOrdersByDriverId(long idDriver);
+    List<Order> getAllOrdersByDriverId(int idDriver);
 
-    List<Order> getAllOrdersByDriverId(long idDriver, int row, int limit);
+    List<Order> getAllOrdersByDriverId(int idDriver, int row, int limit);
 
     void createWithoutCoupon(Order order);
 
-    long getCountOrders(long idDriver);
+    long getCountOrders(int idDriver);
 
     boolean updateOrderStatus(int idOrder, OrderStatus orderStatus);
 

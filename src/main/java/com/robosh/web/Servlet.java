@@ -32,7 +32,7 @@ public class Servlet extends HttpServlet {
         commands.put("showAllOrders", new ShowAllDriverOrdersCommand(new OrderService()));
         commands.put("forbidden403", new ErrorForbiddenCommand());
         commands.put("enterOrder", new EnterOrderCommand(new OrderService(), new DriverService(),
-                new AdressService(), new CouponService()));
+                new AddressService(), new CouponService()));
         commands.put("showClientOrder", new ShowOrderClientCommand());
         commands.put("enterCommand", new DriverEnterNumberOrderCommand(new OrderService()));
     }

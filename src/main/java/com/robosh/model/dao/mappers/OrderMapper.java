@@ -4,7 +4,7 @@ import com.robosh.model.entity.Coupon;
 import com.robosh.model.entity.Driver;
 import com.robosh.model.entity.Order;
 import com.robosh.model.entity.enums.OrderStatus;
-import com.robosh.service.AdressService;
+import com.robosh.service.AddressService;
 import com.robosh.service.ClientService;
 import com.robosh.service.CouponService;
 import com.robosh.service.DriverService;
@@ -12,26 +12,26 @@ import com.robosh.service.DriverService;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrderMapper implements Mapper<Order>{
+public class OrderMapper implements Mapper<Order> {
     @Override
     public Order getEntity(ResultSet resultSet) throws SQLException {
         Order order = new Order();
         ClientService clientService = new ClientService();
         DriverService driverService = new DriverService();
-        AdressService adressService = new AdressService();
+        AddressService addressService = new AddressService();
         CouponService couponService = new CouponService();
         order.setIdOrder(resultSet.getInt("id_order"));
         order.setOrderStatus(OrderStatus.valueOf(resultSet.getString("order_status")));
-        order.setClient(clientService.getClientById(resultSet.getLong("id_client")));
+        order.setClient(clientService.getClientById(resultSet.getInt("id_client")));
 
-        Driver driver = driverService.getDriverById(resultSet.getLong("id_driver"));
-        if (driver.getPersonId() != -1){
+        Driver driver = driverService.getDriverById(resultSet.getInt("id_driver"));
+        if (driver.getPersonId() != -1) {
             order.setDriver(driver);
         }
-        order.setAddressDeparture(adressService.getAddressById(resultSet.getLong("id_adress_departure")));
-        order.setAddressArrive(adressService.getAddressById(resultSet.getLong("id_adress_arrive")));
+        order.setAddressDeparture(addressService.getAddressById(resultSet.getInt("id_adress_departure")));
+        order.setAddressArrive(addressService.getAddressById(resultSet.getInt("id_adress_arrive")));
 
-        Coupon coupon = couponService.getCouponById(resultSet.getLong("id_coupon"));
+        Coupon coupon = couponService.getCouponById(resultSet.getInt("id_coupon"));
         if (coupon.getIdCoupon() != -1) {
             order.setCoupon(coupon);
         }

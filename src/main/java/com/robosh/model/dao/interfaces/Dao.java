@@ -6,13 +6,13 @@ public interface Dao<T> extends AutoCloseable {
 
     void create(T entity);
 
-    T getById(long id);
+    T getById(int id);
 
     List<T> findAll();
 
     boolean update(T t);
 
-    boolean delete(long id);
+    boolean delete(int id);
 
     @Override
     void close();

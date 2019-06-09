@@ -3,18 +3,18 @@ package com.robosh.model.entity;
 import com.robosh.model.entity.enums.Role;
 
 public abstract class Person {
-    protected long personId;
+    protected int personId;
     protected String name;
     protected String surname;
     protected String password;
     protected String phoneNumber;
     protected Role role;
 
-    public long getPersonId() {
+    public int getPersonId() {
         return personId;
     }
 
-    public void setPersonId(long personId) {
+    public void setPersonId(int personId) {
         this.personId = personId;
     }
 
@@ -57,6 +57,4 @@ public abstract class Person {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-
 }

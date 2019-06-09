@@ -11,7 +11,7 @@ public class ClientMapper implements Mapper<Client> {
     @Override
     public Client getEntity(ResultSet resultSet) throws SQLException {
         Client client = new Client();
-        client.setPersonId(resultSet.getLong("id_client"));
+        client.setPersonId(resultSet.getInt("id_client"));
         client.setSurname(resultSet.getString("surname"));
         client.setName(resultSet.getString("name"));
         client.setPhoneNumber(resultSet.getString("phone_number"));
