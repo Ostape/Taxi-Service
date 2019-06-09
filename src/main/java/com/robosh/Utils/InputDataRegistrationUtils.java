@@ -17,7 +17,6 @@ public class InputDataRegistrationUtils {
         Pattern VALID_EMAIL_ADDRESS_REGEX =
                 Pattern.compile(EMAIL_PATTERN, Pattern.CASE_INSENSITIVE);
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
-        System.out.println(matcher.matches() + " email");
         return matcher.matches();
     }
 
@@ -28,7 +27,6 @@ public class InputDataRegistrationUtils {
         Pattern validPassword = Pattern.compile(CORRECT_PASSWORD);
         Matcher matcher = validPassword.matcher(password1);
         boolean temp = isSamePassword(password1, password2) && matcher.matches();
-        System.out.println("pass " + temp);
         return temp;
     }
 

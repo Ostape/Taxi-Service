@@ -28,13 +28,13 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <p>Дорогий <c:out value="${sessionScope.loginedPerson.name}"/>
-                        <c:out value="${sessionScope.loginedPerson.surname}"/>, ваше замовлення відправлено.</p>
-                    <p>Ваш водій <c:out value="${requestScope.driverName}"/>.
+                    <strong><p class="order-text-about">Дорогий <c:out value="${sessionScope.loginedPerson.name}"/>
+                        <c:out value="${sessionScope.loginedPerson.surname}"/>, ваше замовлення відправлено.</p></strong>
+                    <p class="order-text-about">Ваш водій <c:out value="${requestScope.driverName}"/>.
                         Номер телефону +<c:out value="${requestScope.phoneNumber}"/>.</p>
-                    <p>Дякуємо за користування нашою службою таксі.</p>
-                    <p>Вартісь поїздки: <c:out value="${requestScope.priceVoyage}"/> грн</p>
-                    <p>Орієнтований очікування: <c:out value="${requestScope.timeWait}"/> хв</p>
+                    <p class="order-text-about">Дякуємо за користування нашою службою таксі.</p>
+                    <p class="order-text-about">Вартісь поїздки: <c:out value="${requestScope.priceVoyage}"/> грн</p>
+                    <p class="order-text-about">Орієнтований очікування: <c:out value="${requestScope.timeWait}"/> хв</p>
                 </div>
             </div>
             <div>

@@ -21,11 +21,33 @@ public class ShowAllDriverOrdersCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        long idDriver = AppUtils.getLoginedUser(session).getPersonId();
-        List<Order> orderList = orderService.getAllOrderByIdDriver(idDriver);
-        System.out.println(orderList);
+        int idDriver = (int)AppUtils.getLoginedUser(session).getPersonId();
+        int pageNumber = 0;
+        int totalNumberRecords = (int) orderService.getAllOrdersCount(idDriver);
+        int recordPerPage = 5;
+        int startIndex = 0;
+        int numberOfPages = 0;
+        String sPageNo = request.getParameter("pagination");
+        pageNumber = getPageNumber(sPageNo);
+        startIndex = (pageNumber * recordPerPage) - recordPerPage;
+        List<Order> orderList = orderService.getAllOrderByIdDriver(idDriver, startIndex, recordPerPage);
         request.setAttribute("orderList", orderList);
-
+        request.setAttribute("recordPerPage", recordPerPage);
+        numberOfPages = totalNumberRecords / recordPerPage;
+        if (totalNumberRecords > numberOfPages * recordPerPage) {
+            numberOfPages = numberOfPages + 1;
+        }
+        request.setAttribute("pageNumbers", numberOfPages);
         return "/jsp/accountDriver/showOrders.jsp";
+    }
+
+    private int getPageNumber(String strNumber){
+        try {
+            return Integer.valueOf(strNumber);
+        }
+        catch (IllegalArgumentException e){
+            e.printStackTrace();
+        }
+        return 1;
     }
 }

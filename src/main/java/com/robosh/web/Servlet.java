@@ -34,6 +34,7 @@ public class Servlet extends HttpServlet {
         commands.put("enterOrder", new EnterOrderCommand(new OrderService(), new DriverService(),
                 new AdressService(), new CouponService()));
         commands.put("showClientOrder", new ShowOrderClientCommand());
+        commands.put("enterCommand", new DriverEnterNumberOrderCommand(new OrderService()));
     }
 
     @Override

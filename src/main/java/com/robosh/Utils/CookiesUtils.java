@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.stream.Stream;
+
 
 public class CookiesUtils {
     public static final String DRIVER_NAME = "driverName";

@@ -9,7 +9,7 @@ body { height:100%; font:15px/24px 'Ubuntu', serif; color:#3d3d3d; background:#f
 .clearfix:after { display:block; content:"."; clear:both; font-size:0; line-height:0; height:0; overflow:hidden;}
 /*dev*/
 h1, h2, h3, h4, h5, h6 { margin-bottom:24px; line-height:24px; font-weight:normal; color:#009edf;}
-h1 { font-size:41px; line-height:40px; margin-bottom:32px;}
+h1 { font-size:41px; line-height:40px; margin-bottom:32px;}dl, ol, ul
 h2 { font-size:26px; line-height:28px;}
 h3 { font-size:22px;}
 h4 { font-size:19px;}
@@ -157,7 +157,34 @@ hr {
   cursor: pointer;
   margin-top: 60px;
   width: 30%;
+  border-radius: 4px;
   opacity:1;
+}
+.account-driver-btns{
+  background-color: #009edf;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 35%;
+  opacity:1;
+}
+.bad-order-input {
+    width: fit-content;
+    margin-left: 170px;
+    margin-top: 10px;
+    margin-bottom: -12px;
+}
+
+.text-order{
+  width: 35% !important;
+  height: 48px;
+  border-radius: 4px;
+}
+.make-order{
+  width: 100%;
+  margin-top: 10px;
 }
 /* Add a blue text color to links */
 a {
@@ -298,7 +325,7 @@ p{margin-bottom:.3em;}
 .nazar{
   min-height: 400px;
   margin-top: 80px;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
 }
 .row{
   margin: 0px;
@@ -312,7 +339,7 @@ p{margin-bottom:.3em;}
 .a-center { text-align:center;}
 .cell { vertical-align:middle; display:table-cell;}
 .thumb img { display:block;}
-#wrapper { width:100%; min-width:300px; min-height:100%; position:relative; overflow:hidden;}
+#wrapper { width:100%; min-width:300px;position:relative; overflow:hidden;}
 .center { max-width:1000px; margin:0 auto; position:relative; padding:0 20px;}
 table { width:100%; border-collapse:collapse; border-spacing:0;}
 .header_white { background:#fff; padding:9px 0 11px;}
@@ -330,7 +357,7 @@ table { width:100%; border-collapse:collapse; border-spacing:0;}
 .header_city .city_change .cities a.cities_link {display:block;border: none;line-height: 20px;}
 .header_city .city_change .cities a.cities_link:hover {padding-bottom:0;}
 .slider_home { max-width:960px; margin:0 auto; border-top:1px solid #65d2ff; position:relative;min-height: 580px;}
-#main_slider { width:100%; height:580px; overflow:hidden;}
+#main_slider { width:100%; height:580px; overflow:hidden; margin-bottom: 0px}
 #main_slider li { float:left; width:100%; position:relative; text-align:center; font-size:0; line-height:0;}
 #main_slider li img { display:block;}
 #main_slider li img.mobile-slide { display:none;}
@@ -449,12 +476,15 @@ p:empty { display:none;}
 .features_section { padding:30px 0; margin:0 -4px 0 4px; vertical-align:top;}
 .features_list li { display:inline-block; vertical-align:top;  width:25%; padding:20px; text-align:center; margin-left:-4px;}
 .features_list li .thumb { width:156px; margin:0 auto 22px;}
-.features_list li .caption { font-size:18px; line-height:22px; color:#7199aa; font-weight:300; font-style:italic;}
+.features_list li .caption { font-size:18px; line-height:2px; color:#7199aa; font-weight:300; font-style:italic;}
 
 .reg_list li {display: block; vertical-align:top;  width:25%; padding:20px; text-align:center; margin-left:-4px;}
 .reg_list li .thumb { width:156px; margin:0 auto 22px;}
 .reg_list li .caption { font-size:18px; line-height:22px; color:#7199aa; font-weight:300; font-style:italic;}
 
+.order-text-about{
+    padding-bottom: 12px;
+}
 @media screen and (min-width: 981px) {
 	.main_menu { display:block !important;}
 }

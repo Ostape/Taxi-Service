@@ -36,9 +36,7 @@ public class ConnectionPoolHolder {
                             throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
                         }
 
-                        Class.forName(properties.getProperty("db.connection.driver"));
                         dataSource = getBasicDataSource(properties);
-
                     } catch (IOException | ClassNotFoundException e) {
                         LOG.debug("File not found " + propFileName);
                         e.printStackTrace();
@@ -46,12 +44,12 @@ public class ConnectionPoolHolder {
                 }
             }
         }
-
         return dataSource;
     }
 
-    private static BasicDataSource getBasicDataSource(Properties properties) {
+    private static BasicDataSource getBasicDataSource(Properties properties) throws ClassNotFoundException {
         BasicDataSource ds = new BasicDataSource();
+        Class.forName(properties.getProperty("db.connection.driver"));
         ds.setUrl(properties.getProperty("db.connection.url"));
         ds.setUsername(properties.getProperty("db.connection.username"));
         ds.setPassword(properties.getProperty("db.connection.password"));

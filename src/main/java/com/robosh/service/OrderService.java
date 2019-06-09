@@ -18,13 +18,20 @@ public class OrderService {
             return dao.getAllOrdersByDriverId(idDriver);
         }
     }
+
+    public List<Order> getAllOrderByIdDriver(long idDriver, int row, int limit){
+        try (OrderDao dao = daoFactory.createOrderDao()) {
+            LOG.debug("created OrderDao");
+            return dao.getAllOrdersByDriverId(idDriver,row, limit);
+        }
+    }
+
     public List<Order> getAllOrders(){
         try (OrderDao dao = daoFactory.createOrderDao()){
             LOG.debug("created OrderDao");
             return dao.findAll();
         }
     }
-
     public Order getOrderById(long idOrder) {
         try(OrderDao dao = daoFactory.createOrderDao()){
             LOG.debug("created OrderDao");
@@ -59,4 +66,21 @@ public class OrderService {
 
     }
 
+    public long getAllOrdersCount(long idDriver){
+        try (OrderDao dao = daoFactory.createOrderDao()){
+            return dao.getCountOrders(idDriver);
+        }
+    }
+
+    public boolean updateOrderStatus(int idOrder, OrderStatus orderStatus){
+        try (OrderDao dao = daoFactory.createOrderDao()){
+            return dao.updateOrderStatus(idOrder, orderStatus);
+        }
+    }
+
+    public boolean isCorrespondOrderAndDriver(int idOrder, int idDriver) {
+        try (OrderDao dao = daoFactory.createOrderDao()){
+            return dao.isCorrespondOrderAndDriver(idOrder, idDriver);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ page import="com.robosh.model.entity.enums.*" %>--%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
@@ -23,6 +24,35 @@
             <div class="row">
             <div class="col-lg-6">
                 <img src="${pageContext.request.contextPath}/img/clientPhoto.png" style="width: 65% ">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form class="dr" action="${pageContext.request.contextPath}/taxi-Kyiv/logOut">
+                            <button type="submit" class="account-driver-btns">Logout</button>
+                        </form>
+                        <a href="${pageContext.request.contextPath}/taxi-Kyiv/showAllOrders?pagination=1">
+                            <button class="account-driver-btns"> Show all orders </button>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <c:if test="${param.wrongInput == true}">
+                            <p class="errorsM bad-order-input">should contain digits</p>
+                        </c:if>
+
+                        <c:if test="${param.noSuchOrder == true}">
+                            <p class="errorsM bad-order-input">no such order</p>
+                        </c:if>
+
+                        <c:if test="${sessionScope.loginedPerson.driverStatus.toString() == 'BOOKED'}">
+                        <form class="make-order" action="${pageContext.request.contextPath}/taxi-Kyiv/enterCommand"
+                              method="POST">
+                            <button type="submit" class="account-driver-btns">make order</button>
+                            <input type="text" name="executeOrder" class="text-order" placeholder="enter num order" />
+                        </form>
+                        </c:if>
+                    </div>
+                </div>
             </div>
 
             <div class="col-lg-6">
@@ -47,20 +77,6 @@
                     </li>
                 </ul>
             </div>
-            </div>
-            <div>
-                
-                <form class="dr" action="${pageContext.request.contextPath}/taxi-Kyiv/logOut">
-                    <button type="submit" class="logoutDriver">Logout</button>
-                </form>
-
-                <form class="dr" action="${pageContext.request.contextPath}/taxi-Kyiv/showAllOrders">
-                    <button type="submit" class="logoutDriver">Show all orders</button>
-                </form>
-
-                <form class="dr">
-                    <button type="submit" class="logoutDriver">make order</button>
-                </form>
             </div>
         </div>
     </div>

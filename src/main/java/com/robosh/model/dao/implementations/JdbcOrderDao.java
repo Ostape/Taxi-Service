@@ -5,6 +5,7 @@ import com.robosh.model.dao.implementations.queries.OrderSQL;
 import com.robosh.model.dao.mappers.Mapper;
 import com.robosh.model.dao.mappers.OrderMapper;
 import com.robosh.model.entity.Order;
+import com.robosh.model.entity.enums.OrderStatus;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -39,7 +40,6 @@ public class JdbcOrderDao implements OrderDao {
         }
     }
 
-
     @Override
     public void createWithoutCoupon(Order order) {
         try (PreparedStatement ps = connection.prepareStatement(OrderSQL.INSERT_WITHOUT_COUPON.getQUERY())) {
@@ -56,6 +56,26 @@ public class JdbcOrderDao implements OrderDao {
             LOG.debug("SQLException occurred");
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public long getCountOrders(long idDriver) {
+        long countOrders = 0;
+        try (PreparedStatement ps = connection.prepareStatement(OrderSQL.GET_COUNT_ORDERS.getQUERY())) {
+            ps.setLong(1, idDriver);
+
+            final ResultSet rs = ps.executeQuery();
+
+            LOG.debug("Executed query" + OrderSQL.GET_COUNT_ORDERS);
+            if (rs.next()) {
+                LOG.debug("check is rs has next");
+                countOrders = rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
+            e.printStackTrace();
+        }
+        return countOrders;
     }
 
     @Override
@@ -86,14 +106,7 @@ public class JdbcOrderDao implements OrderDao {
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setLong(1, idDriver);
            final ResultSet rs = ps.executeQuery();
-            LOG.debug("Executed query" + OrderSQL.READ_BY_ID_DRIVER);
-            Mapper<Order> orderMapper = new OrderMapper();
-            while (rs.next()) {
-                LOG.debug("check is rs has next");
-                Order order = orderMapper.getEntity(rs);
-                orders.add(order);
-            }
-            return orders;
+            return getOrders(orders, rs);
         } catch (SQLException e) {
             LOG.debug("SQLException occurred");
             e.printStackTrace();
@@ -101,6 +114,33 @@ public class JdbcOrderDao implements OrderDao {
         }
     }
 
+    @Override
+    public List<Order> getAllOrdersByDriverId(long idDriver, int row, int limit) {
+        List<Order> orders = new ArrayList<>();
+        final String query = OrderSQL.READ_BY_ID_DRIVER_WITH_LIMIT.getQUERY();
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setLong(1, idDriver);
+            ps.setInt(2, row);
+            ps.setInt(3, limit);
+            final ResultSet rs = ps.executeQuery();
+            return getOrders(orders, rs);
+        } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private List<Order> getOrders(List<Order> orders, ResultSet rs) throws SQLException {
+        LOG.debug("Executed query" + OrderSQL.READ_BY_ID_DRIVER);
+        Mapper<Order> orderMapper = new OrderMapper();
+        while (rs.next()) {
+            LOG.debug("check is rs has next");
+            Order order = orderMapper.getEntity(rs);
+            orders.add(order);
+        }
+        return orders;
+    }
 
     @Override
     public List<Order> findAll() {
@@ -122,12 +162,44 @@ public class JdbcOrderDao implements OrderDao {
         }
     }
 
+    @Override
+    public boolean updateOrderStatus(int idOrder, OrderStatus orderStatus) {
+        try (PreparedStatement ps = connection.prepareStatement(OrderSQL.UPDATE.getQUERY())) {
+            ps.setString(1, orderStatus.toString());
+            ps.setInt(2, idOrder);
+            ps.execute();
+            LOG.debug("Executed query" + OrderSQL.UPDATE);
+            return true;
+        } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isCorrespondOrderAndDriver(int idOrder, int idDriver) {
+        try (PreparedStatement ps = connection.prepareStatement(OrderSQL.IS_SUCH_VOYAGE.getQUERY())) {
+            ps.setInt(1, idOrder);
+            ps.setInt(2, idDriver);
+            ps.setString(3, OrderStatus.EXECUTING.toString());
+            final ResultSet rs = ps.executeQuery();
+            LOG.debug("Executed query" + OrderSQL.IS_SUCH_VOYAGE);
+            if (rs.next()) {
+                LOG.debug("check is rs has next");
+                return true;
+            }
+        } catch (SQLException e) {
+            LOG.debug("SQLException occurred");
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     @Override
     public boolean update(Order order) {
         return false;
     }
-
 
     /**
      * not using

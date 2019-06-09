@@ -9,7 +9,6 @@
 
 <html lang="${param.lang}">
 <jsp:include page="../commonPartsOfPages/headTag.jsp"/>
-
 <body class="home blog">
 <div id="wrapper">
     <header id="header">
@@ -17,8 +16,12 @@
         <div class="header_blue">
             <jsp:include page="../commonPartsOfPages/navi_block.jsp"/>
         </div>
-
+<%--        <style>--%>
+<%--            .pagination{display:-ms-flexbox;display:flex;padding-left:0;list-style:none;border-radius:.25rem}--%>
+<%--            .pagination-sm .page-link{padding:.25rem .5rem;font-size:.875rem;line-height:1.5}--%>
+<%--        </style>--%>
     </header>
+
 
     <div class="center">
         <div class="nazar">
@@ -43,8 +46,7 @@
                     <p>Costs</p>
                 </div>
             </div>
-
-            <c:forEach items="${requestScope.orderList}" var="order">
+           <c:forEach items="${requestScope.orderList}" var="order" begin="0" end="${requestScope.recordPerPage -1}">
                 <div class="viewData data">
                     <div class="idOrder">
                         <p><c:out value="${order.idOrder}"/></p>
@@ -67,8 +69,16 @@
                 </div>
             </c:forEach>
         </div>
+            <nav aria-label="...">
+                <ul class="pagination pagination-sm justify-content-center">
+                    <c:forEach var="pagNumber" begin = "1" end = "${requestScope.pageNumbers}">
+                     <li class="page-item">
+                         <a class="page-link" href="${pageContext.request.contextPath}/taxi-Kyiv/showAllOrders?pagination=${pagNumber}"><c:out value = "${pagNumber}"/></a>
+                     </li>
+                    </c:forEach>
+                </ul>
+            </nav>
     </div>
-    </section>
 </div>
 <jsp:include page="../commonPartsOfPages/footer.jsp"/>
 </body>

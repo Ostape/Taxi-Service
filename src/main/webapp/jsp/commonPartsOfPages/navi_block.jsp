@@ -7,7 +7,7 @@
 <nav id="navi_block">
     <div class="center">
         <div id="navmobile-btn"><fmt:message key="label.header.menu"/></div>
-        <ul id="menu-main-menu" class="main_menu clearfix">
+        <ul id="menu-main-menu" class="main_menu ">
             <li id="menu-item-45" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45"><a
                     href="#"><fmt:message key="label.header.menu.tariff"/></a></li>
             <li id="menu-item-44" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-44"><a

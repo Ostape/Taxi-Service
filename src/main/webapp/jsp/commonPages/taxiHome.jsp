@@ -36,37 +36,6 @@
     </header>
 </div>
 
-<section class="features_section">
-    <div class="center">
-        <ul class="features_list">
-            <li>
-                <div class="thumb"><img width="156" height="156"
-                                        src="${pageContext.request.contextPath}/img/advantage-1.jpg"
-                                        class="attachment-thumbnail wp-post-image"/></div>
-                <div class="caption">Єдиний номер для всієї України</div>
-            </li>
-            <li>
-                <div class="thumb"><img width="156" height="156"
-                                        src="${pageContext.request.contextPath}/img/advantage-2.jpg"
-                                        class="attachment-thumbnail wp-post-image"/></div>
-                <div class="caption">Ввічливі і уважні диспетчери</div>
-            </li>
-            <li>
-                <div class="thumb"><img width="156" height="156"
-                                        src="${pageContext.request.contextPath}/img/advantage-3.jpg"
-                                        class="attachment-thumbnail wp-post-image"/></div>
-                <div class="caption">Мобільний додаток з геолокацією</div>
-            </li>
-            <li>
-                <div class="thumb"><img width="156" height="156"
-                                        src="${pageContext.request.contextPath}/img/advantage-4.jpg"
-                                        class="attachment-thumbnail wp-post-image"/></div>
-                <div class="caption">100% подача автомобіля</div>
-            </li>
-        </ul>
-    </div>
-</section>
-
 
 <section class="benefits_section">
     <div class="center">

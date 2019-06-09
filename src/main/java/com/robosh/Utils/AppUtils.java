@@ -15,4 +15,9 @@ public class AppUtils {
     public static Person getLoginedUser(HttpSession session) {
         return (Person) session.getAttribute("loginedPerson");
     }
+
+    public static void updateLoginedUser(HttpSession session, Person loginedPerson){
+        session.removeAttribute("loginedPerson");
+        session.setAttribute("loginedPerson", loginedPerson);
+    }
 }
