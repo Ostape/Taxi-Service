@@ -1,4 +1,4 @@
-package com.robosh.utils;
+package com.robosh.myUtils;
 
 public class TimeWaitTaxiUtil {
     private TimeWaitTaxiUtil(){}

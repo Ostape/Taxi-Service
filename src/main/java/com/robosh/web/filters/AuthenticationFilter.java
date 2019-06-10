@@ -10,10 +10,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.robosh.utils.LoginedUserUtils;
-import com.robosh.utils.SecurityUtils;
+
 import com.robosh.model.entity.Person;
 import com.robosh.model.entity.enums.Role;
+import com.robosh.myUtils.LoginedUserUtils;
+import com.robosh.myUtils.SecurityUtils;
 
 public class AuthenticationFilter implements Filter {
 

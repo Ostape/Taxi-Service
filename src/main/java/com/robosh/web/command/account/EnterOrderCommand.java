@@ -1,9 +1,10 @@
 package com.robosh.web.command.account;
 
-import com.robosh.utils.LoginedUserUtils;
-import com.robosh.utils.CookiesUtils;
-import com.robosh.utils.PriceVoyageUtils;
-import com.robosh.utils.TimeWaitTaxiUtil;
+
+import com.robosh.myUtils.CookiesUtils;
+import com.robosh.myUtils.LoginedUserUtils;
+import com.robosh.myUtils.PriceVoyageUtils;
+import com.robosh.myUtils.TimeWaitTaxiUtil;
 import com.robosh.web.command.Command;
 import com.robosh.web.command.directions.ClientOrderCommand;
 import com.robosh.model.entity.*;

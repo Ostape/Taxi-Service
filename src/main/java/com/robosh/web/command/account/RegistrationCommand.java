@@ -1,6 +1,7 @@
 package com.robosh.web.command.account;
 
-import com.robosh.utils.InputDataRegistrationUtils;
+
+import com.robosh.myUtils.InputDataRegistrationUtils;
 import com.robosh.web.command.Command;
 import com.robosh.web.command.RoutesJSP;
 import com.robosh.model.customExceptions.EmailIsAlreadyTaken;

@@ -1,7 +1,7 @@
 package com.robosh.web.command.account;
 
+import com.robosh.myUtils.LoginedUserUtils;
 import com.robosh.web.command.Command;
-import com.robosh.utils.LoginedUserUtils;
 import com.robosh.web.command.RoutesJSP;
 import com.robosh.model.entity.Person;
 import com.robosh.service.ClientService;
