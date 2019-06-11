@@ -26,7 +26,7 @@ public class JdbcDriverDaoTest {
     }
 
     @Test
-    public void shouldReturnDriverById(){
+    public void shouldReturnDriverById() {
         Driver actualDriver = dao.getById(1);
         actualDriver.setDriverStatus(DriverStatus.FREE);
         actualDriver.setCar(null);
@@ -42,7 +42,7 @@ public class JdbcDriverDaoTest {
     }
 
     @Test
-    public void shouldNotReturnDriverById(){
+    public void shouldNotReturnDriverById() {
         Driver actualDriver = dao.getById(0);
         int actualDriverId = actualDriver.getPersonId();
         int expectedId = -1;
@@ -50,7 +50,7 @@ public class JdbcDriverDaoTest {
     }
 
     @Test
-    public void shouldReturnAllDrivers(){
+    public void shouldReturnAllDrivers() {
         List<Driver> driversActual = dao.findAll();
         int driverNumberActual = driversActual.size();
         int expectedNumberDrivers = 7;
@@ -58,7 +58,7 @@ public class JdbcDriverDaoTest {
     }
 
     @Test
-    public void shouldNotReturnAllDrivers(){
+    public void shouldNotReturnAllDrivers() {
         List<Driver> driversActual = dao.findAll();
         int driverNumberActual = driversActual.size();
         int expectedNumberDrivers = 0;
@@ -66,19 +66,19 @@ public class JdbcDriverDaoTest {
     }
 
     @Test
-    public void shouldReturnTrueIfDriverExists(){
+    public void shouldReturnTrueIfDriverExists() {
         boolean driverExistActual = dao.isDriverExist("+380983445123", "qwerty");
         assertTrue(driverExistActual);
     }
 
     @Test
-    public void shouldReturnFalseIfDriverNotExists(){
+    public void shouldReturnFalseIfDriverNotExists() {
         boolean driverNotExistActual = dao.isDriverExist("+2134322131", "qwertt");
         assertFalse(driverNotExistActual);
     }
 
     @Test
-    public void shouldReturnDriverByPassAndPhone(){
+    public void shouldReturnDriverByPassAndPhone() {
         Driver actualDriver = dao.getDriverByPassAndPhone("+380983445123", "qwerty");
         actualDriver.setDriverStatus(DriverStatus.FREE);
         actualDriver.setCar(null);
@@ -94,7 +94,7 @@ public class JdbcDriverDaoTest {
     }
 
     @Test
-    public void shouldNotReturnDriverByPassAndPhone(){
+    public void shouldNotReturnDriverByPassAndPhone() {
         Driver actualDriver = dao.getDriverByPassAndPhone("+380983445144", "qwedsfty");
         int actualId = actualDriver.getPersonId();
         int expectedId = -1;

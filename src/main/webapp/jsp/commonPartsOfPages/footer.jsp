@@ -11,9 +11,10 @@
 <footer id="footer">
     <div class="center">
         <div class="foot"><img src="${pageContext.request.contextPath}/img/logo.png"></div>
-        <div class="copyright">	<div class="textwidget">
-            <fmt:message key="footer.info"/>
-        </div>
+        <div class="copyright">
+            <div class="textwidget">
+                <fmt:message key="footer.info"/>
+            </div>
         </div>
     </div>
 

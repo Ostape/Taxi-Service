@@ -3,6 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${bundle}"/>
+
 <html lang="${param.lang}">
 <jsp:include page="../commonPartsOfPages/headTag.jsp"/>
 <body class="home blog">
@@ -18,23 +21,24 @@
         <div class="register">
             <form method="POST" action="${pageContext.request.contextPath}/taxi-Kyiv/enterLogin">
                 <div class="container">
-                    <h1>Sign up</h1>
-                    <p>Please fill this form to enter in your account.</p>
+
+                    <h1><fmt:message key="login.sign.up"/></h1>
+                    <p><fmt:message key="login.fill.form"/></p>
                     <hr>
                     <c:if test="${param.wrongData == true}">
-                        <p class="errorsM">Incorrect input</p>
+                        <p class="errorsM"><fmt:message key="login.incorrect.input"/></p>
                     </c:if>
-                    <label><b>Phone</b></label>
-                    <input type="text" placeholder="Enter Phone" name="phoneNumber" required>
-                    <label><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="password" required>
+                    <label><b><fmt:message key="login.title.phone"/></b></label>
+                    <input type="text" placeholder="<fmt:message key="login.phoneNumber"/>" name="phoneNumber" required>
+                    <label><b><fmt:message key="login.title.password"/></b></label>
+                    <input type="password" placeholder="<fmt:message key="login.password"/>" name="password" required>
                     <hr>
-                    <button type="submit" class="registerbtn">Submit</button>
+                    <button type="submit" class="registerbtn"><fmt:message key="login.submit.btn"/></button>
                 </div>
 
                 <div class="container signup">
-                    <p>Have not an account? <a href="${pageContext.request.contextPath}/taxi-Kyiv/registerClient">Sign
-                        up</a>.</p>
+                    <p><fmt:message key="login.have.not.acc"/> <a href="${pageContext.request.contextPath}/taxi-Kyiv/registerClient">
+                        <fmt:message key="login.sign.up"/></a>.</p>
                 </div>
                 <div style="height: 60px"></div>
             </form>

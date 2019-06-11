@@ -24,43 +24,43 @@ public class JdbcCouponDaoTest {
     }
 
     @Test
-    public void shouldReturnCouponById(){
+    public void shouldReturnCouponById() {
         Coupon actualCoupon = dao.getById(1);
         Coupon couponExpected = new Coupon();
         couponExpected.setIdCoupon(1);
         couponExpected.setDiscount(20);
         couponExpected.setCouponName("AZAZ");
-        assertEquals(couponExpected,actualCoupon);
+        assertEquals(couponExpected, actualCoupon);
     }
 
     @Test
-    public void shouldNotReturnCouponById(){
+    public void shouldNotReturnCouponById() {
         Coupon actualCoupon = dao.getById(0);
         Coupon couponExpected = new Coupon();
         couponExpected.setIdCoupon(1);
         couponExpected.setDiscount(20);
         couponExpected.setCouponName("AZAZ");
-        assertNotEquals(couponExpected,actualCoupon);
+        assertNotEquals(couponExpected, actualCoupon);
     }
 
     @Test
-    public void shouldReturnCouponByCouponName(){
+    public void shouldReturnCouponByCouponName() {
         Coupon actualCoupon = dao.readByCouponName("AZAZ");
         Coupon couponExpected = new Coupon();
         couponExpected.setIdCoupon(1);
         couponExpected.setDiscount(20);
         couponExpected.setCouponName("AZAZ");
-        assertEquals(couponExpected,actualCoupon);
+        assertEquals(couponExpected, actualCoupon);
     }
 
 
     @Test
-    public void shouldNotReturnCouponByCouponName(){
+    public void shouldNotReturnCouponByCouponName() {
         Coupon actualCoupon = dao.readByCouponName("AZAZA");
         Coupon couponExpected = new Coupon();
         couponExpected.setIdCoupon(1);
         couponExpected.setDiscount(20);
         couponExpected.setCouponName("AZAZ");
-        assertNotEquals(couponExpected,actualCoupon);
+        assertNotEquals(couponExpected, actualCoupon);
     }
 }

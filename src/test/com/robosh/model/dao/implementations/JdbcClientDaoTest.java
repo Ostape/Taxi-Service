@@ -23,32 +23,32 @@ public class JdbcClientDaoTest {
     }
 
     @Test
-    public void shouldReturnTrueIfPhoneNumberExists(){
+    public void shouldReturnTrueIfPhoneNumberExists() {
         boolean phoneNumberExistsActual = dao.isPhoneNumberExists("+380976970365");
         assertTrue(phoneNumberExistsActual);
     }
 
     @Test
-    public void shouldReturnFalseIfPhoneNumberNotExists(){
+    public void shouldReturnFalseIfPhoneNumberNotExists() {
         boolean phoneNumberNotExistsActual = dao.isPhoneNumberExists("+380006970365");
         assertFalse(phoneNumberNotExistsActual);
     }
 
     @Test
-    public void shouldReturnTrueIfEmailExists(){
+    public void shouldReturnTrueIfEmailExists() {
         boolean emailExistsActual = dao.isEmailExists("orestshemelyuk@gmail.com");
         assertTrue(emailExistsActual);
     }
 
 
     @Test
-    public void shouldReturnFalseIfEmailExists(){
+    public void shouldReturnFalseIfEmailExists() {
         boolean emailNotExistsActual = dao.isEmailExists("notexists@gmaill.com");
         assertFalse(emailNotExistsActual);
     }
 
     @Test
-    public void shouldReturnClientByPassPhone(){
+    public void shouldReturnClientByPassPhone() {
         Client clientActual = dao.getClientByPassPhone("+380976970365", "rootroot");
         Client clientExpected = new Client();
         clientExpected.setPersonId(1);
@@ -61,7 +61,7 @@ public class JdbcClientDaoTest {
     }
 
     @Test
-    public void shouldNotReturnClientByPassPhone(){
+    public void shouldNotReturnClientByPassPhone() {
         Client clientActual = dao.getClientByPassPhone("+380976900365", "rootroot");
         Client clientExpected = new Client();
         clientExpected.setPersonId(1);
@@ -74,7 +74,7 @@ public class JdbcClientDaoTest {
     }
 
     @Test
-    public void shouldReturnClientById(){
+    public void shouldReturnClientById() {
         Client actualClient = dao.getById(1);
         Client clientExpected = new Client();
         clientExpected.setPersonId(1);
@@ -87,7 +87,7 @@ public class JdbcClientDaoTest {
     }
 
     @Test
-    public void shouldNotReturnClientById(){
+    public void shouldNotReturnClientById() {
         Client actualClient = dao.getById(0);
         Client clientExpected = new Client();
         clientExpected.setPersonId(1);

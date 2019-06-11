@@ -4,6 +4,7 @@
 
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
+
 <nav id="navi_block">
     <div class="center">
         <div id="navmobile-btn"><fmt:message key="label.header.menu"/></div>
@@ -14,8 +15,6 @@
                     href="#"><fmt:message key="label.header.menu.about.us"/></a></li>
             <li id="menu-item-47" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-47"><a
                     href="#"><fmt:message key="label.header.menu.news"/></a></li>
-            <%--            <li id="menu-item-43" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-43"><a href="${pageContext.request.contextPath}/taxi-Kyiv/login">--%>
-            <%--                <fmt:message key="label.header.menu.for.drivers"/></a></li>--%>
             <li id="menu-item-431" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-431"><a
                     href="${pageContext.request.contextPath}/taxi-Kyiv/makeOrder">
                 <fmt:message key="label.header.menu.for.make.order"/></a></li>

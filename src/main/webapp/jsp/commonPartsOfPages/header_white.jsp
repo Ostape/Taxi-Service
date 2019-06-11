@@ -11,15 +11,14 @@
             <img src="${pageContext.request.contextPath}/img/logo.png" width="163" height="57">
         </a>
         <div style="float: right; width: 420px">
-
             <div class="signClient">
-
-                <p style="float: left;padding-top: 7px; color: #009EDF"><c:out value="${sessionScope.loginedPerson.name}"/>
-                     <c:out value="${sessionScope.loginedPerson.surname}"/></p>
+                <p style="float: left;padding-top: 7px; color: #009EDF"><c:out
+                        value="${sessionScope.loginedPerson.name}"/>
+                    <c:out value="${sessionScope.loginedPerson.surname}"/></p>
 
                 <a href="${pageContext.request.contextPath}/taxi-Kyiv/login">
                     <div style="margin: auto; float: right; height: 36px;">
-                        <img src="${pageContext.request.contextPath}/img/iconenter.png" style="height: 36px" >
+                        <img src="${pageContext.request.contextPath}/img/iconenter.png" style="height: 36px">
                     </div>
                 </a>
             </div>
