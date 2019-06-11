@@ -11,17 +11,35 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class named JdbcAddressDao implements AddressDao
+ * execute different queries to database with prepared statements
+ *
+ * @author Orest Shemelyuk
+ */
 
 public class JdbcAddressDao implements AddressDao {
 
     private static final Logger LOG = Logger.getLogger(JdbcAddressDao.class);
     private Connection connection;
 
+    /**
+     * public Constructor that assigns connection
+     *
+     * @param connection
+     */
     public JdbcAddressDao(Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * This method takes two String parameters and checks
+     * if object exists in database with such fields
+     *
+     * @param street
+     * @param numberHouse
+     * @return boolean
+     */
     @Override
     public boolean checkAddressExist(String street, String numberHouse) {
         try (PreparedStatement ps = connection.prepareStatement(AddressSQL.READ_BY_ADRESS.getQUERY())) {
@@ -40,8 +58,18 @@ public class JdbcAddressDao implements AddressDao {
         return false;
     }
 
+
+    /**
+     * This method takes two String parameters
+     * and get idAddress if such object exists in database
+     * else return -1
+     *
+     * @param street
+     * @param numberHouse
+     * @return int
+     */
     @Override
-    public long getAddressId(String street, String numberHouse) {
+    public int getAddressId(String street, String numberHouse) {
         try (PreparedStatement ps = connection.prepareStatement(AddressSQL.READ_ADDRESS_ID.getQUERY())) {
             ps.setString(1, street);
             ps.setString(2, numberHouse);
@@ -49,7 +77,7 @@ public class JdbcAddressDao implements AddressDao {
             LOG.debug("Executed query" + AddressSQL.READ_ADDRESS_ID);
             if (rs.next()) {
                 LOG.debug("check is rs has next");
-                return rs.getLong("id_adress");
+                return rs.getInt("id_adress");
             }
         } catch (SQLException e) {
             LOG.debug("SQLException occurred");
@@ -58,6 +86,17 @@ public class JdbcAddressDao implements AddressDao {
         return -1;
     }
 
+
+    /**
+     * This method takes two String parameters
+     * ans return Address if such object exists in database
+     * according to parameters else return Address with idAddress
+     * equals -1
+     *
+     * @param street
+     * @param numberHouse
+     * @return Address
+     */
     @Override
     public Address getAddressByStreetNumberHouse(String street, String numberHouse) {
         Mapper<Address> addressMapper = new AddressMapper();
@@ -79,6 +118,16 @@ public class JdbcAddressDao implements AddressDao {
         return result;
     }
 
+
+    /**
+     * This method takes one int parameter
+     * ans return Address if such object exists in database
+     * according to parameter else return Address with idAddress
+     * equals -1
+     *
+     * @param id
+     * @return Address
+     */
     @Override
     public Address getById(int id) {
         Mapper<Address> addressMapper = new AddressMapper();
@@ -99,6 +148,13 @@ public class JdbcAddressDao implements AddressDao {
         return result;
     }
 
+
+    /**
+     * This method return all addresses from database
+     * else null
+     *
+     * @return List<Address>
+     */
     @Override
     public List<Address> findAll() {
         List<Address> addresses = new ArrayList<>();
@@ -108,11 +164,11 @@ public class JdbcAddressDao implements AddressDao {
             LOG.debug("connection createStatement");
             ResultSet rs = st.executeQuery(query);
             LOG.debug("Executed query" + AddressSQL.READ_ALL);
-            Mapper<Address> adressMapper = new AddressMapper();
+            Mapper<Address> addressMapper = new AddressMapper();
 
             while (rs.next()) {
                 LOG.debug("Read objects");
-                Address address = adressMapper.getEntity(rs);
+                Address address = addressMapper.getEntity(rs);
                 addresses.add(address);
             }
             return addresses;
@@ -125,7 +181,7 @@ public class JdbcAddressDao implements AddressDao {
 
     @Override
     /**
-     * not using
+     *This method not using here
      */
     public void create(Address entity) {
 
@@ -133,7 +189,7 @@ public class JdbcAddressDao implements AddressDao {
 
     @Override
     /**
-     * not using
+     *This method not using here
      */
     public boolean update(Address address) {
         return false;
@@ -141,12 +197,16 @@ public class JdbcAddressDao implements AddressDao {
 
     @Override
     /**
-     * not using
+     *This method not using here
      */
     public boolean delete(int id) {
         return false;
     }
 
+    /**
+     * this method
+     * close connection
+     */
     @Override
     public void close() {
         try {

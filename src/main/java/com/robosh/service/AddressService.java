@@ -32,7 +32,7 @@ public class AddressService {
         }
     }
 
-    public long getAdressId(String street, String houseNumber){
+    public int getAdressId(String street, String houseNumber){
         try (AddressDao dao = daoFactory.createAdressDao()){
             LOG.debug("created Address DAO");
             return dao.getAddressId(street, houseNumber);

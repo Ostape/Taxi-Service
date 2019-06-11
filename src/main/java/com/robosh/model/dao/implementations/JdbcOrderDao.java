@@ -99,22 +99,6 @@ public class JdbcOrderDao implements OrderDao {
     }
 
     @Override
-    public List<Order> getAllOrdersByDriverId(int idDriver) {
-        List<Order> orders = new ArrayList<>();
-        final String query = OrderSQL.READ_BY_ID_DRIVER.getQUERY();
-
-        try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setInt(1, idDriver);
-           final ResultSet rs = ps.executeQuery();
-            return getOrders(orders, rs);
-        } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @Override
     public List<Order> getAllOrdersByDriverId(int idDriver, int row, int limit) {
         List<Order> orders = new ArrayList<>();
         final String query = OrderSQL.READ_BY_ID_DRIVER_WITH_LIMIT.getQUERY();

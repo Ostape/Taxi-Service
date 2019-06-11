@@ -1,5 +1,7 @@
 package com.robosh.model.entity;
 
+import java.util.Objects;
+
 public class Coupon {
     private int idCoupon;
     private String couponName;
@@ -36,5 +38,20 @@ public class Coupon {
                 ", couponName='" + couponName + '\'' +
                 ", discount=" + discount +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Coupon)) return false;
+        Coupon coupon = (Coupon) o;
+        return idCoupon == coupon.idCoupon &&
+                discount == coupon.discount &&
+                Objects.equals(couponName, coupon.couponName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCoupon, couponName, discount);
     }
 }

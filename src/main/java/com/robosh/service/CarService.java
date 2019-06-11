@@ -33,10 +33,4 @@ public class CarService {
         }
     }
 
-    public Car getCarByType(String type){
-        try(CarDao dao = daoFactory.createCarDao()){
-            LOG.debug("created CarDao");
-            return dao.getCarByType(type);
-        }
-    }
 }

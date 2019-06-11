@@ -21,26 +21,6 @@ public class JdbcDriverDao implements DriverDao {
     }
 
     @Override
-    /**
-     * rewrite
-     */
-    public boolean isFree() {
-        try (PreparedStatement ps = connection.prepareStatement(DriverSQL.CHECK_STATUS.getQUERY())) {
-            ps.setString(1, DriverStatus.FREE.toString().toLowerCase());
-            final ResultSet rs = ps.executeQuery();
-            LOG.debug("Executed query" + DriverSQL.CHECK_STATUS);
-            if (rs.next()) {
-                LOG.debug("check is rs has next");
-                return true;
-            }
-        } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    @Override
     public Driver getById(int id) {
         Mapper<Driver> driverMapper = new DriverMapper();
         Driver result = new Driver();

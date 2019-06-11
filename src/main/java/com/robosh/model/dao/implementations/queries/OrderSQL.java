@@ -1,25 +1,44 @@
 package com.robosh.model.dao.implementations.queries;
 
+import com.robosh.model.dao.implementations.queries.fieldsDatabase.OrderFields;
+import com.robosh.model.entity.Order;
+
 public enum OrderSQL {
-    READ_BY_ID("SELECT * FROM `order` WHERE `id_order`=(?)"),
-    READ_BY_ID_DRIVER("SELECT * FROM `order` WHERE `id_driver`=(?)"),
-    READ_BY_ID_DRIVER_WITH_LIMIT("SELECT * FROM `order` WHERE `id_driver`=(?) limit ?, ?"),
-    READ_ALL("SELECT * FROM `order`"),
-    INSERT("INSERT INTO `order` " +
-            "(`order_status`, `id_client`, `id_driver`, `id_adress_departure`," +
-            " `id_adress_arrive`, `id_coupon`, `cost`, `cost_with_discount`)" +
+    READ_BY_ID("SELECT * FROM " + OrderFields.ORDER +
+            " WHERE " + OrderFields.ORDER_ID + "=(?)"),
+
+    READ_BY_ID_DRIVER("SELECT * FROM " + OrderFields.ORDER +
+            " WHERE " + OrderFields.ID_DRIVER + "=(?)"),
+
+    READ_BY_ID_DRIVER_WITH_LIMIT("SELECT * FROM " + OrderFields.ORDER +
+            " WHERE " + OrderFields.ID_DRIVER + "=(?) limit ?, ?"),
+
+    READ_ALL("SELECT * FROM " + OrderFields.ORDER),
+
+    INSERT("INSERT INTO " + OrderFields.ORDER + "(" +
+            OrderFields.ORDER_STATUS + ", " + OrderFields.ID_CLIENT + ", " +
+            OrderFields.ID_DRIVER + ", " + OrderFields.ID_ADDRESS_DEPARTURES + ", " +
+            OrderFields.ID_ADDRESS_ARRIVE + ", " + OrderFields.ID_COUPON + ", " +
+            OrderFields.COSTS + ", " + OrderFields.COSTS_WITH_DISCOUNT + ")" +
             " VALUES ((?), (?), (?), (?), (?), (?), (?), (?))"),
 
-    INSERT_WITHOUT_COUPON("INSERT INTO `order` (`order_status`, `id_client`, " +
-            "`id_driver`, `id_adress_departure`, `id_adress_arrive`, `cost`, `cost_with_discount`) " +
+    INSERT_WITHOUT_COUPON("INSERT INTO " + OrderFields.ORDER+
+            " (" + OrderFields.ORDER_STATUS + ", " + OrderFields.ID_CLIENT + ", " +
+            OrderFields.ID_DRIVER + ", " + OrderFields.ID_ADDRESS_DEPARTURES + ", " +
+            OrderFields.ID_ADDRESS_ARRIVE + ", " + OrderFields.COSTS + ", " +
+            OrderFields.COSTS_WITH_DISCOUNT + ") " +
             "VALUES ((?), (?), (?), (?), (?), (?), (?))"),
 
-    UPDATE("UPDATE `order` SET `order_status`= (?) WHERE `id_order` = (?)"),
+    UPDATE("UPDATE " + OrderFields.ORDER +
+            " SET " + OrderFields.ORDER_STATUS + "= (?) WHERE " +
+            OrderFields.ORDER_ID + " = (?)"),
 
-    IS_SUCH_VOYAGE("SELECT * FROM `order` WHERE `id_order` = (?) AND `id_driver`" +
-            " = (?) AND `order_status` = (?)"),
+    IS_SUCH_VOYAGE("SELECT * FROM " + OrderFields.ORDER +
+            " WHERE " + OrderFields.ORDER_ID + " = (?) AND " +
+            OrderFields.ID_DRIVER + " = (?) AND " + OrderFields.ORDER_STATUS + " = (?)"),
 
-    GET_COUNT_ORDERS("SELECT count(*) FROM `order` WHERE `id_driver` = (?)"),
+    GET_COUNT_ORDERS("SELECT count(*) FROM " + OrderFields.ORDER +
+            " WHERE " + OrderFields.ID_DRIVER + " = (?)"),
 
     DELETE("");
 

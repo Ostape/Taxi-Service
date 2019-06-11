@@ -32,7 +32,6 @@ public class EnterLoginCommand implements Command {
         }else {
             Person person = LoginedUserUtils.getLoginedUser(request.getSession());
             if (person != null){
-                System.out.println("in EnterLoginCommand");
                 if ("CLIENT".equals(person.getRole().toString())) {
                     return "redirect#" + request.getContextPath() + "/taxi-Kyiv/clientAccount";
                 }

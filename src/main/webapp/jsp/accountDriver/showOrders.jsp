@@ -16,10 +16,6 @@
         <div class="header_blue">
             <jsp:include page="../commonPartsOfPages/navi_block.jsp"/>
         </div>
-<%--        <style>--%>
-<%--            .pagination{display:-ms-flexbox;display:flex;padding-left:0;list-style:none;border-radius:.25rem}--%>
-<%--            .pagination-sm .page-link{padding:.25rem .5rem;font-size:.875rem;line-height:1.5}--%>
-<%--        </style>--%>
     </header>
 
 
@@ -43,7 +39,7 @@
                     <p>Street arrive</p>
                 </div>
                 <div class="costVoage">
-                    <p>Costs</p>
+                    <p>Price</p>
                 </div>
             </div>
            <c:forEach items="${requestScope.orderList}" var="order" begin="0" end="${requestScope.recordPerPage -1}">

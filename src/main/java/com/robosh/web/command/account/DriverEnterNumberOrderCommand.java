@@ -25,20 +25,15 @@ public class DriverEnterNumberOrderCommand implements Command {
         String executeOrder = request.getParameter("executeOrder");
         int numberOfOrder = 0;
 
-        System.out.println(executeOrder + " execute");
         if (executeOrder.matches("\\d+")){
             numberOfOrder = Integer.valueOf(executeOrder);
-
-
-
             Driver driver = (Driver) LoginedUserUtils.getLoginedUser(request.getSession());
-            if (orderService.isCorrespondOrderAndDriver(numberOfOrder, (int) driver.getPersonId())){
+            if (orderService.isCorrespondOrderAndDriver(numberOfOrder, driver.getPersonId())){
                 driver.setDriverStatus(DriverStatus.FREE);
                 LoginedUserUtils.updateLoginedUser(request.getSession(), driver);
                 orderService.updateOrderStatus(numberOfOrder, OrderStatus.COMPLETE);
                 return RoutesJSP.DRIVER_ACCOUNT;
             }
-
             return RoutesJSP.DRIVER_ACCOUNT + "?noSuchOrder=true";
         }
         else {

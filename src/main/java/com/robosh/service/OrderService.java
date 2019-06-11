@@ -12,13 +12,6 @@ public class OrderService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
     private static final Logger LOG = Logger.getLogger(OrderService.class);
 
-    public List<Order> getAllOrderByIdDriver(int idDriver){
-        try (OrderDao dao = daoFactory.createOrderDao()) {
-            LOG.debug("created OrderDao");
-            return dao.getAllOrdersByDriverId(idDriver);
-        }
-    }
-
     public List<Order> getAllOrderByIdDriver(int idDriver, int row, int limit){
         try (OrderDao dao = daoFactory.createOrderDao()) {
             LOG.debug("created OrderDao");

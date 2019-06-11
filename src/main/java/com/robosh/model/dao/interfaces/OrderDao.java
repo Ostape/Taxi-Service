@@ -6,8 +6,6 @@ import com.robosh.model.entity.enums.OrderStatus;
 import java.util.List;
 
 public interface OrderDao extends Dao<Order> {
-    List<Order> getAllOrdersByDriverId(int idDriver);
-
     List<Order> getAllOrdersByDriverId(int idDriver, int row, int limit);
 
     void createWithoutCoupon(Order order);

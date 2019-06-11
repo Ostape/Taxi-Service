@@ -1,5 +1,9 @@
 package com.robosh.model.customExceptions;
-
+/**
+ * my own custom exception that should be
+ * thrown when phone number is already exists in database
+ * @author Orest Shemelyuk
+ */
 public class PhoneNumberIsAlreadyTaken extends Exception {
     public PhoneNumberIsAlreadyTaken() {
     }

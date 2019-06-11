@@ -11,6 +11,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * This class named JdbcClientDao implements ClientDao
+ * execute different queries to database with prepared statements
+ *
+ * @author Orest Shemelyuk
+ */
+
 public class JdbcClientDao implements ClientDao {
 
     private static final Logger LOG = Logger.getLogger(JdbcClientDao.class);
@@ -163,7 +171,7 @@ public class JdbcClientDao implements ClientDao {
 
 
     /**
-    *not using yet
+     *not using yet
      */
     @Override
     public boolean update(Client client) {

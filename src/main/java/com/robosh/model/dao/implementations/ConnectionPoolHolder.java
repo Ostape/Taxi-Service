@@ -53,10 +53,10 @@ public class ConnectionPoolHolder {
         ds.setUrl(properties.getProperty("db.connection.url"));
         ds.setUsername(properties.getProperty("db.connection.username"));
         ds.setPassword(properties.getProperty("db.connection.password"));
-
-        ds.setMinIdle(5);
-        ds.setMaxIdle(10);
+        ds.setMinIdle(10);
+        ds.setMaxIdle(20);
         ds.setMaxOpenPreparedStatements(100);
+        ds.setInitialSize(12);
         return ds;
     }
 }

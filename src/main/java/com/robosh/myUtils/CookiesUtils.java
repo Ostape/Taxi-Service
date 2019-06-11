@@ -16,6 +16,7 @@ public class CookiesUtils {
     public static final String PRICE_VOYAGE = "priceVoyage";
     public static final String TIME_WAIT = "timeWait";
 
+
     private CookiesUtils() {}
 
     public static String readCookie(HttpServletRequest request, String key) throws UnsupportedEncodingException {
@@ -50,6 +51,4 @@ public class CookiesUtils {
         response.addCookie(priceCookie);
         response.addCookie(timeWaitCookie);
     }
-
-
 }
