@@ -29,8 +29,12 @@ public class JdbcClientDao implements ClientDao {
     }
 
     /**
-     * checks is client registered
+     * Takes two parameters and checks if
+     * client exists in database
      *
+     * @param phoneNumber
+     * @param password
+     * @return
      */
     @Override
     public boolean isClientExists(String phoneNumber, String password) {
@@ -52,7 +56,11 @@ public class JdbcClientDao implements ClientDao {
     }
 
     /**
-     * checks if phone number is free
+     * Takes phone Number
+     * and checks if phone number is free
+     *
+     * @param phoneNumber
+     * @return boolean
      */
     @Override
     public boolean isPhoneNumberExists(String phoneNumber) {
@@ -71,6 +79,12 @@ public class JdbcClientDao implements ClientDao {
         return false;
     }
 
+    /**
+     * Takes email and checks if email is free
+     *
+     * @param email
+     * @return boolean
+     */
     @Override
     public boolean isEmailExists(String email) {
         try (PreparedStatement ps = connection.prepareStatement(ClientSQL.READ_BY_EMAIL.getQUERY())) {
@@ -87,6 +101,14 @@ public class JdbcClientDao implements ClientDao {
         return false;
     }
 
+    /**
+     * Takes two parameters and get Client
+     * from database
+     *
+     * @param phoneNumber
+     * @param password
+     * @return Client
+     */
     @Override
     public Client getClientByPassPhone(String phoneNumber, String password) {
         Mapper<Client> clientMapper = new ClientMapper();
@@ -95,7 +117,6 @@ public class JdbcClientDao implements ClientDao {
         try (PreparedStatement ps = connection.prepareStatement(ClientSQL.READ_BY_PHONE_PASSWORD.getQUERY())) {
             ps.setString(1, phoneNumber);
             ps.setString(2, password);
-
             final ResultSet rs = ps.executeQuery();
             LOG.debug("Executed query" + ClientSQL.READ_BY_PHONE_PASSWORD);
             if (rs.next()) {
@@ -109,6 +130,11 @@ public class JdbcClientDao implements ClientDao {
         return result;
     }
 
+    /**
+     * takes Client object and create such object in database
+     *
+     * @param client
+     */
     @Override
     public void create(Client client) {
         try (PreparedStatement ps = connection.prepareStatement(ClientSQL.INSERT.getQUERY())) {
@@ -125,6 +151,12 @@ public class JdbcClientDao implements ClientDao {
         }
     }
 
+    /**
+     * takes one int parameter and return Client by id
+     *
+     * @param id
+     * @return Client
+     */
     @Override
     public Client getById(int id) {
         Mapper<Client> clientMapper = new ClientMapper();
@@ -146,6 +178,11 @@ public class JdbcClientDao implements ClientDao {
         return result;
     }
 
+    /**
+     * returns all Clients from Database
+     *
+     * @return
+     */
     @Override
     public List<Client> findAll() {
         List<Client> clients = new ArrayList<>();
@@ -171,7 +208,7 @@ public class JdbcClientDao implements ClientDao {
 
 
     /**
-     *not using yet
+     * This method not using here
      */
     @Override
     public boolean update(Client client) {
@@ -179,13 +216,17 @@ public class JdbcClientDao implements ClientDao {
     }
 
     /**
-     * not using
+     * This method not using here
      */
     @Override
     public boolean delete(int id) {
         return false;
     }
 
+    /**
+     * this method
+     * close connection
+     */
     @Override
     public void close() {
         try {

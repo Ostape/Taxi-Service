@@ -12,14 +12,27 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class named JdbcDriverDao implements DriverDao
+ * execute different queries to database with prepared statements
+ *
+ * @author Orest Shemelyuk
+ */
 public class JdbcDriverDao implements DriverDao {
 
     private Connection connection;
     private static final Logger LOG = Logger.getLogger(JdbcDriverDao.class);
+
     public JdbcDriverDao(Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * This method takes int id parameter and return Driver
+     *
+     * @param id
+     * @return Driver
+     */
     @Override
     public Driver getById(int id) {
         Mapper<Driver> driverMapper = new DriverMapper();
@@ -40,6 +53,11 @@ public class JdbcDriverDao implements DriverDao {
         return result;
     }
 
+    /**
+     * returns all drivers from database
+     *
+     * @return List<Driver>
+     */
     @Override
     public List<Driver> findAll() {
         List<Driver> drivers = new ArrayList<>();
@@ -62,6 +80,14 @@ public class JdbcDriverDao implements DriverDao {
         }
     }
 
+    /**
+     * takes DriverStatus and carType parameters
+     * and return Driver wiht such parameters
+     *
+     * @param driverStatus
+     * @param carType
+     * @return Driver
+     */
     @Override
     public Driver getDriverByCarTypeAndDriverStatus(DriverStatus driverStatus, String carType) {
         Mapper<Driver> driverMapper = new DriverMapper();
@@ -84,6 +110,13 @@ public class JdbcDriverDao implements DriverDao {
         return result;
     }
 
+    /**
+     * check if driver exists in database
+     *
+     * @param phoneNumber
+     * @param password
+     * @return boolean
+     */
     @Override
     public boolean isDriverExist(String phoneNumber, String password) {
         try (PreparedStatement ps = connection.prepareStatement(DriverSQL.READ_BY_PHONE_AND_PASSWORD.getQUERY())) {
@@ -102,14 +135,21 @@ public class JdbcDriverDao implements DriverDao {
         return false;
     }
 
+    /**
+     * return Driver by phoneNumber and password
+     *
+     * @param phoneNumber
+     * @param password
+     * @return
+     */
     @Override
-    public Driver getDriverByPassAndPhone(String phone_number, String password) {
+    public Driver getDriverByPassAndPhone(String phoneNumber, String password) {
         Mapper<Driver> driverMapper = new DriverMapper();
         Driver result = new Driver();
         result.setPersonId(-1);
         try (PreparedStatement ps = connection.prepareStatement(DriverSQL
                 .READ_BY_PHONE_AND_PASSWORD.getQUERY())) {
-            ps.setString(1, phone_number);
+            ps.setString(1, phoneNumber);
             ps.setString(2, password);
             final ResultSet rs = ps.executeQuery();
             LOG.debug("Executed query" + DriverSQL.READ_BY_PHONE_AND_PASSWORD);
@@ -125,14 +165,15 @@ public class JdbcDriverDao implements DriverDao {
     }
 
     /**
-     * rewrite
+     * updates Driver status
+     *
      * @param driver
-     * @return
+     * @return boolean
      */
     @Override
     public boolean update(Driver driver) {
         try (PreparedStatement ps = connection.prepareStatement(DriverSQL.UPDATE.getQUERY())) {
-            ps.setString(1,driver.getDriverStatus().toString().toLowerCase());
+            ps.setString(1, driver.getDriverStatus().toString().toLowerCase());
             ps.setInt(2, driver.getPersonId());
             ps.execute();
             LOG.debug("Executed query" + DriverSQL.UPDATE);
@@ -146,24 +187,25 @@ public class JdbcDriverDao implements DriverDao {
 
 
     /**
-     * not using
-     *
-     * @param entity
+     * This method not using here
      */
     @Override
     public void create(Driver entity) {
     }
 
     /**
-     * not using
-     *
-     * @param id
+     * This method not using here
      */
     @Override
     public boolean delete(int id) {
         return false;
     }
 
+
+    /**
+     * this method
+     * close connection
+     */
     @Override
     public void close() {
         try {

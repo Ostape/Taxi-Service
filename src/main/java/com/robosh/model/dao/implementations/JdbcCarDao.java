@@ -94,6 +94,7 @@ public class JdbcCarDao implements CarDao {
      * This method take two parameters
      * int parameter id_car and String carType
      * and checks if Car exists in database according to such parameters
+     *
      * @param id_car
      * @param carType
      * @return boolean

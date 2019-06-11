@@ -10,11 +10,22 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+/**
+ * This class respond to connection for database
+ *
+ * @author Orest Shemelyul
+ */
 public class ConnectionPoolHolder {
     private static volatile DataSource dataSource;
     private static final Logger LOG = Logger.getLogger(ConnectionPoolHolder.class);
 
 
+    /**
+     * This method return DataSource
+     * and takes parameters from db.properties
+     *
+     * @return DataSource
+     */
     public static DataSource getDataSource() {
         if (dataSource == null) {
             synchronized (ConnectionPoolHolder.class) {

@@ -12,6 +12,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class named JdbcOrderDao implements OrderDao
+ * execute different queries to database with prepared statements
+ *
+ * @author Orest Shemelyuk
+ */
 public class JdbcOrderDao implements OrderDao {
 
     private Connection connection;
@@ -21,6 +27,12 @@ public class JdbcOrderDao implements OrderDao {
         this.connection = connection;
     }
 
+    /**
+     * takes order Object
+     * create order in database
+     *
+     * @param order
+     */
     @Override
     public void create(Order order) {
         try (PreparedStatement ps = connection.prepareStatement(OrderSQL.INSERT.getQUERY())) {
@@ -40,6 +52,13 @@ public class JdbcOrderDao implements OrderDao {
         }
     }
 
+    /**
+     * takes order Object
+     * create order in database
+     * without coupon
+     *
+     * @param order
+     */
     @Override
     public void createWithoutCoupon(Order order) {
         try (PreparedStatement ps = connection.prepareStatement(OrderSQL.INSERT_WITHOUT_COUPON.getQUERY())) {
@@ -58,6 +77,13 @@ public class JdbcOrderDao implements OrderDao {
         }
     }
 
+    /**
+     * takes one parameter
+     * an returns count of orders
+     *
+     * @param idDriver
+     * @return long
+     */
     @Override
     public long getCountOrders(int idDriver) {
         long countOrders = 0;
@@ -78,6 +104,12 @@ public class JdbcOrderDao implements OrderDao {
         return countOrders;
     }
 
+    /**
+     * return Order by id
+     *
+     * @param id
+     * @return Order
+     */
     @Override
     public Order getById(int id) {
         Mapper<Order> orderMapper = new OrderMapper();
@@ -98,6 +130,12 @@ public class JdbcOrderDao implements OrderDao {
         return result;
     }
 
+    /**
+     * @param idDriver
+     * @param row
+     * @param limit
+     * @return
+     */
     @Override
     public List<Order> getAllOrdersByDriverId(int idDriver, int row, int limit) {
         List<Order> orders = new ArrayList<>();
@@ -126,6 +164,11 @@ public class JdbcOrderDao implements OrderDao {
         return orders;
     }
 
+    /**
+     * return all orders from database
+     *
+     * @return List<Order>
+     */
     @Override
     public List<Order> findAll() {
         List<Order> orders = new ArrayList<>();
@@ -146,6 +189,13 @@ public class JdbcOrderDao implements OrderDao {
         }
     }
 
+    /**
+     * updates order status in database
+     *
+     * @param idOrder
+     * @param orderStatus
+     * @return boolean
+     */
     @Override
     public boolean updateOrderStatus(int idOrder, OrderStatus orderStatus) {
         try (PreparedStatement ps = connection.prepareStatement(OrderSQL.UPDATE.getQUERY())) {
@@ -161,6 +211,13 @@ public class JdbcOrderDao implements OrderDao {
         return false;
     }
 
+    /**
+     * checks if id driver has such order
+     *
+     * @param idOrder
+     * @param idDriver
+     * @return boolean
+     */
     @Override
     public boolean isCorrespondOrderAndDriver(int idOrder, int idDriver) {
         try (PreparedStatement ps = connection.prepareStatement(OrderSQL.IS_SUCH_VOYAGE.getQUERY())) {
@@ -180,21 +237,27 @@ public class JdbcOrderDao implements OrderDao {
         return false;
     }
 
+    /**
+     * This method not using here
+     */
     @Override
     public boolean update(Order order) {
         return false;
     }
 
     /**
-     * not using
-     * @param id
-     * @return
+     * This method not using here
      */
     @Override
     public boolean delete(int id) {
         return false;
     }
 
+
+    /**
+     * this method
+     * close connection
+     */
     @Override
     public void close() {
         try {

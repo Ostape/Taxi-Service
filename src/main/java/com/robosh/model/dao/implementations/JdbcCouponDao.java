@@ -11,6 +11,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class named JdbcCouponDao implements CouponDao
+ * execute different queries to database with prepared statements
+ *
+ * @author Orest Shemelyuk
+ */
 public class JdbcCouponDao implements CouponDao {
     private Connection connection;
     private static final Logger LOG = Logger.getLogger(JdbcCouponDao.class);
@@ -19,6 +25,13 @@ public class JdbcCouponDao implements CouponDao {
         this.connection = connection;
     }
 
+    /**
+     * takes int parameter and search
+     * Coupon by id else return Coupon with idCoupon -1
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Coupon getById(int id) {
         Mapper<Coupon> couponMapper = new CouponMapper();
@@ -40,6 +53,11 @@ public class JdbcCouponDao implements CouponDao {
         return result;
     }
 
+    /**
+     * return All Coupon from database
+     *
+     * @return List<Coupon>
+     */
     @Override
     public List<Coupon> findAll() {
         List<Coupon> coupons = new ArrayList<>();
@@ -62,6 +80,12 @@ public class JdbcCouponDao implements CouponDao {
         }
     }
 
+    /**
+     * return from database Coupon by couponName
+     *
+     * @param couponName
+     * @return Coupon
+     */
     @Override
     public Coupon readByCouponName(String couponName) {
         Mapper<Coupon> couponMapper = new CouponMapper();
@@ -83,9 +107,7 @@ public class JdbcCouponDao implements CouponDao {
     }
 
     /**
-     * not using
-     *
-     * @param entity
+     * This method not using here
      */
     @Override
     public void create(Coupon entity) {
@@ -93,9 +115,7 @@ public class JdbcCouponDao implements CouponDao {
 
 
     /**
-     * not using
-     *
-     * @param coupon
+     * This method not using here
      */
     @Override
     public boolean update(Coupon coupon) {
@@ -103,15 +123,18 @@ public class JdbcCouponDao implements CouponDao {
     }
 
     /**
-     * not using
-     *
-     * @param id
+     * This method not using here
      */
     @Override
     public boolean delete(int id) {
         return false;
     }
 
+
+    /**
+     * this method
+     * close connection
+     */
     @Override
     public void close() {
         try {
