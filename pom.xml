@@ -90,13 +90,17 @@
         <plugin>
           <artifactId>maven-deploy-plugin</artifactId>
       <version>2.8.2</version>
-    </plugin>
+      </plugin>
+
+
     <plugin>
+
       <groupId>org.apache.tomcat.maven</groupId>
       <artifactId>tomcat7-maven-plugin</artifactId>
+
       <version>2.2</version>
       <configuration>
-        <port>8080</port>
+        <port>8888</port>
         <path>/taxi-Kyiv/*</path>
       </configuration>
       <dependencies>
@@ -105,29 +109,24 @@
           <artifactId>jstl</artifactId>
           <version>1.2</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--          <groupId>tagLibs</groupId>-->
-<!--          <artifactId>standart</artifactId>-->
-<!--          <version>1.1.2</version>-->
-<!--        </dependency>-->
       </dependencies>
-
-
-    </plugin>
-
+        </plugin>
+        <!-- tomcat -->
+        <plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <version>2.2</version>
+          <configuration>
+            <port>8888</port>
+            <path>/</path>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
-      <plugins>
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <configuration>
-                  <source>8</source>
-                  <target>8</target>
-              </configuration>
-          </plugin>
-      </plugins>
+
+
+
 
   </build>
+
 </project>

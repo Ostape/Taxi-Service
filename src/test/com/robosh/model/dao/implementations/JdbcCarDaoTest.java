@@ -65,7 +65,7 @@ public class JdbcCarDaoTest {
 
     @Test
     public void shouldReturnFalseIfCarNotExists() {
-        boolean isExistsCar = dao.isSameCarType(1, "wagon");
+        boolean isExistsCar = dao.isSameCarType(1, "23agon");
         assertFalse(isExistsCar);
     }
 }

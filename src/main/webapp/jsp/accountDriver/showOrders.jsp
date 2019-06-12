@@ -3,8 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
-<fmt:setLocale value="${param.lang}"/>
-<fmt:setBundle basename="messages"/>
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${bundle}"/>
 
 
 <html lang="${param.lang}">
@@ -23,23 +23,23 @@
         <div class="nazar">
 
             <div class="ordersHeader">
-                <p>All orders</p>
+                <p><fmt:message key="showOrders.orders.title"/></p>
             </div>
             <div class="viewData">
                 <div class="idOrder">
-                    <p>id_order</p>
+                    <p><fmt:message key="showOrders.orders.id"/></p>
                 </div>
                 <div class="nameClient">
-                    <p>Client Name</p>
+                    <p><fmt:message key="showOrders.client"/></p>
                 </div>
                 <div class="street">
-                    <p>Street deparure</p>
+                    <p><fmt:message key="showOrders.street.dep"/></p>
                 </div>
                 <div class="street">
-                    <p>Street arrive</p>
+                    <p><fmt:message key="showOrders.street.arr"/></p>
                 </div>
                 <div class="costVoage">
-                    <p>Price</p>
+                    <p><fmt:message key="showOrders.price"/></p>
                 </div>
             </div>
            <c:forEach items="${requestScope.orderList}" var="order" begin="0" end="${requestScope.recordPerPage -1}">
@@ -61,8 +61,8 @@
                     <div class="costVoage">
                         <p><c:out value="${order.costWithDiscount}"/></p>
                     </div>
-
                 </div>
+
             </c:forEach>
         </div>
             <nav aria-label="...">

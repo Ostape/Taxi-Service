@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${bundle}"/>
 
 <html lang="${param.lang}">
 
@@ -28,18 +30,18 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <strong><p class="order-text-about">Дорогий <c:out value="${sessionScope.loginedPerson.name}"/>
-                        <c:out value="${sessionScope.loginedPerson.surname}"/>, ваше замовлення відправлено.</p></strong>
-                    <p class="order-text-about">Ваш водій <c:out value="${requestScope.driverName}"/>.
-                        Номер телефону +<c:out value="${requestScope.phoneNumber}"/>.</p>
-                    <p class="order-text-about">Дякуємо за користування нашою службою таксі.</p>
-                    <p class="order-text-about">Вартісь поїздки: <c:out value="${requestScope.priceVoyage}"/> грн</p>
-                    <p class="order-text-about">Орієнтований очікування: <c:out value="${requestScope.timeWait}"/> хв</p>
+                    <strong><p class="order-text-about"><fmt:message key="show.order.dear"/> <c:out value="${sessionScope.loginedPerson.name}"/>
+                        <c:out value="${sessionScope.loginedPerson.surname}"/>, <fmt:message key="show.order.your.order"/>.</p></strong>
+                    <p class="order-text-about"><fmt:message key="show.order.driver"/> <c:out value="${requestScope.driverName}"/>.
+                        <fmt:message key="show.order.phone.number"/> +<c:out value="${requestScope.phoneNumber}"/>.</p>
+                    <p class="order-text-about"><fmt:message key="show.order.thanks"/></p>
+                    <p class="order-text-about"><fmt:message key="show.order.costs"/> <c:out value="${requestScope.priceVoyage}"/> <fmt:message key="show.order.money"/></p>
+                    <p class="order-text-about"><fmt:message key="show.order.wait"/> <c:out value="${requestScope.timeWait}"/> <fmt:message key="show.order.min"/></p>
                 </div>
             </div>
             <div>
                 <form class="dr" action="${pageContext.request.contextPath}/taxi-Kyiv/homePage">
-                    <button type="submit" class="logoutDriver">Home page</button>
+                    <button type="submit" class="logoutDriver"><fmt:message key="show.order.home"/></button>
                 </form>
             </div>
         </div>
