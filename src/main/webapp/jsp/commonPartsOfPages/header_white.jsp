@@ -29,10 +29,10 @@
 
             <div class="lang_block">
                 <ul id="lang">
-                    <li class="lang-item lang-item-2 current-lang">
+                    <li class="lang-item lang-item-2">
                         <a href="?locale=ua">ua</a>
                     </li>
-                    <li class="lang-item lang-item-5 ">
+                    <li class="lang-item lang-item-5">
                         <a href="?locale=en">en</a>
                     </li>
                 </ul>

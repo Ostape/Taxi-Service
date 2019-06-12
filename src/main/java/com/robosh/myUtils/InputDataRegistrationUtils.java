@@ -3,6 +3,11 @@ package com.robosh.myUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * class that contains methods to manage data of registration
+ *
+ * @author Orest Shmelyuk
+ */
 public class InputDataRegistrationUtils {
 
     private static final String EMAIL_PATTERN = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
@@ -20,14 +25,10 @@ public class InputDataRegistrationUtils {
         return matcher.matches();
     }
 
-    /**
-     * without <></>
-     */
     private static boolean isValidPassword(String password1, String password2) {
         Pattern validPassword = Pattern.compile(CORRECT_PASSWORD);
         Matcher matcher = validPassword.matcher(password1);
-        boolean temp = isSamePassword(password1, password2) && matcher.matches();
-        return temp;
+        return isSamePassword(password1, password2) && matcher.matches();
     }
 
     private static boolean isSamePassword(String password1, String password2) {
@@ -60,7 +61,7 @@ public class InputDataRegistrationUtils {
     }
 
     public static boolean isNotCorrectData(String name, String surname, String phoneNumber,
-                                        String email, String password, String repeatPassword) {
+                                           String email, String password, String repeatPassword) {
         return !(isCorrectNameSurname(name, surname) && isCorrectPhoneNumber(phoneNumber)
                 && isCorrectEmail(email) && isValidPassword(password, repeatPassword));
     }

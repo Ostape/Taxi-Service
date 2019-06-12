@@ -1,4 +1,4 @@
-package com.robosh.web.command.directions;
+package com.robosh.web.command.common;
 
 import com.robosh.web.command.Command;
 import com.robosh.web.command.RoutesJSP;
@@ -6,9 +6,14 @@ import com.robosh.web.command.RoutesJSP;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ClientAccountCommand implements Command {
+/**
+ * return driver account
+ *
+ * @author Orest Shemelyuk
+ */
+public class DriverAccountCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        return RoutesJSP.CLIENT_ACCOUNT;
+        return RoutesJSP.DRIVER_ACCOUNT;
     }
 }

@@ -1,4 +1,4 @@
-package com.robosh.web.command.directions;
+package com.robosh.web.command.common;
 
 import com.robosh.web.command.Command;
 import com.robosh.web.command.RoutesJSP;
@@ -6,9 +6,14 @@ import com.robosh.web.command.RoutesJSP;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class TaxiHomeCommand implements Command {
+/**
+ * return error page 403 forbidden
+ *
+ * @author Orest Shemelyuk
+ */
+public class ErrorForbiddenCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        return RoutesJSP.TAXI_HOME;
+        return RoutesJSP.HTTP_FORBIDDEN;
     }
 }

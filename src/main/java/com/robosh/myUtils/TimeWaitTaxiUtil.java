@@ -2,13 +2,15 @@ package com.robosh.myUtils;
 
 /**
  * class that contains only one static method
- * @author  Orest Shemelyuk
+ *
+ * @author Orest Shemelyuk
  */
 
 public class TimeWaitTaxiUtil {
-    private TimeWaitTaxiUtil(){}
+    private TimeWaitTaxiUtil() {
+    }
 
-    public static int getTimeWait(){
+    public static int getTimeWait() {
         return (int) (Math.random() * 10);
     }
 }

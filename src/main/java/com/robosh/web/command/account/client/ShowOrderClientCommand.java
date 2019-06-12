@@ -1,4 +1,4 @@
-package com.robosh.web.command.directions;
+package com.robosh.web.command.account.client;
 
 
 import com.robosh.myUtils.CookiesUtils;
@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This class shows order status to client
+ *
+ * @author Orest Shemelyuk
+ */
 public class ShowOrderClientCommand implements Command {
 
     @Override

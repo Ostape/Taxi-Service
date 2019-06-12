@@ -2,8 +2,13 @@ package com.robosh.web;
 
 import com.robosh.web.command.Command;
 import com.robosh.service.*;
-import com.robosh.web.command.account.*;
-import com.robosh.web.command.directions.*;
+import com.robosh.web.command.PathCommand;
+import com.robosh.web.command.RedirectPath;
+import com.robosh.web.command.account.client.*;
+import com.robosh.web.command.account.driver.DriverEnterNumberOrderCommand;
+import com.robosh.web.command.account.driver.EnterLoginCommand;
+import com.robosh.web.command.account.driver.ShowAllDriverOrdersCommand;
+import com.robosh.web.command.common.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,21 +25,21 @@ public class Servlet extends HttpServlet {
     @Override
     public void init() {
         commands = new HashMap<>();
-        commands.put("registerClient", new RegisterClientCommand());
-        commands.put("register", new RegistrationCommand(new ClientService()));
-        commands.put("homePage", new TaxiHomeCommand());
-        commands.put("makeOrder", new ClientOrderCommand());
-        commands.put("enterLogin", new EnterLoginCommand(new ClientService(), new DriverService()));
-        commands.put("login", new LoginCommand());
-        commands.put("logOut", new LogOutCommand());
-        commands.put("clientAccount", new ClientAccountCommand());
-        commands.put("driverAccount", new DriverAccountCommand());
-        commands.put("showAllOrders", new ShowAllDriverOrdersCommand(new OrderService()));
-        commands.put("forbidden403", new ErrorForbiddenCommand());
-        commands.put("enterOrder", new EnterOrderCommand(new OrderService(), new DriverService(),
+        commands.put(PathCommand.REGISTER_CLIENT, new RegisterClientCommand());
+        commands.put(PathCommand.REGISTER_PAGE, new RegistrationCommand(new ClientService()));
+        commands.put(PathCommand.HOME_PAGE, new TaxiHomeCommand());
+        commands.put(PathCommand.MAKE_ORDER, new ClientOrderCommand());
+        commands.put(PathCommand.ENTER_LOGIN, new EnterLoginCommand(new ClientService(), new DriverService()));
+        commands.put(PathCommand.LOGIN_PAGE, new LoginCommand());
+        commands.put(PathCommand.LOGOUT, new LogOutCommand());
+        commands.put(PathCommand.CLIENT_ACCOUNT, new ClientAccountCommand());
+        commands.put(PathCommand.DRIVER_ACCOUNT, new DriverAccountCommand());
+        commands.put(PathCommand.SHOW_ALL_ORDERS_PAG, new ShowAllDriverOrdersCommand(new OrderService()));
+        commands.put(PathCommand.FORBIDDEN, new ErrorForbiddenCommand());
+        commands.put(PathCommand.ENTER_ORDER, new EnterOrderCommand(new OrderService(), new DriverService(),
                 new AddressService(), new CouponService()));
-        commands.put("showClientOrder", new ShowOrderClientCommand());
-        commands.put("enterCommand", new DriverEnterNumberOrderCommand(new OrderService()));
+        commands.put(PathCommand.SHOW_CLIENT_ORDER, new ShowOrderClientCommand());
+        commands.put(PathCommand.ENTER_NUMBER_OF_ORDER, new DriverEnterNumberOrderCommand(new OrderService()));
     }
 
     @Override
@@ -59,11 +64,9 @@ public class Servlet extends HttpServlet {
             String nextPage = command.execute(request, response); //which one we will use: regirect or forward
             //if command.execute will have "redirect#", we will use redirect, otherwise forward
             if (isRedirect(nextPage)){
-                System.out.println("redirect servlet: " + nextPage + "\n");
                 response.sendRedirect(nextPage.replaceAll("redirect#", ""));
             }
             else{
-                System.out.println("forward servlet: " + nextPage +"\n");
                 request.getRequestDispatcher(nextPage).forward(request, response);
             }
         }
@@ -76,6 +79,6 @@ public class Servlet extends HttpServlet {
     }
 
     private boolean isRedirect(String string){
-        return string.contains("redirect#");
+        return string.contains(RedirectPath.REDIRECT);
     }
 }

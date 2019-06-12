@@ -1,4 +1,4 @@
-package com.robosh.web.command.account;
+package com.robosh.web.command.account.client;
 
 
 import com.robosh.myUtils.CookiesUtils;
@@ -6,26 +6,38 @@ import com.robosh.myUtils.LoginedUserUtils;
 import com.robosh.myUtils.PriceVoyageUtils;
 import com.robosh.myUtils.TimeWaitTaxiUtil;
 import com.robosh.web.command.Command;
-import com.robosh.web.command.directions.ClientOrderCommand;
 import com.robosh.model.entity.*;
 import com.robosh.model.entity.enums.DriverStatus;
 import com.robosh.service.AddressService;
 import com.robosh.service.CouponService;
 import com.robosh.service.DriverService;
 import com.robosh.service.OrderService;
+import com.robosh.web.command.RedirectPath;
+import com.robosh.web.command.RoutesJSP;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * class that takes parameter from order and process them
+ *
+ * @author Orest Shemelyuk
+ */
 public class EnterOrderCommand implements Command {
+    private static final String ADDRESS_DEPARTURE_PARAMETER = "addressDeparture";
+    private static final String ADDRESS_ARRIVE_PARAMETER = "addressArrive";
+    private static final String CAR_TYPE_PARAMETER = "carType";
+    private static final String COUPON_PARAMETER = "coupon";
+    private static final String NO_SUCH_CAR = "?noSuitableCarType=true";
+    private static final String SAME_ADDRESS = "?sameAddress=true";
+
 
     private OrderService orderService;
     private DriverService driverService;
     private AddressService addressService;
     private CouponService couponService;
-    private Command clientOrderCommand = new ClientOrderCommand();
 
     public EnterOrderCommand(OrderService orderService, DriverService driverService,
                              AddressService addressService, CouponService couponService) {
@@ -37,15 +49,14 @@ public class EnterOrderCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        final String wrongDataRequest = clientOrderCommand.execute(request, response);
-        final String addressDepartureStr = request.getParameter("addressDeparture");
-        final String addressArriveStr = request.getParameter("addressArrive");
-        final String carType = request.getParameter("carType");
-        final String couponStr = request.getParameter("coupon");
+        final String addressDepartureStr = request.getParameter(ADDRESS_DEPARTURE_PARAMETER);
+        final String addressArriveStr = request.getParameter(ADDRESS_ARRIVE_PARAMETER);
+        final String carType = request.getParameter(CAR_TYPE_PARAMETER);
+        final String couponStr = request.getParameter(COUPON_PARAMETER);
 
         if (isNotSameAddress(addressDepartureStr, addressArriveStr)) {
             Driver driver = driverService.getDriverByCarTypeAndDriverStatus(DriverStatus.FREE, carType);
-            if (driver != null){
+            if (driver != null) {
                 bookedDriver(driver);
                 Client loginedClient = (Client) LoginedUserUtils.getLoginedUser(request.getSession());
                 Address addressDeparture = addressService.getAdressByAdressString(addressDepartureStr);
@@ -56,14 +67,13 @@ public class EnterOrderCommand implements Command {
                 orderService.createOrderInDB(loginedClient, driver, addressDeparture, addressArrive,
                         coupon, costs, costWithDiscount);
                 int timeWait = TimeWaitTaxiUtil.getTimeWait();
-                CookiesUtils.addCookies(response, driver, costWithDiscount,timeWait);
-                return "redirect#" + request.getContextPath() + "/taxi-Kyiv/showClientOrder";
-            }else {
-                return wrongDataRequest + "?noSuitableCarType=true";
+                CookiesUtils.addCookies(response, driver, costWithDiscount, timeWait);
+                return RedirectPath.REDIRECT_SHOW_CLIENT_ORDER;
+            } else {
+                return RoutesJSP.TAXI_ORDER + NO_SUCH_CAR;
             }
-        }
-        else {
-            return wrongDataRequest + "?sameAddress=true";
+        } else {
+            return RoutesJSP.TAXI_ORDER + SAME_ADDRESS;
         }
     }
 

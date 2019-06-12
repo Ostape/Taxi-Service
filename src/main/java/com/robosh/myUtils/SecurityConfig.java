@@ -4,6 +4,12 @@ import com.robosh.model.entity.enums.Role;
 
 import java.util.*;
 
+
+/**
+ * class that make security for pages that need to be authorized
+ *
+ * @author Orest Shemelyuk
+ */
 public class SecurityConfig {
     private static final Map<Role, List<String>> mapConfig = new HashMap<>();
 
@@ -12,7 +18,6 @@ public class SecurityConfig {
     }
 
     private static void init() {
-        // Configure For "Client" Role.
         List<String> urlPatterns1 = new ArrayList<>();
         urlPatterns1.add("/makeOrder");
         urlPatterns1.add("/clientAccount");
@@ -21,7 +26,6 @@ public class SecurityConfig {
 
         mapConfig.put(Role.CLIENT, urlPatterns1);
 
-        // Configure For "Driver" Role.
         List<String> urlPatterns2 = new ArrayList<>();
         urlPatterns2.add("/showOrders");
         urlPatterns2.add("/driverAccount");

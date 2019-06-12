@@ -1,4 +1,4 @@
-package com.robosh.web.command.account;
+package com.robosh.web.command.account.driver;
 
 
 import com.robosh.myUtils.LoginedUserUtils;
@@ -12,9 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * shows all orders which has driver
+ *
+ * @author Orest Shemelyuk
+ */
 public class ShowAllDriverOrdersCommand implements Command {
 
     private OrderService orderService;
+
+    private static final String PAGINATION_PARAMETER = "pagination";
+    private static final String ORDER_LIST_ATTRIBUTE = "orderList";
+    private static final String RECORD_PER_PAGE_ATTRIBUTE = "recordPerPage";
+    private static final String PAGE_NUMBERS_ATTRIBUTE = "pageNumbers";
 
     public ShowAllDriverOrdersCommand(OrderService orderService) {
         this.orderService = orderService;
@@ -23,31 +33,30 @@ public class ShowAllDriverOrdersCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        int idDriver =  LoginedUserUtils.getLoginedUser(session).getPersonId();
-        int pageNumber = 0;
+        int idDriver = LoginedUserUtils.getLoginedUser(session).getPersonId();
+        int pageNumber;
         int totalNumberRecords = (int) orderService.getAllOrdersCount(idDriver);
         int recordPerPage = 5;
-        int startIndex = 0;
-        int numberOfPages = 0;
-        String sPageNo = request.getParameter("pagination");
+        int startIndex;
+        int numberOfPages;
+        String sPageNo = request.getParameter(PAGINATION_PARAMETER);
         pageNumber = getPageNumber(sPageNo);
         startIndex = (pageNumber * recordPerPage) - recordPerPage;
         List<Order> orderList = orderService.getAllOrderByIdDriver(idDriver, startIndex, recordPerPage);
-        request.setAttribute("orderList", orderList);
-        request.setAttribute("recordPerPage", recordPerPage);
+        request.setAttribute(ORDER_LIST_ATTRIBUTE, orderList);
+        request.setAttribute(RECORD_PER_PAGE_ATTRIBUTE, recordPerPage);
         numberOfPages = totalNumberRecords / recordPerPage;
         if (totalNumberRecords > numberOfPages * recordPerPage) {
             numberOfPages = numberOfPages + 1;
         }
-        request.setAttribute("pageNumbers", numberOfPages);
+        request.setAttribute(PAGE_NUMBERS_ATTRIBUTE, numberOfPages);
         return RoutesJSP.SHOW_DRIVER_ORDERS;
     }
 
-    private int getPageNumber(String strNumber){
+    private int getPageNumber(String strNumber) {
         try {
             return Integer.valueOf(strNumber);
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
         return 1;

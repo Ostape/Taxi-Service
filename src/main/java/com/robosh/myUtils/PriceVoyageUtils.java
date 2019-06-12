@@ -3,6 +3,11 @@ package com.robosh.myUtils;
 import com.robosh.model.entity.Address;
 import com.robosh.model.entity.Coupon;
 
+/**
+ * class that calculate price of voyage
+ *
+ * @author Orest Shemelyuk
+ */
 public class PriceVoyageUtils {
     private static final double START_PRICE = 30.0;
 
@@ -14,7 +19,7 @@ public class PriceVoyageUtils {
         double departureStreetPrice = getStreetPrice(addressDeparture.getStreet());
         double arriveHouseNumberPrice = getHouseNumberPrice(addressArrive.getHouseNumber());
         double departureHouseNumberPrice = getHouseNumberPrice(addressDeparture.getHouseNumber());
-        return (int) (arriveStreetPrice + departureStreetPrice +
+        return (int) (START_PRICE + arriveStreetPrice + departureStreetPrice +
                 arriveHouseNumberPrice + departureHouseNumberPrice + getPriceWeather());
     }
 
@@ -47,13 +52,12 @@ public class PriceVoyageUtils {
         if (coupon.getIdCoupon() != -1) {
             double discountPercents = coupon.getDiscount();
             return (int) (price - price * (discountPercents / 100));
-        }
-        else return price;
+        } else return price;
     }
 
     private static int loyaltyProgram(double price) {
         if (price > 200) {
-            price = price - price * 0.1;
+            price = price - price * 0.2;
         }
         return (int) price;
     }

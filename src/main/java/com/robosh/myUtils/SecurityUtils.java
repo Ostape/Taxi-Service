@@ -6,6 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * class that check if Person has permission to this page or not
+ *
+ * @author Orest Shemelyuk
+ */
 public class SecurityUtils {
     public static boolean isSecurityPage(HttpServletRequest request) {
         Set<Role> roles = SecurityConfig.getAllAppRoles();
