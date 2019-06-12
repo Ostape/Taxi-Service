@@ -16,6 +16,12 @@ import org.apache.log4j.Logger;
  * @author Orest Shemelyul
  */
 public class ConnectionPoolHolder {
+    private static final String DRIVER_DB = "db.connection.driver";
+    private static final String URL_DB = "db.connection.url";
+    private static final String USERNAME_DB = "db.connection.username";
+    private static final String PASSWORD_DB = "db.connection.password";
+
+
     private static volatile DataSource dataSource;
     private static final Logger LOG = Logger.getLogger(ConnectionPoolHolder.class);
 
@@ -49,8 +55,7 @@ public class ConnectionPoolHolder {
 
                         dataSource = getBasicDataSource(properties);
                     } catch (IOException | ClassNotFoundException e) {
-                        LOG.debug("File not found " + propFileName);
-                        e.printStackTrace();
+                        LOG.error("File not found " + propFileName);
                     }
                 }
             }
@@ -60,14 +65,14 @@ public class ConnectionPoolHolder {
 
     private static BasicDataSource getBasicDataSource(Properties properties) throws ClassNotFoundException {
         BasicDataSource ds = new BasicDataSource();
-        Class.forName(properties.getProperty("db.connection.driver"));
-        ds.setUrl(properties.getProperty("db.connection.url"));
-        ds.setUsername(properties.getProperty("db.connection.username"));
-        ds.setPassword(properties.getProperty("db.connection.password"));
-        ds.setMinIdle(100);
-        ds.setMaxIdle(100);
+        Class.forName(properties.getProperty(DRIVER_DB));
+        ds.setUrl(properties.getProperty(URL_DB));
+        ds.setUsername(properties.getProperty(USERNAME_DB));
+        ds.setPassword(properties.getProperty(PASSWORD_DB));
+        ds.setMinIdle(5);
+        ds.setMaxIdle(20);
         ds.setMaxOpenPreparedStatements(100);
-        ds.setInitialSize(100);
+        ds.setInitialSize(20);
         return ds;
     }
 }

@@ -49,8 +49,7 @@ public class JdbcClientDao implements ClientDao {
                 return true;
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return false;
     }
@@ -73,8 +72,7 @@ public class JdbcClientDao implements ClientDao {
                 return true;
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return false;
     }
@@ -95,8 +93,7 @@ public class JdbcClientDao implements ClientDao {
                 return true;
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return false;
     }
@@ -124,8 +121,7 @@ public class JdbcClientDao implements ClientDao {
                 result = clientMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return result;
     }
@@ -146,8 +142,7 @@ public class JdbcClientDao implements ClientDao {
             ps.setString(5, client.getPassword());
             ps.executeUpdate();
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
     }
 
@@ -172,8 +167,7 @@ public class JdbcClientDao implements ClientDao {
                 result = clientMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return result;
     }
@@ -200,8 +194,7 @@ public class JdbcClientDao implements ClientDao {
             }
             return clients;
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
             return null;
         }
     }
@@ -212,7 +205,7 @@ public class JdbcClientDao implements ClientDao {
      */
     @Override
     public boolean update(Client client) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -220,7 +213,7 @@ public class JdbcClientDao implements ClientDao {
      */
     @Override
     public boolean delete(int id) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -233,7 +226,7 @@ public class JdbcClientDao implements ClientDao {
             connection.close();
             LOG.debug("Connection closed");
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
+            LOG.error("SQLException occurred");
             throw new RuntimeException(e);
         }
     }

@@ -56,8 +56,7 @@ public class JdbcCarDao implements CarDao {
                 result = carMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return result;
     }
@@ -84,8 +83,7 @@ public class JdbcCarDao implements CarDao {
             }
             return cars;
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
             return null;
         }
     }
@@ -111,8 +109,7 @@ public class JdbcCarDao implements CarDao {
                 return true;
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return false;
     }
@@ -122,6 +119,7 @@ public class JdbcCarDao implements CarDao {
      *This method not using here
      */
     public void create(Car entity) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -129,7 +127,7 @@ public class JdbcCarDao implements CarDao {
      *This method not using here
      */
     public boolean update(Car car) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -137,7 +135,7 @@ public class JdbcCarDao implements CarDao {
      *This method not using here
      */
     public boolean delete(int id) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -150,7 +148,7 @@ public class JdbcCarDao implements CarDao {
             connection.close();
             LOG.debug("Connection closed");
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
+            LOG.error("SQLException occurred");
             throw new RuntimeException(e);
         }
     }

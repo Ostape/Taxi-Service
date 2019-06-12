@@ -47,8 +47,7 @@ public class JdbcOrderDao implements OrderDao {
             ps.setInt(8, order.getCostWithDiscount());
             ps.executeUpdate();
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
     }
 
@@ -72,8 +71,7 @@ public class JdbcOrderDao implements OrderDao {
             ps.setInt(7, order.getCostWithDiscount());
             ps.execute();
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
     }
 
@@ -98,8 +96,7 @@ public class JdbcOrderDao implements OrderDao {
                 countOrders = rs.getLong(1);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return countOrders;
     }
@@ -124,8 +121,7 @@ public class JdbcOrderDao implements OrderDao {
                 result = orderMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return result;
     }
@@ -147,8 +143,7 @@ public class JdbcOrderDao implements OrderDao {
             final ResultSet rs = ps.executeQuery();
             return getOrders(orders, rs);
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
             return null;
         }
     }
@@ -183,8 +178,7 @@ public class JdbcOrderDao implements OrderDao {
             }
             return orders;
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
             return null;
         }
     }
@@ -205,8 +199,7 @@ public class JdbcOrderDao implements OrderDao {
             LOG.debug("Executed query" + OrderSQL.UPDATE);
             return true;
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return false;
     }
@@ -231,8 +224,7 @@ public class JdbcOrderDao implements OrderDao {
                 return true;
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return false;
     }
@@ -242,7 +234,7 @@ public class JdbcOrderDao implements OrderDao {
      */
     @Override
     public boolean update(Order order) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -250,7 +242,7 @@ public class JdbcOrderDao implements OrderDao {
      */
     @Override
     public boolean delete(int id) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
 
@@ -264,7 +256,7 @@ public class JdbcOrderDao implements OrderDao {
             connection.close();
             LOG.debug("Connection closed");
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
+            LOG.error("SQLException occurred");
             throw new RuntimeException(e);
         }
     }

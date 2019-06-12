@@ -47,8 +47,7 @@ public class JdbcDriverDao implements DriverDao {
                 result = driverMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return result;
     }
@@ -74,8 +73,7 @@ public class JdbcDriverDao implements DriverDao {
             }
             return drivers;
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
             return null;
         }
     }
@@ -104,8 +102,7 @@ public class JdbcDriverDao implements DriverDao {
                 result = driverMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return result;
     }
@@ -129,8 +126,7 @@ public class JdbcDriverDao implements DriverDao {
                 return true;
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return false;
     }
@@ -158,8 +154,7 @@ public class JdbcDriverDao implements DriverDao {
                 result = driverMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return result;
     }
@@ -179,8 +174,7 @@ public class JdbcDriverDao implements DriverDao {
             LOG.debug("Executed query" + DriverSQL.UPDATE);
             return true;
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
             return false;
         }
     }
@@ -191,6 +185,7 @@ public class JdbcDriverDao implements DriverDao {
      */
     @Override
     public void create(Driver entity) {
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -198,7 +193,7 @@ public class JdbcDriverDao implements DriverDao {
      */
     @Override
     public boolean delete(int id) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
 
@@ -212,7 +207,7 @@ public class JdbcDriverDao implements DriverDao {
             connection.close();
             LOG.debug("Connection closed");
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
+            LOG.error("SQLException occurred");
             throw new RuntimeException(e);
         }
     }

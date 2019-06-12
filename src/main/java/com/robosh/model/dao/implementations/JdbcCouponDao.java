@@ -47,8 +47,7 @@ public class JdbcCouponDao implements CouponDao {
                 result = couponMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return result;
     }
@@ -74,8 +73,7 @@ public class JdbcCouponDao implements CouponDao {
             }
             return coupons;
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
             return null;
         }
     }
@@ -100,8 +98,7 @@ public class JdbcCouponDao implements CouponDao {
                 result = couponMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return result;
     }
@@ -111,6 +108,7 @@ public class JdbcCouponDao implements CouponDao {
      */
     @Override
     public void create(Coupon entity) {
+        throw new UnsupportedOperationException();
     }
 
 
@@ -119,7 +117,7 @@ public class JdbcCouponDao implements CouponDao {
      */
     @Override
     public boolean update(Coupon coupon) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -127,7 +125,7 @@ public class JdbcCouponDao implements CouponDao {
      */
     @Override
     public boolean delete(int id) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
 
@@ -141,7 +139,7 @@ public class JdbcCouponDao implements CouponDao {
             connection.close();
             LOG.debug("Connection closed");
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
+            LOG.error("SQLException occurred");
             throw new RuntimeException(e);
         }
     }

@@ -52,8 +52,7 @@ public class JdbcAddressDao implements AddressDao {
                 return true;
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return false;
     }
@@ -80,8 +79,7 @@ public class JdbcAddressDao implements AddressDao {
                 return rs.getInt("id_adress");
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return -1;
     }
@@ -112,8 +110,7 @@ public class JdbcAddressDao implements AddressDao {
                 result = addressMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return result;
     }
@@ -142,8 +139,7 @@ public class JdbcAddressDao implements AddressDao {
                 result = addressMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return result;
     }
@@ -173,8 +169,7 @@ public class JdbcAddressDao implements AddressDao {
             }
             return addresses;
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
             return null;
         }
     }
@@ -184,7 +179,7 @@ public class JdbcAddressDao implements AddressDao {
      *This method not using here
      */
     public void create(Address entity) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -192,7 +187,7 @@ public class JdbcAddressDao implements AddressDao {
      *This method not using here
      */
     public boolean update(Address address) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -200,7 +195,7 @@ public class JdbcAddressDao implements AddressDao {
      *This method not using here
      */
     public boolean delete(int id) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -213,7 +208,7 @@ public class JdbcAddressDao implements AddressDao {
             connection.close();
             LOG.debug("Connection closed");
         } catch (SQLException e) {
-            LOG.debug(" SQLException occurred");
+            LOG.error(" SQLException occurred");
             throw new RuntimeException(e);
         }
     }
