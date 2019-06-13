@@ -3,12 +3,14 @@ package com.robosh.web.command.account.driver;
 import com.robosh.model.entity.enums.Role;
 import com.robosh.myUtils.LoginedUserUtils;
 import com.robosh.web.command.Command;
-import com.robosh.web.command.PathCommand;
-import com.robosh.web.command.RedirectPath;
+
+import static com.robosh.web.command.PathCommand.*;
+
 import com.robosh.web.command.RoutesJSP;
 import com.robosh.model.entity.Person;
 import com.robosh.service.ClientService;
 import com.robosh.service.DriverService;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,7 +41,7 @@ public class EnterLoginCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         final String phoneNumber = request.getParameter(PHONE_PARAMETER);
         final String password = request.getParameter(PASSWORD_PARAMETER);
-
+        String contextAndServletPath = request.getContextPath() + request.getServletPath();
         if (inputWrongData(phoneNumber, password)) {
             request.setAttribute(ERROR_MESSAGE_ATTRIBUTE, ERROR_MESSAGE_STRING);
             return RoutesJSP.LOGIN + WRONG_DATA;
@@ -47,19 +49,19 @@ public class EnterLoginCommand implements Command {
             Person person = LoginedUserUtils.getLoginedUser(request.getSession());
             if (person != null) {
                 if (Role.CLIENT.toString().equals(person.getRole().toString())) {
-                    return RedirectPath.REDIRECT_CLIENT_ACCOUNT;
+                    return REDIRECT + contextAndServletPath + CLIENT_ACCOUNT;
                 } else {
-                    return RedirectPath.REDIRECT_DRIVER_ACCOUNT;
+                    return REDIRECT + contextAndServletPath + DRIVER_ACCOUNT;
                 }
             }
             if (checkIfDriver(phoneNumber, password)) {
                 person = driverService.getDriverByPasswordAndPhone(phoneNumber, password);
                 LoginedUserUtils.storeLoginedUser(request.getSession(), person);
-                return RedirectPath.REDIRECT_DRIVER_ACCOUNT;
+                return REDIRECT + contextAndServletPath + DRIVER_ACCOUNT;
             } else {
                 person = clientService.getClientByPasswordAndPhone(phoneNumber, password);
                 LoginedUserUtils.storeLoginedUser(request.getSession(), person);
-                return RedirectPath.REDIRECT_CLIENT_ACCOUNT;
+                return REDIRECT + contextAndServletPath + CLIENT_ACCOUNT;
             }
         }
     }

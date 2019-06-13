@@ -1,7 +1,7 @@
 package com.robosh.myUtils;
 
 import com.robosh.model.entity.enums.Role;
-
+import static com.robosh.web.command.PathCommand.*;
 import java.util.*;
 
 
@@ -19,17 +19,18 @@ public class SecurityConfig {
 
     private static void init() {
         List<String> urlPatterns1 = new ArrayList<>();
-        urlPatterns1.add("/makeOrder");
-        urlPatterns1.add("/clientAccount");
-        urlPatterns1.add("/logOut");
-        urlPatterns1.add("/enterOrder");
+
+        urlPatterns1.add(MAKE_ORDER);
+        urlPatterns1.add(CLIENT_ACCOUNT);
+        urlPatterns1.add(LOGOUT);
+        urlPatterns1.add(ENTER_ORDER);
 
         mapConfig.put(Role.CLIENT, urlPatterns1);
 
         List<String> urlPatterns2 = new ArrayList<>();
-        urlPatterns2.add("/showOrders");
-        urlPatterns2.add("/driverAccount");
-        urlPatterns2.add("/logOut");
+        urlPatterns2.add(SHOW_ALL_ORDERS_PAG);
+        urlPatterns2.add(DRIVER_ACCOUNT);
+        urlPatterns2.add(LOGOUT);
 
         mapConfig.put(Role.DRIVER, urlPatterns2);
     }

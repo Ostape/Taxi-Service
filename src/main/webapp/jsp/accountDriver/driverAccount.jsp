@@ -35,7 +35,6 @@
                             <button class="account-driver-btns"><fmt:message key="driver.account.show.pag"/></button>
                         </a>
                     </div>
-
                     <div class="col-lg-12">
                         <c:if test="${param.wrongInput == true}">
                             <p class="errorsM bad-order-input"><fmt:message key="driver.account.mess.error"/></p>

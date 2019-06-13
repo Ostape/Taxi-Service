@@ -10,7 +10,6 @@
   <packaging>war</packaging>
 
   <name>taxiService Maven Webapp</name>
-  <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
   <properties>
@@ -98,7 +97,8 @@
       <version>2.2</version>
       <configuration>
         <port>8088</port>
-        <path>/taxi-Kyiv/*</path>
+        <path>/</path>
+        <update>true</update>
       </configuration>
       <dependencies>
         <dependency>
@@ -123,7 +123,6 @@
               </configuration>
           </plugin>
       </plugins>
-
   </build>
 
 </project>

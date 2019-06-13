@@ -12,13 +12,14 @@ import com.robosh.service.AddressService;
 import com.robosh.service.CouponService;
 import com.robosh.service.DriverService;
 import com.robosh.service.OrderService;
-import com.robosh.web.command.RedirectPath;
 import com.robosh.web.command.RoutesJSP;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import static com.robosh.web.command.PathCommand.*;
 
 /**
  * class that takes parameter from order and process them
@@ -68,7 +69,9 @@ public class EnterOrderCommand implements Command {
                         coupon, costs, costWithDiscount);
                 int timeWait = TimeWaitTaxiUtil.getTimeWait();
                 CookiesUtils.addCookies(response, driver, costWithDiscount, timeWait);
-                return RedirectPath.REDIRECT_SHOW_CLIENT_ORDER;
+
+                String contextAndServletPath = request.getContextPath() + request.getServletPath();
+                return REDIRECT + contextAndServletPath + SHOW_CLIENT_ORDER;
             } else {
                 return RoutesJSP.TAXI_ORDER + NO_SUCH_CAR;
             }

@@ -55,9 +55,7 @@ public class InputDataRegistrationUtils {
     }
 
     private static boolean isCorrectNameSurname(String name, String surname) {
-        boolean temp = isCorrectName(name) && isCorrectSurname(surname);
-        System.out.println(temp);
-        return temp;
+        return isCorrectName(name) && isCorrectSurname(surname);
     }
 
     public static boolean isNotCorrectData(String name, String surname, String phoneNumber,

@@ -16,6 +16,8 @@ import com.robosh.model.entity.enums.Role;
 import com.robosh.myUtils.LoginedUserUtils;
 import com.robosh.myUtils.SecurityUtils;
 
+import static com.robosh.web.command.PathCommand.*;
+
 public class AuthenticationFilter implements Filter {
 
     @Override
@@ -26,36 +28,31 @@ public class AuthenticationFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-
         String pathInfo = request.getPathInfo();
+        String contextAndServletPath = request.getContextPath() + request.getServletPath();
         Person loginedPerson = LoginedUserUtils.getLoginedUser(request.getSession());
 
-        if (("/login".equals(pathInfo) || "/registerClient".equals(pathInfo)) && loginedPerson != null){
-            if (loginedPerson.getRole().equals(Role.CLIENT)){
-                response.sendRedirect(request.getContextPath() + "/taxi-Kyiv/clientAccount");
-            }
-            else {
-                response.sendRedirect(request.getContextPath() + "/taxi-Kyiv/driverAccount");
+        if ((LOGIN_PAGE.equals(pathInfo) || REGISTER_CLIENT.equals(pathInfo)) && loginedPerson != null) {
+            if (loginedPerson.getRole().equals(Role.CLIENT)) {
+                response.sendRedirect(contextAndServletPath + CLIENT_ACCOUNT);
+            } else {
+                response.sendRedirect(contextAndServletPath + DRIVER_ACCOUNT);
             }
             return;
         }
 
-        if (SecurityUtils.isSecurityPage(request)){
-            if (loginedPerson != null && SecurityUtils.hasPermission(request, loginedPerson.getRole())){
-                chain.doFilter(req,resp);
-            }
-            else {
-                if("/makeOrder".equals(pathInfo)){
-                //    response.sendRedirect(request.getContextPath() + "/taxi-Kyiv/loginClient");
-                    response.sendRedirect(request.getContextPath() + "/taxi-Kyiv/login");
-                }
-                else {
-                    response.sendRedirect(request.getContextPath() + "/taxi-Kyiv/403");
+        if (SecurityUtils.isSecurityPage(request)) {
+            if (loginedPerson != null && SecurityUtils.hasPermission(request, loginedPerson.getRole())) {
+                chain.doFilter(req, resp);
+            } else {
+                if (MAKE_ORDER.equals(pathInfo)) {
+                    response.sendRedirect(contextAndServletPath + LOGIN_PAGE);
+                } else {
+                    response.sendRedirect(contextAndServletPath + FORBIDDEN);
                 }
             }
-        }
-        else {
-            chain.doFilter(req,resp);
+        } else {
+            chain.doFilter(req, resp);
         }
     }
 

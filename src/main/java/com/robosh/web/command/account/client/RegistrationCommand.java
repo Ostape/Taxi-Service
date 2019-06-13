@@ -3,12 +3,13 @@ package com.robosh.web.command.account.client;
 
 import com.robosh.myUtils.InputDataRegistrationUtils;
 import com.robosh.web.command.Command;
-import com.robosh.web.command.RedirectPath;
 import com.robosh.web.command.RoutesJSP;
 import com.robosh.model.customExceptions.EmailIsAlreadyTaken;
 import com.robosh.model.customExceptions.PhoneNumberIsAlreadyTaken;
 import com.robosh.model.entity.Client;
 import com.robosh.service.ClientService;
+
+import static com.robosh.web.command.PathCommand.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,7 +55,6 @@ public class RegistrationCommand implements Command {
             return RoutesJSP.REGISTER_CLIENT + BAD_INPUT;
         }
 
-
         Client client = new Client();
         client.setName(name);
         client.setPhoneNumber(phoneNumber);
@@ -71,6 +71,8 @@ public class RegistrationCommand implements Command {
             phoneNumberIsAlreadyTaken.printStackTrace();
             return RoutesJSP.REGISTER_CLIENT + BAD_PHONE;
         }
-        return RedirectPath.REDIRECT_LOGIN;
+
+        String contextAndServletPath = request.getContextPath() + request.getServletPath();
+        return REDIRECT + contextAndServletPath + LOGIN_PAGE;
     }
 }
