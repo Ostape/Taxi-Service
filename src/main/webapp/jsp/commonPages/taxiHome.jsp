@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${bundle}"/>
 
 <html lang="${param.lang}">
 <jsp:include page="../commonPartsOfPages/headTag.jsp"/>
@@ -36,37 +38,6 @@
     </header>
 </div>
 
-<section class="features_section">
-    <div class="center">
-        <ul class="features_list">
-            <li>
-                <div class="thumb"><img width="156" height="156"
-                                        src="${pageContext.request.contextPath}/img/advantage-1.jpg"
-                                        class="attachment-thumbnail wp-post-image"/></div>
-                <div class="caption">Єдиний номер для всієї України</div>
-            </li>
-            <li>
-                <div class="thumb"><img width="156" height="156"
-                                        src="${pageContext.request.contextPath}/img/advantage-2.jpg"
-                                        class="attachment-thumbnail wp-post-image"/></div>
-                <div class="caption">Ввічливі і уважні диспетчери</div>
-            </li>
-            <li>
-                <div class="thumb"><img width="156" height="156"
-                                        src="${pageContext.request.contextPath}/img/advantage-3.jpg"
-                                        class="attachment-thumbnail wp-post-image"/></div>
-                <div class="caption">Мобільний додаток з геолокацією</div>
-            </li>
-            <li>
-                <div class="thumb"><img width="156" height="156"
-                                        src="${pageContext.request.contextPath}/img/advantage-4.jpg"
-                                        class="attachment-thumbnail wp-post-image"/></div>
-                <div class="caption">100% подача автомобіля</div>
-            </li>
-        </ul>
-    </div>
-</section>
-
 
 <section class="benefits_section">
     <div class="center">
@@ -74,7 +45,8 @@
             <li class="around-clock">
                 <a href="#" class="benefits_item">
 	                <span class="benefits_inner">
-	                    <span class="caption"><span class="cell">Працюємо <br>цілодобово <br>24/7/365</span></span>
+	                    <span class="caption"><span class="cell"><fmt:message key="home.benefits.work"/>
+                            <br><fmt:message key="home.benefits.all.day"/> <br>24/7/365</span></span>
 	                    <span class="icon"></span>
 	                </span>
                 </a>
@@ -82,7 +54,8 @@
             <li class="taxi-online">
                 <a href="#" class="benefits_item">
 	                <span class="benefits_inner">
-	                    <span class="caption"><span class="cell">Замовити <br>таксі онлайн</span></span>
+	                    <span class="caption"><span class="cell"><fmt:message key="home.benefits.order"/>
+                            <br><fmt:message key="home.benefits.order.online"/></span></span>
 	                    <span class="icon"></span>
 	                </span>
                 </a>
@@ -91,7 +64,8 @@
                 <a href="#" class="benefits_item">
 	                <span class="benefits_inner">
 	                    <span class="caption"><span
-                                class="cell">Таксі в аеропорт, <br>на зал. вокзал, <br>автовокзал</span></span>
+                                class="cell"><fmt:message key="home.benefits.taxi.aeropot"/>
+                             <br><fmt:message key="home.benefits.taxi.railway.st"/><br><fmt:message key="home.benefits.taxi.auto"/></span></span>
 	                    <span class="icon"></span>
 	                </span>
                 </a>
@@ -99,7 +73,8 @@
             <li class="low-rates">
                 <a href="#" class="benefits_item">
 	                <span class="benefits_inner">
-	                    <span class="caption"><span class="cell">Низькі <br>тарифи</span></span>
+	                    <span class="caption"><span class="cell"><fmt:message key="home.benefits.low"/>
+                            <br><fmt:message key="home.benefits.low.tariff"/></span></span>
 	                    <span class="icon"></span>
 	                </span>
                 </a>
@@ -111,32 +86,18 @@
 
 <section id="text_section" class="text_section">
     <div class="center text">
-        <h1>Таксі в Києві онлайн </h1>
-        <span>За статистикою таксі в Києві замовляють кожні 5 хвилин. Складно навіть уявити, наскільки актуальною може виявитися дана послуга, адже ситуації, коли необхідно вчасно бути в тому чи іншому місці трапляються постійно. Наша служба пропонує скористатися таксі в Києві та ще восьми містах України. У перспективі – розвиток і надання послуг на більшій території нашої держави та за її межами. Один з плюсів «838» – можливість замовити таксі (Київ) онлайн в інтернеті або через мобільний додаток, і це не єдина перевага нашої служби.</span>
-        <h2><span>Служба таксі 838: наші переваги</span></h2>
+        <h1><fmt:message key="home.taxi.title"/></h1>
+        <span><fmt:message key="home.text1"/></span>
+        <h2><span><fmt:message key="home.benefit.text"/></span></h2>
         <ul>
-            <li><span>Досвід роботи. На відміну від інших таксі Києва, наша компанія функціонує на ринку України більше 12-ти років. За цей період ми змогли організувати чітку і злагоджену роботу, пропонуючи максимальну оперативність та якість послуг.</span>
+            <li><span><fmt:message key="home.text2"/></span>
             </li>
-            <li><span>Великий автопарк. Не всі таксі Києва можуть запропонувати великий вибір автомобілів. Як правило, в таксі (Київ) використовуються досить зношені машини середнього класу, які приїжджають без можливості вибору відповідного варіанту. Наша служба кардинально змінила підхід до даної сфери послуг! Наприклад, у такому місті, як Київ, таксі 838 володіє своїм власним автопарком, в якому є транспорт від середнього класу і вище.</span>
+            <li><span><fmt:message key="home.text.3"/></span>
             </li>
-            <li><span>Індивідуальний підхід до кожного клієнта. Таксі (Київ і не тільки) 838 – це уважне ставлення до наших замовників. Ваш дзвінок – і ми врахуємо всі особливості майбутнього шляху.</span>
+            <li><span><fmt:message key="home.text.4"/></span>
             </li>
         </ul>
-        <span>Якщо ви знаходитесь в одному з населених пунктів України, де працює наша компанія, або, зокрема, в місті Київ – таксі 838 стане для вас чудовою знахідкою, оскільки головні принципи, якими ми керуємося, це:</span>
-        <ul>
-            <li>
-                <span>Задоволеність клієнта. При замовленні таксі (Київ, Львів, Маріуполь тощо), ми намагаємося зробити все, щоб клієнт залишився задоволений.</span>
-            </li>
-            <li>
-                <span>Доступність. На відміну від інших таксі Києва, служба 838 дотримується демократичної цінової політики.</span>
-            </li>
-            <li>
-                <span>Якість наданих послуг – невід'ємна частина нашої роботи.</span>
-            </li>
-        </ul>
-        <h2><span>Оперативне таксі для тих, хто цінує свій час</span></h2>
-        <span>Служба таксі (Київ) пропонує замовити найбільш прийнятну машину, зробивши лише один дзвінок. Завдяки унікальній системі «автопередзвонювання» наші фахівці зателефонують клієнту і уточнять час і місце початкового і кінцевого пункту. Крім того, щоб скористатися послугами, не обов'язково запам'ятовувати складні телефони і накопичувати візитки у своєму портмоне. Всі номери таксі (Київ) – це лише три прості цифри «838», набір яких для наших клієнтів є абсолютно безкоштовним.</span>
-    </div>
+        </div>
 </section>
 <jsp:include page="../commonPartsOfPages/footer.jsp"/>
 </body>

@@ -36,7 +36,7 @@ CREATE TABLE `adress` (
 
 LOCK TABLES `adress` WRITE;
 /*!40000 ALTER TABLE `adress` DISABLE KEYS */;
-INSERT INTO `adress` VALUES (1,'Янгеля','12'),(2,'Янгеля','16/2'),(3,'Янгеля','7'),(4,'Янгеля','8'),(5,'Проскурівська','3'),(6,'Проскурівська','4'),(7,'Проскурівська','7'),(8,'Петровська','8'),(9,'Петровська','12'),(10,'Петровська','55');
+INSERT INTO `adress` VALUES (1,'Янгеля','12'),(2,'Янгеля','16/2'),(3,'Янгеля','7'),(4,'Янгеля','8'),(5,'Проскурівська','3'),(6,'Проскурівська','4'),(7,'Андріївська','7'),(8,'Андріївська','8'),(9,'Петровська','12'),(10,'Петровська','55');
 /*!40000 ALTER TABLE `adress` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-27 18:36:15
+-- Dump completed on 2019-06-13 16:36:07

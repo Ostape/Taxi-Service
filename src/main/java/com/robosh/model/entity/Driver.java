@@ -3,7 +3,9 @@ package com.robosh.model.entity;
 import com.robosh.model.entity.enums.DriverStatus;
 import com.robosh.model.entity.enums.Role;
 
-public class Driver extends Person{
+import java.util.Objects;
+
+public class Driver extends Person {
     private DriverStatus driverStatus;
     private Car car;
     private String middleName;
@@ -48,5 +50,20 @@ public class Driver extends Person{
                 ", password='" + password + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Driver)) return false;
+        if (!super.equals(o)) return false;
+        Driver driver = (Driver) o;
+        return getDriverStatus() == driver.getDriverStatus() && Objects.equals(getCar(),
+                driver.getCar()) && Objects.equals(getMiddleName(), driver.getMiddleName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getDriverStatus(), getCar(), getMiddleName());
     }
 }

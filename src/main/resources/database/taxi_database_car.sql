@@ -38,7 +38,7 @@ CREATE TABLE `car` (
 
 LOCK TABLES `car` WRITE;
 /*!40000 ALTER TABLE `car` DISABLE KEYS */;
-INSERT INTO `car` VALUES (1,'BX3490VC','Audi','blue','Wagon'),(2,'AA4533AM','BMW','yellow','Wagon'),(3,'AA4544AM','Mercedes','white','MiniVan'),(4,'BX2093MX','Lada','black','Light'),(5,'AA8789AM','BMV','blue','Light'),(6,'AZ2323AK','Shkoda','black','Light'),(7,'AM2378AM','Audi','white','Wagon');
+INSERT INTO `car` VALUES (1,'BX3490VC','Audi','blue','wagon'),(2,'AA4533AM','BMW','yellow','wagon'),(3,'AA4544AM','Mercedes','white','minivan'),(4,'BX2093MX','Lada','black','light'),(5,'AA8789AM','BMV','blue','light'),(6,'AZ2323AK','Shkoda','black','light'),(7,'AM2378AM','Audi','white','wagon');
 /*!40000 ALTER TABLE `car` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-27 18:36:13
+-- Dump completed on 2019-06-13 16:36:05

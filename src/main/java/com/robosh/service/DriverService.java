@@ -27,7 +27,7 @@ public class DriverService {
         }
     }
 
-    public Driver getDriverById(long id) {
+    public Driver getDriverById(int id) {
         try (DriverDao dao = daoFactory.createDriverDao()) {
             LOG.debug("created DriverDao");
             return dao.getById(id);

@@ -3,6 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${bundle}"/>
+
 <html lang="${param.lang}">
 <jsp:include page="../commonPartsOfPages/headTag.jsp"/>
 
@@ -18,63 +21,63 @@
         <div class="register">
             <form method="POST" action="${pageContext.request.contextPath}/taxi-Kyiv/register">
                 <div class="container">
-                    <h1>Register</h1>
-                    <p>Please fill this form to create an account.</p>
+                    <h1><fmt:message key="register.title"/></h1>
+                    <p><fmt:message key="register.ask.to.fill"/></p>
                     <hr>
 
-                    <label><b>Name</b></label>
+                    <label><b><fmt:message key="register.name"/></b></label>
                     <c:if test="${param.badInput == true}">
-                        <p class="errorsM">Can contain only letters</p>
+                        <p class="errorsM"><fmt:message key="register.name.error"/></p>
                     </c:if>
-                    <input type="text" placeholder="Name" name="name" required>
+                    <input type="text" placeholder="<fmt:message key="register.name"/>" name="name" required>
 
-
-                    <label><b>Surname</b></label>
+                    <label><b><fmt:message key="register.surname"/></b></label>
                     <c:if test="${param.badInput == true}">
-                        <p class="errorsM">Can contain only letters</p>
+                        <p class="errorsM"><fmt:message key="register.name.error"/></p>
                     </c:if>
-                    <input type="text" placeholder="Surname" name="surname" required>
+                    <input type="text" placeholder="<fmt:message key="register.surname"/>" name="surname" required>
 
 
-                    <label><b>Phone number</b></label>
+                    <label><b><fmt:message key="register.phone.number"/></b></label>
                     <c:if test="${param.badInput == true}">
-                        <p class="errorsM">should start with (+380) </p>
+                        <p class="errorsM"><fmt:message key="register.phone.number.error"/></p>
                     </c:if>
                     <c:if test="${param.badPhoneNumber == true}">
-                        <p class="errorsM">bad phone number</p>
+                        <p class="errorsM"><fmt:message key="register.bad.phone.number"/></p>
                     </c:if>
-                    <input type="text" placeholder="Phone number" name="phone_number" required>
+                    <input type="text" placeholder="<fmt:message key="register.phone.number"/>" name="phone_number" required>
                     <br>
                     <br>
                     <hr>
 
-                    <label><b>Email</b></label>
+                    <label><b><fmt:message key="register.email"/></b></label>
                     <c:if test="${param.badInput == true}">
-                        <p class="errorsM">bad email</p>
+                        <p class="errorsM"><fmt:message key="register.email.error"/></p>
                     </c:if>
                     <c:if test="${param.badEmail == true}">
-                        <p class="errorsM">bad email</p>
+                        <p class="errorsM"><fmt:message key="register.email.error2"/></p>
                     </c:if>
-                    <input type="email" placeholder="Enter email" name="email" required>
+                    <input type="email" placeholder="<fmt:message key="register.email"/>" name="email" required>
 
 
-                    <label><b>Password</b></label>
+                    <label><b><fmt:message key="register.password"/></b></label>
                     <c:if test="${param.badInput == true}">
-                        <p class="errorsM">password can contain only "a-zA-Z0-9"</p>
+                        <p class="errorsM"><fmt:message key="register.password.error"/></p>
                     </c:if>
-                    <input type="password" placeholder="Enter password" name="password" required>
+                    <input type="password" placeholder="<fmt:message key="register.enter.password"/>" name="password" required>
 
-                    <label><b>Repeat Password</b></label>
-                    <input type="password" placeholder="Repeat password" name="password_repeat" required>
-
+                    <label><b><fmt:message key="register.repeat.password"/></b></label>
+                    <input type="password" placeholder="<fmt:message key="register.repeat.password"/>" name="password_repeat" required>
                     <hr>
 
-                    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-                    <button type="submit" class="registerbtn">Register</button>
+                    <p><fmt:message key="register.agree.creating"/><a href="#">
+                        <fmt:message key="register.terms.privacy"/></a>.</p>
+                    <button type="submit" class="registerbtn"><fmt:message key="register.btn.submit"/></button>
                 </div>
 
                 <div class="container signin">
-                    <p>Already have an account? <a href="${pageContext.request.contextPath}/taxi-Kyiv/login">Sign in</a>.
+                    <p><fmt:message key="register.have.acc"/> <a href="${pageContext.request.contextPath}/taxi-Kyiv/login">
+                        <fmt:message key="register.sign.in"/></a>.
                     </p>
                 </div>
                 <div style="height: 60px"></div>

@@ -12,7 +12,7 @@ public class CarService {
     private DaoFactory daoFactory = DaoFactory.getInstance();
     private static final Logger LOG = Logger.getLogger(CarService.class);
 
-    public Car getCarById(long id){
+    public Car getCarById(int id){
         try (CarDao dao = daoFactory.createCarDao()) {
             LOG.debug("created CarDao");
             return dao.getById(id);
@@ -33,10 +33,4 @@ public class CarService {
         }
     }
 
-    public Car getCarByType(String type){
-        try(CarDao dao = daoFactory.createCarDao()){
-            LOG.debug("created CarDao");
-            return dao.getCarByType(type);
-        }
-    }
 }

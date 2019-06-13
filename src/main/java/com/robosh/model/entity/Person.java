@@ -2,19 +2,21 @@ package com.robosh.model.entity;
 
 import com.robosh.model.entity.enums.Role;
 
+import java.util.Objects;
+
 public abstract class Person {
-    protected long personId;
+    protected int personId;
     protected String name;
     protected String surname;
     protected String password;
     protected String phoneNumber;
     protected Role role;
 
-    public long getPersonId() {
+    public int getPersonId() {
         return personId;
     }
 
-    public void setPersonId(long personId) {
+    public void setPersonId(int personId) {
         this.personId = personId;
     }
 
@@ -58,5 +60,21 @@ public abstract class Person {
         this.phoneNumber = phoneNumber;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return getPersonId() == person.getPersonId() &&
+                Objects.equals(getName(), person.getName()) &&
+                Objects.equals(getSurname(), person.getSurname()) &&
+                Objects.equals(getPassword(), person.getPassword()) &&
+                Objects.equals(getPhoneNumber(), person.getPhoneNumber()) &&
+                getRole() == person.getRole();
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPersonId(), getName(), getSurname(), getPassword(), getPhoneNumber(), getRole());
+    }
 }

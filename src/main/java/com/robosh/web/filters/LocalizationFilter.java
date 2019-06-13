@@ -5,6 +5,11 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+/**
+ * this filter responds for localization on jsp pages
+ *
+ * @author Orest Shemelyuk
+ */
 public class LocalizationFilter implements Filter {
 
     private static final String LOCALE = "locale";
@@ -20,7 +25,7 @@ public class LocalizationFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest httpRequest = (HttpServletRequest)request;
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
         String localeParameter = request.getParameter(LOCALE);
 
         locale = localeParameter != null

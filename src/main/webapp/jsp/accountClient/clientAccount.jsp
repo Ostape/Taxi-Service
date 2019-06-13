@@ -3,6 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${bundle}"/>
+
 <html lang="${param.lang}">
 <jsp:include page="../commonPartsOfPages/headTag.jsp"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-grid.css">
@@ -30,11 +33,11 @@
     				</li>
 
     				<li class="liFont">
-						<p>E-mail: <c:out value="${sessionScope.loginedPerson.email}"/></p>
+						<p><fmt:message key="client.account.mail"/> <c:out value="${sessionScope.loginedPerson.email}"/></p>
     				</li>
 
     				<li class="liFont">
-						<p>Phone number: <c:out value="${sessionScope.loginedPerson.phoneNumber}"/></p>
+						<p><fmt:message key="client.account.phone"/> <c:out value="${sessionScope.loginedPerson.phoneNumber}"/></p>
     				</li>
 
     			</ul>
@@ -42,7 +45,7 @@
     		</div>
     		<div style="text-align: center;">
 	    		<form action="${pageContext.request.contextPath}/taxi-Kyiv/logOut">
-	    			<button type="submit" class="logout">Logout</button>
+	    			<button type="submit" class="logout"><fmt:message key="client.account.logout"/></button>
 	    		</form>
     		</div>
     	</div>

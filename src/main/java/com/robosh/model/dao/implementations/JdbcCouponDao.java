@@ -11,6 +11,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class named JdbcCouponDao implements CouponDao
+ * execute different queries to database with prepared statements
+ *
+ * @author Orest Shemelyuk
+ */
 public class JdbcCouponDao implements CouponDao {
     private Connection connection;
     private static final Logger LOG = Logger.getLogger(JdbcCouponDao.class);
@@ -19,14 +25,21 @@ public class JdbcCouponDao implements CouponDao {
         this.connection = connection;
     }
 
+    /**
+     * takes int parameter and search
+     * Coupon by id else return Coupon with idCoupon -1
+     *
+     * @param id
+     * @return
+     */
     @Override
-    public Coupon getById(long id) {
+    public Coupon getById(int id) {
         Mapper<Coupon> couponMapper = new CouponMapper();
         Coupon result = new Coupon();
         result.setIdCoupon(-1);
 
         try (PreparedStatement ps = connection.prepareStatement(CouponSQL.READ_BY_ID.getQUERY())) {
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             final ResultSet rs = ps.executeQuery();
             LOG.debug("Executed query" + CouponSQL.READ_BY_ID);
             if (rs.next()) {
@@ -34,12 +47,16 @@ public class JdbcCouponDao implements CouponDao {
                 result = couponMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return result;
     }
 
+    /**
+     * return All Coupon from database
+     *
+     * @return List<Coupon>
+     */
     @Override
     public List<Coupon> findAll() {
         List<Coupon> coupons = new ArrayList<>();
@@ -56,16 +73,22 @@ public class JdbcCouponDao implements CouponDao {
             }
             return coupons;
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
             return null;
         }
     }
 
+    /**
+     * return from database Coupon by couponName
+     *
+     * @param couponName
+     * @return Coupon
+     */
     @Override
     public Coupon readByCouponName(String couponName) {
         Mapper<Coupon> couponMapper = new CouponMapper();
         Coupon result = new Coupon();
+        result.setIdCoupon(-1);
         try (PreparedStatement ps = connection.prepareStatement(CouponSQL.READ_BY_COUPON.getQUERY())) {
             ps.setString(1, couponName);
             final ResultSet rs = ps.executeQuery();
@@ -75,49 +98,48 @@ public class JdbcCouponDao implements CouponDao {
                 result = couponMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return result;
     }
 
     /**
-     * not using
-     *
-     * @param entity
+     * This method not using here
      */
     @Override
     public void create(Coupon entity) {
+        throw new UnsupportedOperationException();
     }
 
 
     /**
-     * not using
-     *
-     * @param coupon
+     * This method not using here
      */
     @Override
     public boolean update(Coupon coupon) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     /**
-     * not using
-     *
-     * @param id
+     * This method not using here
      */
     @Override
-    public boolean delete(long id) {
-        return false;
+    public boolean delete(int id) {
+        throw new UnsupportedOperationException();
     }
 
+
+    /**
+     * this method
+     * close connection
+     */
     @Override
     public void close() {
         try {
             connection.close();
             LOG.debug("Connection closed");
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
+            LOG.error("SQLException occurred");
             throw new RuntimeException(e);
         }
     }

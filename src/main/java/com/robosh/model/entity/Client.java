@@ -2,7 +2,9 @@ package com.robosh.model.entity;
 
 import com.robosh.model.entity.enums.Role;
 
-public class Client extends Person{
+import java.util.Objects;
+
+public class Client extends Person {
     private String email;
 
     public Client() {
@@ -15,6 +17,19 @@ public class Client extends Person{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Client)) return false;
+        Client client = (Client) o;
+        return Objects.equals(email, client.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
     }
 
     @Override

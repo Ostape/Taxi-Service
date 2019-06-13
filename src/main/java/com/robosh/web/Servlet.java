@@ -1,11 +1,15 @@
 package com.robosh.web;
 
-import com.robosh.model.command.Command;
-import com.robosh.model.command.account.*;
-import com.robosh.model.command.directions.*;
-import com.robosh.service.ClientService;
-import com.robosh.service.DriverService;
-import com.robosh.service.OrderService;
+import com.robosh.web.command.Command;
+import com.robosh.service.*;
+
+import static com.robosh.web.command.PathCommand.*;
+
+import com.robosh.web.command.account.client.*;
+import com.robosh.web.command.account.driver.DriverEnterNumberOrderCommand;
+import com.robosh.web.command.account.driver.EnterLoginCommand;
+import com.robosh.web.command.account.driver.ShowAllDriverOrdersCommand;
+import com.robosh.web.command.common.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +19,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This is main Servlet that process all pages
+ *
+ * @author Orest Shemelyuk
+ */
 public class Servlet extends HttpServlet {
 
     private Map<String, Command> commands;
@@ -22,18 +31,21 @@ public class Servlet extends HttpServlet {
     @Override
     public void init() {
         commands = new HashMap<>();
-        commands.put("registerClient", new RegisterClientCommand());
-        commands.put("register", new RegistrationCommand(new ClientService()));
-        commands.put("homePage", new TaxiHomeCommand());
-        commands.put("makeOrder", new ClientOrderCommand());
-        commands.put("enterLogin", new EnterLoginCommand(new ClientService(), new DriverService()));
-        commands.put("login", new LoginCommand());
-        commands.put("logOut", new LogOutCommand());
-        commands.put("clientAccount", new ClientAccountCommand());
-        commands.put("driverAccount", new DriverAccountCommand());
-        commands.put("showAllOrders", new ShowAllDriverOrdersCommand(new OrderService()));
-        commands.put("403", new Error403Command());
-        commands.put("enterOrder", new EnterOrderCommand(new OrderService(), new DriverService()));
+        commands.put(REGISTER_CLIENT, new RegisterClientCommand());
+        commands.put(REGISTER_PAGE, new RegistrationCommand(new ClientService()));
+        commands.put(HOME_PAGE, new TaxiHomeCommand());
+        commands.put(MAKE_ORDER, new ClientOrderCommand());
+        commands.put(ENTER_LOGIN, new EnterLoginCommand(new ClientService(), new DriverService()));
+        commands.put(LOGIN_PAGE, new LoginCommand());
+        commands.put(LOGOUT, new LogOutCommand());
+        commands.put(CLIENT_ACCOUNT, new ClientAccountCommand());
+        commands.put(DRIVER_ACCOUNT, new DriverAccountCommand());
+        commands.put(SHOW_ALL_ORDERS_PAG, new ShowAllDriverOrdersCommand(new OrderService()));
+        commands.put(FORBIDDEN, new ErrorForbiddenCommand());
+        commands.put(ENTER_ORDER, new EnterOrderCommand(new OrderService(), new DriverService(),
+                new AddressService(), new CouponService()));
+        commands.put(SHOW_CLIENT_ORDER, new ShowOrderClientCommand());
+        commands.put(ENTER_NUMBER_OF_ORDER, new DriverEnterNumberOrderCommand(new OrderService()));
     }
 
     @Override
@@ -48,34 +60,41 @@ public class Servlet extends HttpServlet {
         processRequest(request, response);
     }
 
+    /**
+     * this method process requests and
+     * get path to the next page from Command interface
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
 
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String commandKey = getRequestPath(request);//get next command key
+    private void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String commandKey = getRequestPath(request);
         Command command = commands.get(commandKey);
-        if (command == null) { //if there is no command with such key, request dispatcher home page
-           // request.getRequestDispatcher("/taxi-Kyiv/homePage").forward(request, response);
-            response.sendRedirect(request.getContextPath() + "/taxi-Kyiv/homePage");
-        }else {
-            String nextPage = command.execute(request, response); //which one we will use: regirect or forward
-            //if command.execute will have "redirect#", we will use redirect, otherwise forward
-            if (isRedirect(nextPage)){
-                System.out.println("redirect servlet: " + nextPage + "\n");
-                response.sendRedirect(nextPage.replaceAll("redirect#", ""));
-            }
-            else{
-                System.out.println("forward servlet: " + nextPage +"\n");
+        String contextAndServletPath = request.getContextPath() + request.getServletPath();
+        if (command == null) {
+            response.sendRedirect(contextAndServletPath + HOME_PAGE);
+        } else {
+            String nextPage = command.execute(request, response);
+            if (isRedirect(nextPage)) {
+                response.sendRedirect(nextPage.replaceAll(REDIRECT, EMPTY_STR));
+            } else {
                 request.getRequestDispatcher(nextPage).forward(request, response);
             }
         }
     }
 
-
     private String getRequestPath(HttpServletRequest request) {
         String pathURI = request.getRequestURI();
-        return pathURI.replaceAll(".*/taxi-Kyiv/", "");
+        String servletPath = request.getServletPath();
+        String regex = ".*" + servletPath;
+        return pathURI.replaceAll(regex, EMPTY_STR);
     }
 
-    private boolean isRedirect(String string){
-        return string.contains("redirect#");
+    private boolean isRedirect(String string) {
+        return string.contains(REDIRECT);
     }
 }

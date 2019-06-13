@@ -11,24 +11,44 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * This class named JdbcCarDao implements CarDao
+ * execute different queries to database with prepared statements
+ *
+ * @author Orest Shemelyuk
+ */
+
 public class JdbcCarDao implements CarDao {
 
-    private static final Logger LOG = Logger.getLogger(JdbcAdressDao.class);
+    private static final Logger LOG = Logger.getLogger(JdbcCarDao.class);
     private Connection connection;
 
+    /**
+     * public Constructor that assigns connection
+     *
+     * @param connection
+     */
     public JdbcCarDao(Connection connection) {
         this.connection = connection;
     }
 
+
+    /**
+     * This method takes one int parameter and return Car object
+     * if iit exists else Car with idCar equals -1
+     *
+     * @param id
+     * @return Car
+     */
     @Override
-    public Car getById(long id) {
+    public Car getById(int id) {
         Mapper<Car> carMapper = new CarMapper();
         Car result = new Car();
         result.setIdCar(-1);
 
         try (PreparedStatement ps = connection.prepareStatement(CarSQL.READ_BY_ID.getQUERY())) {
-
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             final ResultSet rs = ps.executeQuery();
             LOG.debug("Executed query" + CarSQL.READ_BY_ID);
             if (rs.next()) {
@@ -36,11 +56,17 @@ public class JdbcCarDao implements CarDao {
                 result = carMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return result;
     }
+
+    /**
+     * This method should return all Car from database
+     * else return null
+     *
+     * @return List<Car>
+     */
 
     @Override
     public List<Car> findAll() {
@@ -57,12 +83,20 @@ public class JdbcCarDao implements CarDao {
             }
             return cars;
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
             return null;
         }
     }
 
+    /**
+     * This method take two parameters
+     * int parameter id_car and String carType
+     * and checks if Car exists in database according to such parameters
+     *
+     * @param id_car
+     * @param carType
+     * @return boolean
+     */
     @Override
     public boolean isSameCarType(int id_car, String carType) {
         try (PreparedStatement ps = connection.prepareStatement(CarSQL.READ_BY_ID_AND_CAR_TYPE.getQUERY())) {
@@ -75,63 +109,46 @@ public class JdbcCarDao implements CarDao {
                 return true;
             }
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
+            LOG.error("SQLException occurred");
         }
         return false;
     }
 
     @Override
-    public Car getCarByType(String carType) {
-        Mapper<Car> carMapper = new CarMapper();
-        Car result = new Car();
-
-        try (PreparedStatement ps = connection.prepareStatement(CarSQL.READ_BY_TYPE.getQUERY())) {
-            ps.setString(1, carType);
-            final ResultSet rs = ps.executeQuery();
-            LOG.debug("Executed query" + CarSQL.READ_BY_TYPE);
-            if (rs.next()) {
-                LOG.debug("check is rs has next");
-                result = carMapper.getEntity(rs);
-            }
-        } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-
-    @Override
     /**
-     * don`t using
+     *This method not using here
      */
     public void create(Car entity) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     /**
-     * don`t using
+     *This method not using here
      */
     public boolean update(Car car) {
-        return false;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     /**
-     * don`t use
+     *This method not using here
      */
-    public boolean delete(long id) {
-        return false;
+    public boolean delete(int id) {
+        throw new UnsupportedOperationException();
     }
 
+    /**
+     * this method
+     * close connection
+     */
     @Override
     public void close() {
         try {
             connection.close();
             LOG.debug("Connection closed");
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
+            LOG.error("SQLException occurred");
             throw new RuntimeException(e);
         }
     }

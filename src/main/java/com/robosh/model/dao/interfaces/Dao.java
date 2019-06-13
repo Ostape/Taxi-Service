@@ -2,18 +2,18 @@ package com.robosh.model.dao.interfaces;
 
 import java.util.List;
 
-public interface Dao<T> extends AutoCloseable{
+public interface Dao<T> extends AutoCloseable {
 
-       void create(T entity);
+    void create(T entity);
 
-        T getById(long id);
+    T getById(int id);
 
-        List<T> findAll();
+    List<T> findAll();
 
-        boolean update(T t);
+    boolean update(T t);
 
-        boolean delete(long id);
+    boolean delete(int id);
 
-        @Override
-        void close();
+    @Override
+    void close();
 }

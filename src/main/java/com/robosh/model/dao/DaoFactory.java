@@ -10,7 +10,7 @@ public abstract class DaoFactory {
 
     public abstract ClientDao createClientDao();
 
-    public abstract AdressDao createAdressDao();
+    public abstract AddressDao createAdressDao();
 
     public abstract DriverDao createDriverDao();
 

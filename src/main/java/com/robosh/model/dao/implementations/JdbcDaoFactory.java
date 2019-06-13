@@ -8,18 +8,22 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * JdbcDaoFactory that extends DaoFactory and return connection
+ */
 public class JdbcDaoFactory extends DaoFactory {
 
     private static final Logger LOG = Logger.getLogger(JdbcDaoFactory.class);
     private DataSource dataSource = ConnectionPoolHolder.getDataSource();
+
     @Override
     public ClientDao createClientDao() {
         return new JdbcClientDao(getConnection());
     }
 
     @Override
-    public AdressDao createAdressDao() {
-        return new JdbcAdressDao(getConnection());
+    public AddressDao createAdressDao() {
+        return new JdbcAddressDao(getConnection());
     }
 
     @Override
@@ -43,7 +47,7 @@ public class JdbcDaoFactory extends DaoFactory {
     }
 
     private Connection getConnection() {
-        try{
+        try {
             LOG.debug("getConnection: " + dataSource);
             return dataSource.getConnection();
         } catch (SQLException e) {

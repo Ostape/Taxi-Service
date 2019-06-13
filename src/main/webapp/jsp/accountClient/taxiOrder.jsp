@@ -3,6 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
+<fmt:setLocale value="${locale}"/>
+<fmt:setBundle basename="${bundle}"/>
+
 
 <html lang="${param.lang}">
 <jsp:include page="../commonPartsOfPages/headTag.jsp"/>
@@ -23,18 +26,18 @@
                 <div class="formsOrder">
                     <div class="container">
                         <div style="width: 25%; border-bottom: 4px solid #30a3da">
-                            <h1 class="order-text">Місце подачі авто</h1>
+                            <h1 class="order-text"><fmt:message key="taxi.order.place"/></h1>
                         </div>
 
                         <hr style="width: 97%; margin-bottom: 15px">
                         <c:if test="${param.sameAddress == true}">
-                            <p class="errorsM">Select different Addresses</p>
+                            <p class="errorsM"><fmt:message key="taxi.order.choose.error"/></p>
                         </c:if>
-                        <div class="labelOrder"><h1 class="order-text label-text">Адреса: </h1></div>
+                        <div class="labelOrder"><h1 class="order-text label-text"><fmt:message key="taxi.show.address"/></h1></div>
                         <div class="inputOrder">
                             <select name="addressDeparture" class="selectAdress">
-                                <c:forEach items="${requestScope.allAddress}" var="adress">
-                                <option><c:out value="${adress.street}"/> <c:out value="${adress.houseNumber}"/></option>
+                                <c:forEach items="${requestScope.allAddress}" var="address">
+                                <option><c:out value="${address.street}"/> <c:out value="${address.houseNumber}"/></option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -49,15 +52,15 @@
                 <div class="formsOrder">
                     <div class="container">
                         <div style="width: 25%; border-bottom: 4px solid #fed402">
-                            <h1 class="order-text">Куди доставити</h1>
+                            <h1 class="order-text"><fmt:message key="taxi.order.arrive"/></h1>
                         </div>
 
                         <hr style="width: 97%;margin-bottom: 15px">
-                        <div class="labelOrder"><h1 class="order-text label-text">Адреса: </h1></div>
+                        <div class="labelOrder"><h1 class="order-text label-text"><fmt:message key="taxi.show.address"/></h1></div>
                         <div class="inputOrder">
                             <select name="addressArrive" class="selectAdress">
-                                <c:forEach items="${requestScope.allAddress}" var="adress">
-                                    <option><c:out value="${adress.street}"/> <c:out value="${adress.houseNumber}"/></option>
+                                <c:forEach items="${requestScope.allAddress}" var="address">
+                                    <option><c:out value="${address.street}"/> <c:out value="${address.houseNumber}"/></option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -72,15 +75,15 @@
                 <div class="formsOrder">
                     <div class="container">
                         <div style="width: 25%; border-bottom: 4px solid #30a3da">
-                            <h1 class="order-text">Додаткові вимоги</h1>
+                            <h1 class="order-text"><fmt:message key="taxi.order.reqir"/></h1>
                         </div>
                         <hr style="width: 97%; margin-bottom: 15px">
-                        <div class="labelOrder"><h1 class="order-text label-text">Клас авто: </h1></div>
+                        <div class="labelOrder"><h1 class="order-text label-text"><fmt:message key="taxi.order.auto.type"/></h1></div>
                         <div class="inputOrder" style="padding: 10px;">
 
                             <div>
                                 <c:if test="${param.noSuitableCarType == true}">
-                                    <p class="errorsM">No suitable car type</p>
+                                    <p class="errorsM"><fmt:message key="taxi.order.no.car"/></p>
                                 </c:if>
                                 <div class="cc-selector">
                                     <div class="radbox">
@@ -114,13 +117,13 @@
                 <div class="formsOrder">
                     <div class="container">
                         <div style="width: 25%; border-bottom: 4px solid #fed402">
-                            <h1 class="order-text">Купон</h1>
+                            <h1 class="order-text"><fmt:message key="taxi.order.coupon"/></h1>
                         </div>
 
                         <hr style="width: 97%;margin-bottom: 15px">
-                        <div class="labelOrder"><h1 class="order-text label-text">Назва купону: </h1></div>
+                        <div class="labelOrder"><h1 class="order-text label-text"><fmt:message key="taxi.order.coupon.name"/></h1></div>
                         <div class="inputOrder">
-                            <input type="text" placeholder="coupon" name="coupon" class="inputO">
+                            <input type="text" placeholder="<fmt:message key="taxi.order.coupon"/>" name="coupon" class="inputO">
                         </div>
                         <div style="clear: both;"></div>
                     </div>
@@ -131,7 +134,7 @@
                 <div style="height: 10px"></div>
 
                 <div class="container" style="display: flex;">
-                    <button type="submit" class="buttonSub">Замовити</button>
+                    <button type="submit" class="buttonSub"><fmt:message key="taxi.make.order.client"/></button>
                 </div>
 
                 <div style="height: 100px"></div>
