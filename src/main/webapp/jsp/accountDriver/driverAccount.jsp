@@ -45,7 +45,7 @@
                         </c:if>
 
                         <c:if test="${sessionScope.loginedPerson.driverStatus.toString() == 'BOOKED'}">
-                        <form class="make-order" action="${pageContext.request.contextPath}/taxi-Kyiv/enterCommand"
+                        <form class="make-order" action="${pageContext.request.contextPath}/taxi-Kyiv/enterNumOrder"
                               method="POST">
                             <button type="submit" class="account-driver-btns"><fmt:message key="driver.account.order"/></button>
                             <input type="text" name="executeOrder" class="text-order" placeholder="<fmt:message key="driver.account.enter"/>" />
