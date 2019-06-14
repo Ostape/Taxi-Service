@@ -49,7 +49,7 @@ public class JdbcClientDao implements ClientDao {
                 return true;
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcClientDao", e);
         }
         return false;
     }
@@ -72,7 +72,7 @@ public class JdbcClientDao implements ClientDao {
                 return true;
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcClientDao", e);
         }
         return false;
     }
@@ -93,7 +93,7 @@ public class JdbcClientDao implements ClientDao {
                 return true;
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcClientDao", e);
         }
         return false;
     }
@@ -121,7 +121,7 @@ public class JdbcClientDao implements ClientDao {
                 result = clientMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcClientDao ",e);
         }
         return result;
     }
@@ -142,7 +142,7 @@ public class JdbcClientDao implements ClientDao {
             ps.setString(5, client.getPassword());
             ps.executeUpdate();
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcClientDao", e);
         }
     }
 
@@ -167,7 +167,7 @@ public class JdbcClientDao implements ClientDao {
                 result = clientMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcClientDao", e);
         }
         return result;
     }
@@ -194,7 +194,7 @@ public class JdbcClientDao implements ClientDao {
             }
             return clients;
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcClientDao", e);
             return null;
         }
     }
@@ -226,7 +226,7 @@ public class JdbcClientDao implements ClientDao {
             connection.close();
             LOG.debug("Connection closed");
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred", e);
             throw new RuntimeException(e);
         }
     }

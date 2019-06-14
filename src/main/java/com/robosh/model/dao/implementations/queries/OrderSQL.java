@@ -10,7 +10,7 @@ public enum OrderSQL {
             "` WHERE `" + OrderFields.ID_DRIVER + "` =(?)"),
 
     READ_BY_ID_DRIVER_WITH_LIMIT("SELECT * FROM `" + OrderFields.ORDER +
-            "` WHERE `" + OrderFields.ID_DRIVER + "` =(?) limit ?, ?"),
+            "` WHERE `" + OrderFields.ID_DRIVER + "` =(?) ORDER BY " + OrderFields.ORDER_ID + " DESC limit ?, ?"),
 
     READ_ALL("SELECT * FROM `" + OrderFields.ORDER + "`"),
 

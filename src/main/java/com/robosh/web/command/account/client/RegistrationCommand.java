@@ -8,6 +8,7 @@ import com.robosh.model.customExceptions.EmailIsAlreadyTaken;
 import com.robosh.model.customExceptions.PhoneNumberIsAlreadyTaken;
 import com.robosh.model.entity.Client;
 import com.robosh.service.ClientService;
+import org.apache.log4j.Logger;
 
 import static com.robosh.web.command.PathCommand.*;
 
@@ -30,7 +31,7 @@ public class RegistrationCommand implements Command {
     private static final String BAD_INPUT = "?badInput=true";
     private static final String BAD_EMAIL = "?badEmail=true";
     private static final String BAD_PHONE = "?badPhoneNumber=true";
-
+    private final Logger LOGGER = Logger.getLogger(RegistrationCommand.class);
     private ClientService clientService;
 
     public RegistrationCommand(ClientService clientService) {
@@ -48,10 +49,12 @@ public class RegistrationCommand implements Command {
         final String repeatPassword = request.getParameter(PASSWORD_REPEAT);
 
         if (name == null) {
+            LOGGER.info("Name == null, return register client");
             return RoutesJSP.REGISTER_CLIENT;
         }
         if (InputDataRegistrationUtils.isNotCorrectData(name, surname, phoneNumber,
                 email, password, repeatPassword)) {
+            LOGGER.info("wrong data input");
             return RoutesJSP.REGISTER_CLIENT + BAD_INPUT;
         }
 
@@ -63,16 +66,20 @@ public class RegistrationCommand implements Command {
         client.setPassword(password);
 
         try {
+            LOGGER.info("try write to database client");
             clientService.createClientInDatabase(client);
         } catch (EmailIsAlreadyTaken emailIsAlreadyTaken) {
+            LOGGER.error("EmailIsAlreadyTaken ", emailIsAlreadyTaken);
             emailIsAlreadyTaken.printStackTrace();
             return RoutesJSP.REGISTER_CLIENT + BAD_EMAIL;
         } catch (PhoneNumberIsAlreadyTaken phoneNumberIsAlreadyTaken) {
+            LOGGER.error("PhoneNumberIsAlreadyTaken ", phoneNumberIsAlreadyTaken);
             phoneNumberIsAlreadyTaken.printStackTrace();
             return RoutesJSP.REGISTER_CLIENT + BAD_PHONE;
         }
 
         String contextAndServletPath = request.getContextPath() + request.getServletPath();
+        LOGGER.info("return login page");
         return REDIRECT + contextAndServletPath + LOGIN_PAGE;
     }
 }

@@ -51,7 +51,7 @@ public class JdbcDaoFactory extends DaoFactory {
             LOG.debug("getConnection: " + dataSource);
             return dataSource.getConnection();
         } catch (SQLException e) {
-            LOG.debug("SQLException occurred");
+            LOG.debug("SQLException occurred", e);
             throw new RuntimeException(e);
         }
     }

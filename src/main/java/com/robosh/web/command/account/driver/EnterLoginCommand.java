@@ -10,6 +10,7 @@ import com.robosh.web.command.RoutesJSP;
 import com.robosh.model.entity.Person;
 import com.robosh.service.ClientService;
 import com.robosh.service.DriverService;
+import org.apache.log4j.Logger;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +32,8 @@ public class EnterLoginCommand implements Command {
     private static final String ERROR_MESSAGE_STRING = "Invalid Phone Number or Password";
     private static final String ERROR_MESSAGE_ATTRIBUTE = "errorMessage";
     private static final String WRONG_DATA = "?wrongData=true";
+    private final Logger LOGGER = Logger.getLogger(EnterLoginCommand.class);
+
 
     public EnterLoginCommand(ClientService clientService, DriverService driverService) {
         this.clientService = clientService;
@@ -42,23 +45,30 @@ public class EnterLoginCommand implements Command {
         final String phoneNumber = request.getParameter(PHONE_PARAMETER);
         final String password = request.getParameter(PASSWORD_PARAMETER);
         String contextAndServletPath = request.getContextPath() + request.getServletPath();
+        LOGGER.info("check data phone number and password" + phoneNumber + " " + password);
         if (inputWrongData(phoneNumber, password)) {
             request.setAttribute(ERROR_MESSAGE_ATTRIBUTE, ERROR_MESSAGE_STRING);
+            LOGGER.info("wrong data");
             return RoutesJSP.LOGIN + WRONG_DATA;
         } else {
             Person person = LoginedUserUtils.getLoginedUser(request.getSession());
             if (person != null) {
+                LOGGER.info("person id not null");
                 if (Role.CLIENT.toString().equals(person.getRole().toString())) {
+                    LOGGER.info("return client account");
                     return REDIRECT + contextAndServletPath + CLIENT_ACCOUNT;
                 } else {
+                    LOGGER.info("return driver account");
                     return REDIRECT + contextAndServletPath + DRIVER_ACCOUNT;
                 }
             }
             if (checkIfDriver(phoneNumber, password)) {
+                LOGGER.info("return driver account");
                 person = driverService.getDriverByPasswordAndPhone(phoneNumber, password);
                 LoginedUserUtils.storeLoginedUser(request.getSession(), person);
                 return REDIRECT + contextAndServletPath + DRIVER_ACCOUNT;
             } else {
+                LOGGER.info("return client account");
                 person = clientService.getClientByPasswordAndPhone(phoneNumber, password);
                 LoginedUserUtils.storeLoginedUser(request.getSession(), person);
                 return REDIRECT + contextAndServletPath + CLIENT_ACCOUNT;

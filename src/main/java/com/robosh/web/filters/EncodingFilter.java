@@ -1,6 +1,8 @@
 package com.robosh.web.filters;
 
 
+import org.apache.log4j.Logger;
+
 import javax.servlet.*;
 import java.io.IOException;
 
@@ -11,6 +13,7 @@ import java.io.IOException;
  */
 public class EncodingFilter implements Filter {
 
+    private final Logger LOGGER = Logger.getLogger(EncodingFilter.class);
     private static final String ENCODING_TYPE = "encoding_type";
     private static final String CONTENT_TYPE = "text/html; charset=";
     private String encodingTypeValue;
@@ -25,6 +28,7 @@ public class EncodingFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
+        LOGGER.info("set encoding " + ENCODING_TYPE);
         servletRequest.setCharacterEncoding(encodingTypeValue);
         servletResponse.setCharacterEncoding(encodingTypeValue);
         servletResponse.setContentType(CONTENT_TYPE + encodingTypeValue);

@@ -47,7 +47,7 @@ public class JdbcDriverDao implements DriverDao {
                 result = driverMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcDriverDao", e);
         }
         return result;
     }
@@ -73,7 +73,7 @@ public class JdbcDriverDao implements DriverDao {
             }
             return drivers;
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcDriverDao", e);
             return null;
         }
     }
@@ -102,7 +102,7 @@ public class JdbcDriverDao implements DriverDao {
                 result = driverMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcDriverDao", e);
         }
         return result;
     }
@@ -126,7 +126,7 @@ public class JdbcDriverDao implements DriverDao {
                 return true;
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcDriverDao", e);
         }
         return false;
     }
@@ -154,7 +154,7 @@ public class JdbcDriverDao implements DriverDao {
                 result = driverMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcDriverDao", e);
         }
         return result;
     }
@@ -174,7 +174,7 @@ public class JdbcDriverDao implements DriverDao {
             LOG.debug("Executed query" + DriverSQL.UPDATE);
             return true;
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcDriverDao", e);
             return false;
         }
     }
@@ -207,7 +207,7 @@ public class JdbcDriverDao implements DriverDao {
             connection.close();
             LOG.debug("Connection closed");
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred", e);
             throw new RuntimeException(e);
         }
     }

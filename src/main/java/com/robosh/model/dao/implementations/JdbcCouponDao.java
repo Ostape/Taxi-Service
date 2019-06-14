@@ -47,7 +47,7 @@ public class JdbcCouponDao implements CouponDao {
                 result = couponMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcCouponDao", e);
         }
         return result;
     }
@@ -73,7 +73,7 @@ public class JdbcCouponDao implements CouponDao {
             }
             return coupons;
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcCouponDao", e);
             return null;
         }
     }
@@ -98,7 +98,7 @@ public class JdbcCouponDao implements CouponDao {
                 result = couponMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcCouponDao", e);
         }
         return result;
     }
@@ -139,7 +139,7 @@ public class JdbcCouponDao implements CouponDao {
             connection.close();
             LOG.debug("Connection closed");
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred", e);
             throw new RuntimeException(e);
         }
     }

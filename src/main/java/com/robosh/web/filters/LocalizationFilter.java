@@ -1,6 +1,8 @@
 package com.robosh.web.filters;
 
 
+import org.apache.log4j.Logger;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -11,7 +13,7 @@ import java.io.IOException;
  * @author Orest Shemelyuk
  */
 public class LocalizationFilter implements Filter {
-
+    private final Logger LOGGER = Logger.getLogger(LocalizationFilter.class);
     private static final String LOCALE = "locale";
     private static final String BUNDLE = "bundle";
     private String defaultBundle;
@@ -27,7 +29,7 @@ public class LocalizationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String localeParameter = request.getParameter(LOCALE);
-
+        LOGGER.info("set locale Filter" + localeParameter);
         locale = localeParameter != null
                 ? localeParameter
                 : httpRequest.getSession().getAttribute(LOCALE) != null

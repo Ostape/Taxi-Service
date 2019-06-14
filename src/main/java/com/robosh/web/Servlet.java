@@ -10,6 +10,7 @@ import com.robosh.web.command.account.driver.DriverEnterNumberOrderCommand;
 import com.robosh.web.command.account.driver.EnterLoginCommand;
 import com.robosh.web.command.account.driver.ShowAllDriverOrdersCommand;
 import com.robosh.web.command.common.*;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,12 +26,13 @@ import java.util.Map;
  * @author Orest Shemelyuk
  */
 public class Servlet extends HttpServlet {
-
+    private final Logger LOGGER = Logger.getLogger(Servlet.class);
     private Map<String, Command> commands;
 
     @Override
     public void init() {
         commands = new HashMap<>();
+        LOGGER.info("put all commands in HashMap");
         commands.put(REGISTER_CLIENT, new RegisterClientCommand());
         commands.put(REGISTER_PAGE, new RegistrationCommand(new ClientService()));
         commands.put(HOME_PAGE, new TaxiHomeCommand());
@@ -51,12 +53,14 @@ public class Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        LOGGER.info("doGet process");
         processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        LOGGER.info("doPost process");
         processRequest(request, response);
     }
 
@@ -73,15 +77,19 @@ public class Servlet extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String commandKey = getRequestPath(request);
+        LOGGER.info("get command");
         Command command = commands.get(commandKey);
         String contextAndServletPath = request.getContextPath() + request.getServletPath();
         if (command == null) {
+            LOGGER.info("command is null redirect home page");
             response.sendRedirect(contextAndServletPath + HOME_PAGE);
         } else {
             String nextPage = command.execute(request, response);
             if (isRedirect(nextPage)) {
+                LOGGER.info("redirect page " + nextPage);
                 response.sendRedirect(nextPage.replaceAll(REDIRECT, EMPTY_STR));
             } else {
+                LOGGER.info("forward page " + nextPage);
                 request.getRequestDispatcher(nextPage).forward(request, response);
             }
         }

@@ -56,7 +56,7 @@ public class JdbcCarDao implements CarDao {
                 result = carMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcCarDao ", e);
         }
         return result;
     }
@@ -83,7 +83,7 @@ public class JdbcCarDao implements CarDao {
             }
             return cars;
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcCarDao" , e);
             return null;
         }
     }
@@ -109,7 +109,7 @@ public class JdbcCarDao implements CarDao {
                 return true;
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred in JdbcCarDao", e);
         }
         return false;
     }
@@ -148,7 +148,7 @@ public class JdbcCarDao implements CarDao {
             connection.close();
             LOG.debug("Connection closed");
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred", e);
             throw new RuntimeException(e);
         }
     }

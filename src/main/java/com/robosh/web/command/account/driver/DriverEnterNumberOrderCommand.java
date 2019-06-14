@@ -8,6 +8,7 @@ import com.robosh.model.entity.Driver;
 import com.robosh.model.entity.enums.DriverStatus;
 import com.robosh.model.entity.enums.OrderStatus;
 import com.robosh.service.OrderService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,7 @@ public class DriverEnterNumberOrderCommand implements Command {
     private static final String WRONG_INPUT = "?wrongInput=true";
     private static final String REGEX_DIGITS = "\\d+";
     private static final String ORDER_PARAMETER = "executeOrder";
-
+    private final Logger LOGGER = Logger.getLogger(DriverEnterNumberOrderCommand.class);
     public DriverEnterNumberOrderCommand(OrderService orderService) {
         this.orderService = orderService;
     }
@@ -35,9 +36,11 @@ public class DriverEnterNumberOrderCommand implements Command {
         int numberOfOrder;
 
         if (executeOrder.matches(REGEX_DIGITS)) {
+            LOGGER.info("Input is correct");
             numberOfOrder = Integer.valueOf(executeOrder);
             Driver driver = (Driver) LoginedUserUtils.getLoginedUser(request.getSession());
             if (orderService.isCorrespondOrderAndDriver(numberOfOrder, driver.getPersonId())) {
+                LOGGER.info("set driver free");
                 driver.setDriverStatus(DriverStatus.FREE);
                 LoginedUserUtils.updateLoginedUser(request.getSession(), driver);
                 orderService.updateOrderStatus(numberOfOrder, OrderStatus.COMPLETE);
@@ -45,6 +48,7 @@ public class DriverEnterNumberOrderCommand implements Command {
             }
             return RoutesJSP.DRIVER_ACCOUNT + NO_SUCH_ORDER;
         } else {
+            LOGGER.info("input is not digit");
             return RoutesJSP.DRIVER_ACCOUNT + WRONG_INPUT;
         }
     }

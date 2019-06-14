@@ -52,7 +52,7 @@ public class JdbcAddressDao implements AddressDao {
                 return true;
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred", e);
         }
         return false;
     }
@@ -79,7 +79,7 @@ public class JdbcAddressDao implements AddressDao {
                 return rs.getInt("id_adress");
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred", e);
         }
         return -1;
     }
@@ -110,7 +110,7 @@ public class JdbcAddressDao implements AddressDao {
                 result = addressMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred", e);
         }
         return result;
     }
@@ -139,7 +139,7 @@ public class JdbcAddressDao implements AddressDao {
                 result = addressMapper.getEntity(rs);
             }
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred", e);
         }
         return result;
     }
@@ -169,7 +169,7 @@ public class JdbcAddressDao implements AddressDao {
             }
             return addresses;
         } catch (SQLException e) {
-            LOG.error("SQLException occurred");
+            LOG.error("SQLException occurred", e);
             return null;
         }
     }
@@ -208,7 +208,7 @@ public class JdbcAddressDao implements AddressDao {
             connection.close();
             LOG.debug("Connection closed");
         } catch (SQLException e) {
-            LOG.error(" SQLException occurred");
+            LOG.error(" SQLException occurred", e);
             throw new RuntimeException(e);
         }
     }

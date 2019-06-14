@@ -13,6 +13,7 @@ import com.robosh.service.CouponService;
 import com.robosh.service.DriverService;
 import com.robosh.service.OrderService;
 import com.robosh.web.command.RoutesJSP;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ public class EnterOrderCommand implements Command {
     private static final String COUPON_PARAMETER = "coupon";
     private static final String NO_SUCH_CAR = "?noSuitableCarType=true";
     private static final String SAME_ADDRESS = "?sameAddress=true";
-
+    private final Logger LOGGER = Logger.getLogger(EnterOrderCommand.class);
 
     private OrderService orderService;
     private DriverService driverService;
@@ -56,8 +57,10 @@ public class EnterOrderCommand implements Command {
         final String couponStr = request.getParameter(COUPON_PARAMETER);
 
         if (isNotSameAddress(addressDepartureStr, addressArriveStr)) {
+            LOGGER.info("is not same address");
             Driver driver = driverService.getDriverByCarTypeAndDriverStatus(DriverStatus.FREE, carType);
             if (driver != null) {
+                LOGGER.info("driver is free");
                 bookedDriver(driver);
                 Client loginedClient = (Client) LoginedUserUtils.getLoginedUser(request.getSession());
                 Address addressDeparture = addressService.getAdressByAdressString(addressDepartureStr);
@@ -71,11 +74,14 @@ public class EnterOrderCommand implements Command {
                 CookiesUtils.addCookies(response, driver, costWithDiscount, timeWait);
 
                 String contextAndServletPath = request.getContextPath() + request.getServletPath();
+                LOGGER.info("show order");
                 return REDIRECT + contextAndServletPath + SHOW_CLIENT_ORDER;
             } else {
+                LOGGER.info("no such car");
                 return RoutesJSP.TAXI_ORDER + NO_SUCH_CAR;
             }
         } else {
+            LOGGER.info("choosed same address");
             return RoutesJSP.TAXI_ORDER + SAME_ADDRESS;
         }
     }
