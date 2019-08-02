@@ -34,6 +34,7 @@ public class EnterOrderCommand implements Command {
     private static final String COUPON_PARAMETER = "coupon";
     private static final String NO_SUCH_CAR = "?noSuitableCarType=true";
     private static final String SAME_ADDRESS = "?sameAddress=true";
+    private static final ClientOrderCommand clientOrder = new ClientOrderCommand();
     private final Logger LOGGER = Logger.getLogger(EnterOrderCommand.class);
 
     private OrderService orderService;
@@ -78,11 +79,11 @@ public class EnterOrderCommand implements Command {
                 return REDIRECT + contextAndServletPath + SHOW_CLIENT_ORDER;
             } else {
                 LOGGER.info("no such car");
-                return RoutesJSP.TAXI_ORDER + NO_SUCH_CAR;
+                return clientOrder.execute(request,response)+ NO_SUCH_CAR;
             }
         } else {
             LOGGER.info("choosed same address");
-            return RoutesJSP.TAXI_ORDER + SAME_ADDRESS;
+            return clientOrder.execute(request, response) + SAME_ADDRESS;
         }
     }
 

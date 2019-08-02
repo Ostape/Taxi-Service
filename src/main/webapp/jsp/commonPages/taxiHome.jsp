@@ -18,9 +18,6 @@
             <jsp:include page="../commonPartsOfPages/navi_block.jsp"/>
 
             <section class="slider_home">
-                <div class="slides_nav_wrap">
-                    <ul id="slides_nav"></ul>
-                </div>
                 <ul id="main_slider">
                     <li>
                         <img src="${pageContext.request.contextPath}/img/9.png" class="desktop-slide" width="960"
@@ -38,53 +35,7 @@
     </header>
 </div>
 
-
-<section class="benefits_section">
-    <div class="center">
-        <ul class="benefits_list clearfix">
-            <li class="around-clock">
-                <a href="#" class="benefits_item">
-	                <span class="benefits_inner">
-	                    <span class="caption"><span class="cell"><fmt:message key="home.benefits.work"/>
-                            <br><fmt:message key="home.benefits.all.day"/> <br>24/7/365</span></span>
-	                    <span class="icon"></span>
-	                </span>
-                </a>
-            </li>
-            <li class="taxi-online">
-                <a href="#" class="benefits_item">
-	                <span class="benefits_inner">
-	                    <span class="caption"><span class="cell"><fmt:message key="home.benefits.order"/>
-                            <br><fmt:message key="home.benefits.order.online"/></span></span>
-	                    <span class="icon"></span>
-	                </span>
-                </a>
-            </li>
-            <li class="taxi-station">
-                <a href="#" class="benefits_item">
-	                <span class="benefits_inner">
-	                    <span class="caption"><span
-                                class="cell"><fmt:message key="home.benefits.taxi.aeropot"/>
-                             <br><fmt:message key="home.benefits.taxi.railway.st"/><br><fmt:message key="home.benefits.taxi.auto"/></span></span>
-	                    <span class="icon"></span>
-	                </span>
-                </a>
-            </li>
-            <li class="low-rates">
-                <a href="#" class="benefits_item">
-	                <span class="benefits_inner">
-	                    <span class="caption"><span class="cell"><fmt:message key="home.benefits.low"/>
-                            <br><fmt:message key="home.benefits.low.tariff"/></span></span>
-	                    <span class="icon"></span>
-	                </span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</section>
-
-
-<section id="text_section" class="text_section">
+<section class="text_section">
     <div class="center text">
         <h1><fmt:message key="home.taxi.title"/></h1>
         <span><fmt:message key="home.text1"/></span>
@@ -99,6 +50,7 @@
         </ul>
         </div>
 </section>
+
 <jsp:include page="../commonPartsOfPages/footer.jsp"/>
 </body>
 </html>

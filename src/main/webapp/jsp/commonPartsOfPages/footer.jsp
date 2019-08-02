@@ -10,7 +10,7 @@
 <script src='${pageContext.request.contextPath}/js/script.js?ver=4.3.19'></script>
 <footer id="footer">
     <div class="center">
-        <div class="foot"><img src="${pageContext.request.contextPath}/img/logo.png"></div>
+        <div class="foot"><img src="${pageContext.request.contextPath}/img/taxi_logo.png" style="height: 100px"></div>
         <div class="copyright">
             <div class="textwidget">
                 <fmt:message key="footer.info"/>

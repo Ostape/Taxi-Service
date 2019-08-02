@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
+<%@ page isELIgnored="false" %>
 
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
@@ -8,7 +9,7 @@
 <div class="header_white clearfix">
     <div class="center">
         <a href="${pageContext.request.contextPath}/taxi-Kyiv/homePage" id="logo" title="Taxi Kyiv">
-            <img src="${pageContext.request.contextPath}/img/logo.png" width="163" height="57">
+            <img src="${pageContext.request.contextPath}/img/taxi_logo.png" width="85px" height="57">
         </a>
         <div style="float: right; width: 420px">
             <div class="signClient">
